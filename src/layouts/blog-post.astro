@@ -1,0 +1,165 @@
+---
+import Layout from '@/layouts/layout.astro';
+import BlogpostLayout from '@/components/blogpost-layout.astro';
+import { getBasePath } from '@/utils/env';
+import serialize from 'serialize-javascript';
+import type {
+  WithContext,
+  BlogPosting,
+  BreadcrumbList,
+  FAQPage,
+} from 'schema-dts';
+
+export interface BlogPostFrontmatter {
+  title: string;
+  description: string;
+  label: string;
+  publishDate: string;
+  /** Slug-based canonical path, e.g. "/blog/onde-comer-em-sao-bento" */
+  slug: string;
+  keywords?: string[];
+  ogImage?: string;
+  robots?: string;
+  /** Optional FAQ items for FAQPage schema */
+  faq?: Array<{ question: string; answer: string }>;
+}
+
+const { frontmatter } = Astro.props as { frontmatter: BlogPostFrontmatter };
+
+const basePath = getBasePath();
+const canonicalUrl = `${basePath}${frontmatter.slug}`;
+const ogImage = frontmatter.ogImage ?? `${basePath}/og-image.jpg`;
+
+const blogPostingSchema: WithContext<BlogPosting> = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: frontmatter.title,
+  description: frontmatter.description,
+  url: canonicalUrl,
+  datePublished: frontmatter.publishDate,
+  dateModified: frontmatter.publishDate,
+  inLanguage: 'pt-BR',
+  image: {
+    '@type': 'ImageObject',
+    url: ogImage,
+  },
+  author: {
+    '@type': 'Organization',
+    name: 'Restaurante Sabor com Arte',
+    url: basePath,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Restaurante Sabor com Arte',
+    url: basePath,
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalUrl,
+  },
+  keywords: frontmatter.keywords?.join(', '),
+};
+
+const breadcrumbSchema: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Início', item: basePath },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Blog',
+      item: `${basePath}/blog`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: frontmatter.title,
+      item: canonicalUrl,
+    },
+  ],
+};
+
+const faqSchema: WithContext<FAQPage> | null =
+  frontmatter.faq && frontmatter.faq.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: frontmatter.faq.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
+---
+
+<Layout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  canonical={canonicalUrl}
+  openGraph={{
+    basic: {
+      title: frontmatter.title,
+      type: 'article',
+      image: ogImage,
+      url: canonicalUrl,
+    },
+    optional: {
+      description: frontmatter.description,
+      siteName: 'Restaurante Sabor com Arte',
+      locale: 'pt_BR',
+    },
+    image: {
+      alt: frontmatter.title,
+    },
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: frontmatter.title,
+    description: frontmatter.description,
+    image: ogImage,
+    imageAlt: frontmatter.title,
+  }}
+  extend={{
+    meta: [
+      ...(frontmatter.keywords
+        ? [{ name: 'keywords', content: frontmatter.keywords.join(', ') }]
+        : []),
+      ...(frontmatter.robots
+        ? [{ name: 'robots', content: frontmatter.robots }]
+        : []),
+    ],
+  }}
+>
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(blogPostingSchema, { isJSON: true })}
+    slot='head'
+  />
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(breadcrumbSchema, { isJSON: true })}
+    slot='head'
+  />
+  {
+    faqSchema && (
+      <script
+        is:inline
+        type='application/ld+json'
+        set:html={serialize(faqSchema, { isJSON: true })}
+        slot='head'
+      />
+    )
+  }
+  <main class='min-h-svh'>
+    <BlogpostLayout title={frontmatter.title}>
+      <slot />
+    </BlogpostLayout>
+  </main>
+</Layout>

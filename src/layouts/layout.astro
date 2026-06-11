@@ -1,7 +1,6 @@
 ---
 import '@/styles/global.css';
 import { SEO, type Props as SEOProps } from 'astro-seo';
-import { Font } from 'astro:assets';
 
 interface Props extends SEOProps {
   title: string;
@@ -25,8 +24,6 @@ const { ...props } = Astro.props as Props;
     <meta name='apple-mobile-web-app-title' content='MyWebSite' />
     <link rel='manifest' href='/site.webmanifest' />
     <meta name='generator' content={Astro.generator} />
-    <Font cssVariable='--font-sans' preload />
-    <Font cssVariable='--font-serif' preload />
     <SEO {...props} />
     <slot name='head' />
   </head>

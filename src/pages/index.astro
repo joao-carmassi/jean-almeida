@@ -1,4 +1,13 @@
 ---
+import { About6 } from '@/components/about6';
+import { CaseStudies6 } from '@/components/case-studies6';
+import { Contact6 } from '@/components/contact6';
+import { Cta20 } from '@/components/cta20';
+import { Faq4 } from '@/components/faq4';
+import { Hero4 } from '@/components/hero4';
+import { Process2 } from '@/components/process2';
+import { Stats6 } from '@/components/stats6';
+import { Testimonial18 } from '@/components/testimonial18';
 import Layout from '@/layouts/layout.astro';
 import { getBasePath } from '@/utils/env';
 import serialize from 'serialize-javascript';
@@ -44,9 +53,14 @@ const restaurantSchema = {
     slot='head'
   />
   <main>
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate commodi
-    expedita, exercitationem et natus, consectetur amet, libero consequatur
-    ratione deleniti aspernatur fugiat distinctio officiis quod maxime
-    perspiciatis inventore corporis cum!
+    <Hero4 />
+    <About6 />
+    <Stats6 />
+    <CaseStudies6 client:visible />
+    <Process2 client:visible />
+    <Testimonial18 />
+    <Faq4 client:visible />
+    <Cta20 />
+    <Contact6 />
   </main>
 </Layout>

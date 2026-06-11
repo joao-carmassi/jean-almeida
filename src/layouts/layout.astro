@@ -1,4 +1,6 @@
 ---
+import { Footer12 } from '@/components/footer12';
+import { Navbar33 } from '@/components/navbar33';
 import '@/styles/global.css';
 import { SEO, type Props as SEOProps } from 'astro-seo';
 
@@ -28,6 +30,8 @@ const { ...props } = Astro.props as Props;
     <slot name='head' />
   </head>
   <body>
+    <Navbar33 />
     <slot />
+    <Footer12 />
   </body>
 </html>

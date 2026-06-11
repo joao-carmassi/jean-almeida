@@ -30,7 +30,7 @@ const { ...props } = Astro.props as Props;
     <slot name='head' />
   </head>
   <body>
-    <Navbar33 />
+    <Navbar33 client:load />
     <slot />
     <Footer12 />
   </body>

@@ -3,6 +3,13 @@
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+import imgAltHumor from '@/assets/clinica/LCM_1642.jpg';
+import imgAnsiedade from '@/assets/clinica/LCM_1637.jpg';
+import imgBurnout from '@/assets/clinica/LCM_1640.jpg';
+import imgDepressao from '@/assets/clinica/LCM_1636.jpg';
+import imgInsonia from '@/assets/clinica/LCM_1643.jpg';
+import imgOutras from '@/assets/clinica/LCM_1644.jpg';
+import imgTDAH from '@/assets/clinica/LCM_1638.jpg';
 import { Button } from '@/components/ui/button';
 import type { CarouselApi } from '@/components/ui/carousel';
 import {
@@ -12,6 +19,9 @@ import {
 } from '@/components/ui/carousel';
 
 import { cn } from '@/lib/utils';
+
+const TRANSPARENT_PIXEL =
+  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
 interface CaseStudiesCarouselItem {
   id: string;
@@ -30,84 +40,88 @@ interface CaseStudiesCarouselProps {
   className?: string;
 }
 
-type CaseStudies6Props = CaseStudiesCarouselProps;
-type Props = Partial<CaseStudies6Props>;
+type ServicesSectionProps = CaseStudiesCarouselProps;
+type Props = Partial<ServicesSectionProps>;
 
-const defaultProps: CaseStudies6Props = {
-  title: 'Case studies',
+const defaultProps: ServicesSectionProps = {
+  title: 'Temas Frequentemente Acompanhados',
   description:
-    'A horizontal carousel of customer stories with full-bleed imagery, company logos, short summaries, and links to read the full write-up.',
+    'Atendimento de adultos que buscam acompanhamento para ansiedade, depressão, transtornos do humor, transtorno bipolar, insônia, burnout, sofrimento emocional persistente e dificuldades relacionais.',
   items: [
     {
-      id: 'pipeline-analytics',
-      logo: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/logos/fictional-company-logo-white-1.svg',
-      logoAlt: 'Northwind Analytics',
-      title: 'Unified pipeline analytics in a single view',
+      id: 'depressao',
+      logo: TRANSPARENT_PIXEL,
+      logoAlt: '',
+      title: 'Depressão',
       description:
-        'How a revenue team unified CRM data and product telemetry to shorten sales cycles and make forecasting review meetings less painful.',
-      href: '#',
-      image:
-        'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/photos3/photo-1-3x4.jpg',
+        'Muitas pessoas continuam trabalhando, cumprindo compromissos e convivendo normalmente enquanto se sentem emocionalmente esgotadas por dentro. A depressão nem sempre paralisa — às vezes, ela só apaga.',
+      href: '#contato',
+      image: imgDepressao.src,
     },
     {
-      id: 'launch-readiness',
-      logo: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/logos/fictional-company-logo-white-2.svg',
-      logoAlt: 'Stacklane',
-      title: 'Coordinating a multi-team product launch',
+      id: 'ansiedade',
+      logo: TRANSPARENT_PIXEL,
+      logoAlt: '',
+      title: 'Ansiedade e Ruminação',
       description:
-        'Design, engineering, and go-to-market aligned on one timeline with shared blocks and checklists so launch week stayed predictable.',
-      href: '#',
-      image:
-        'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/photos3/photo-2-3x4.jpg',
+        'Pensamento acelerado, dificuldade de desligar, exigência interna excessiva, sensação de alerta permanente. A ansiedade de alta performance é real — e frequentemente invisível para quem está de fora.',
+      href: '#contato',
+      image: imgAnsiedade.src,
     },
     {
-      id: 'customer-success',
-      logo: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/logos/fictional-company-logo-white-3.svg',
-      logoAlt: 'Railway Apps',
-      title: 'Scaling onboarding without growing headcount',
+      id: 'tdah',
+      logo: TRANSPARENT_PIXEL,
+      logoAlt: '',
+      title: 'TDAH em Adultos',
       description:
-        'Automated nudges and in-app guidance replaced one-off emails while support kept a clear view of who needed a human touch.',
-      href: '#',
-      image:
-        'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/photos3/photo-3-3x4.jpg',
+        'Dificuldade de sustentar foco, procrastinação crônica, impulsividade e sensação de estar sempre um passo atrás — o TDAH em adultos é subdiagnosticado e frequentemente confundido com falta de disciplina.',
+      href: '#contato',
+      image: imgTDAH.src,
     },
     {
-      id: 'security-review',
-      logo: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/logos/fictional-company-logo-white-4.svg',
-      logoAlt: 'CipherTrust',
-      title: 'Passing enterprise security review faster',
+      id: 'burnout',
+      logo: TRANSPARENT_PIXEL,
+      logoAlt: '',
+      title: 'Esgotamento e Burnout',
       description:
-        'The team turned a checklist-heavy review into a tracked workflow so legal and IT could sign off without thrashing the roadmap.',
-      href: '#',
-      image:
-        'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/photos3/photo-4-3x4.jpg',
+        'Exaustão que o descanso não resolve, desconexão do próprio trabalho, irritabilidade crescente, perda de sentido — o esgotamento profissional vai além do cansaço. Não é falta de força de vontade.',
+      href: '#contato',
+      image: imgBurnout.src,
     },
     {
-      id: 'design-system',
-      logo: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/logos/fictional-company-logo-white-5.svg',
-      logoAlt: 'Glyph Studio',
-      title: 'One design system across marketing and product',
+      id: 'humor',
+      logo: TRANSPARENT_PIXEL,
+      logoAlt: '',
+      title: 'Alterações de Humor',
       description:
-        'Shared tokens and documented sections cut duplicate UI work and made brand updates roll out consistently across surfaces.',
-      href: '#',
-      image:
-        'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/photos3/photo-5-3x4.jpg',
+        'Oscilações emocionais sem causa aparente, períodos de euforia seguidos de queda, instabilidade que afeta relações e trabalho — quando o humor não segue uma lógica clara, um diagnóstico preciso faz toda a diferença.',
+      href: '#contato',
+      image: imgAltHumor.src,
     },
     {
-      id: 'revenue-ops',
-      logo: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/logos/fictional-company-logo-white-6.svg',
-      logoAlt: 'Cedarline',
-      title: 'Revenue ops that fits how teams actually work',
+      id: 'insonia',
+      logo: TRANSPARENT_PIXEL,
+      logoAlt: '',
+      title: 'Insônia Crônica',
       description:
-        'Forecasting and pipeline hygiene moved out of spreadsheets into one place so leadership could see risk early without extra ceremony.',
-      href: '#',
-      image:
-        'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/photos3/photo-6-3x4.jpg',
+        'Dificuldade em adormecer, sono fragmentado, acordar sem descanso — a insônia crônica raramente é apenas "estresse". Com avaliação adequada, é possível entender sua causa e tratá-la de forma eficaz.',
+      href: '#contato',
+      image: imgInsonia.src,
+    },
+    {
+      id: 'outras',
+      logo: TRANSPARENT_PIXEL,
+      logoAlt: '',
+      title: 'Outras Condições Psiquiátricas',
+      description:
+        'Cada sofrimento tem sua singularidade. Condições que não se encaixam nas categorias acima também são avaliadas com a mesma atenção e profundidade.',
+      href: '#contato',
+      image: imgOutras.src,
     },
   ],
 };
 
-const CaseStudies6 = (props: Props) => {
+const ServicesSection = (props: Props) => {
   const { title, description, items, className } = {
     ...defaultProps,
     ...props,
@@ -243,4 +257,4 @@ const CaseStudies6 = (props: Props) => {
   );
 };
 
-export { CaseStudies6 };
+export { ServicesSection };

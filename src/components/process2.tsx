@@ -1,11 +1,15 @@
-"use client";
+'use client';
 
-import { motion, useInView } from "framer-motion";
-import { CornerDownRight } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import { motion, useInView } from 'framer-motion';
+import { CornerDownRight } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
 
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import imgAvaliacaoClinica from '@/assets/clinica/LCM_1565.jpg';
+import imgConsultaInicial from '@/assets/clinica/LCM_1563.jpg';
+import imgPrimeiroContato from '@/assets/clinica/LCM_1559.jpg';
+import imgSeguimento from '@/assets/clinica/LCM_1567.jpg';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 // Custom hook to get previous value
 const usePrevious = <T,>(value: T): T | undefined => {
@@ -20,43 +24,39 @@ const usePrevious = <T,>(value: T): T | undefined => {
   return prev;
 };
 
-interface Process2Props {
+interface ProcessSectionProps {
   className?: string;
 }
 
-const Process2 = ({ className }: Process2Props) => {
+const ProcessSection = ({ className }: ProcessSectionProps) => {
   const process = [
     {
-      step: "01",
-      title: "Discover & Research",
-      image:
-        "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/guri4/img11.png",
+      step: '01',
+      title: 'Primeiro Contato',
+      image: imgPrimeiroContato.src,
       description:
-        "We begin by understanding your business goals, target audience, and current challenges. This phase involves research, analysis, and strategic planning to identify opportunities.",
+        'Entre em contato pelo WhatsApp ou formulário. Retornaremos para agendar sua consulta na Av. Paulista.',
     },
     {
-      step: "02",
-      title: "Strategy & Planning",
-      image:
-        "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/guri4/img12.png",
+      step: '02',
+      title: 'Consulta Inicial',
+      image: imgConsultaInicial.src,
       description:
-        "Based on our findings, we develop a comprehensive strategy that aligns with your objectives. This includes defining the approach, timeline, and key milestones for success.",
+        'Uma conversa sem pressa. O Dr. Jean ouvirá sua história, sintomas e contexto de vida antes de qualquer avaliação.',
     },
     {
-      step: "03",
-      title: "Execute & Develop",
-      image:
-        "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/guri4/img10.png",
+      step: '03',
+      title: 'Avaliação Clínica',
+      image: imgAvaliacaoClinica.src,
       description:
-        "We bring the strategy to life through careful implementation and development. Our team works collaboratively to ensure every detail meets your requirements and standards.",
+        'Com base na sua história completa, será construída uma compreensão individualizada — clínica e psicodinâmica — para orientar o acompanhamento.',
     },
     {
-      step: "04",
-      title: "Optimize & Improve",
-      image:
-        "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/guri4/img9.png",
+      step: '04',
+      title: 'Acompanhamento Longitudinal',
+      image: imgSeguimento.src,
       description:
-        "We continuously monitor performance and gather feedback to refine and improve the solution. This iterative process ensures long-term success and growth.",
+        'O cuidado se constrói ao longo do tempo. O Dr. Jean acompanhará sua evolução com atenção contínua, ajustando a conduta conforme necessário.',
     },
   ];
 
@@ -64,55 +64,59 @@ const Process2 = ({ className }: Process2Props) => {
   const previousActive = usePrevious(active);
 
   return (
-    <section className={cn("py-32", className)}>
-      <div className="container">
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-20">
-          <div className="top-10 h-fit w-fit gap-3 space-y-7 py-8 lg:sticky">
-            <h1 className="relative w-fit text-5xl font-semibold tracking-tight lg:text-7xl">
-              Our Process
+    <section id='como-funciona' className={cn('py-32', className)}>
+      <div className='container'>
+        <div className='grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-20'>
+          <div className='top-10 h-fit w-fit gap-3 space-y-7 py-8 lg:sticky'>
+            <h1 className='relative w-fit text-5xl font-semibold tracking-tight lg:text-7xl'>
+              Como Funciona
             </h1>
-            <p className="text-base text-foreground/50">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime
-              amet dolorem eum est voluptatem id repellendus ut laborum
-              laboriosam debitis.
+            <p className='text-base text-foreground/50'>
+              Acreditamos que o cuidado começa antes mesmo da consulta. Desde o
+              primeiro contato, buscamos oferecer um ambiente acolhedor,
+              tranquilo e respeitoso, onde cada pessoa possa se sentir bem
+              recebida.
             </p>
-            <div className="relative h-90 overflow-hidden border">
+            <div className='relative h-90 overflow-hidden border'>
               {previousActive !== undefined && (
-                <div className="absolute top-0 h-full w-full">
+                <div className='absolute top-0 h-full w-full'>
                   <img
                     src={process[previousActive].image}
-                    className="h-full w-full object-cover"
-                    alt=""
+                    className='h-full w-full object-cover'
+                    alt=''
                   />
                 </div>
               )}
               <motion.div
-                initial={{ clipPath: "inset(100% 100% 0% 0%)" }}
-                animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
+                initial={{ clipPath: 'inset(100% 100% 0% 0%)' }}
+                animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
                 key={active}
                 transition={{
-                  type: "spring",
+                  type: 'spring',
                   stiffness: 150,
                   damping: 20,
                 }}
-                className="h-full w-full"
+                className='h-full w-full'
               >
                 <img
                   src={process[active].image}
-                  className="h-full w-full object-cover"
-                  alt=""
+                  className='h-full w-full object-cover'
+                  alt=''
                 />
               </motion.div>
             </div>
             <Button
-              variant="ghost"
-              className="flex items-center justify-start gap-2"
+              variant='ghost'
+              className='flex items-center justify-start gap-2'
+              asChild
             >
-              <CornerDownRight className="text-orange-500" />
-              Get in touch
+              <a href='https://wa.me/5511913259328?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta.'>
+                <CornerDownRight className='text-orange-500' />
+                Agendar Consulta
+              </a>
             </Button>
           </div>
-          <ul className="relativew-full lg:pl-22">
+          <ul className='relativew-full lg:pl-22'>
             {process.map((step, index) => (
               <ProcessCard
                 key={index}
@@ -146,7 +150,7 @@ const ProcessCard = ({
 
   const itemInView = useInView(ref, {
     amount: 0,
-    margin: "0px 0px -60% 0px",
+    margin: '0px 0px -60% 0px',
   });
 
   useEffect(() => {
@@ -159,19 +163,19 @@ const ProcessCard = ({
     <li
       ref={ref}
       key={index}
-      className="relative flex flex-col justify-between gap-12 border-b py-8 lg:py-16"
+      className='relative flex flex-col justify-between gap-12 border-b py-8 lg:py-16'
     >
-      <div className="flex w-fit items-center justify-center px-4 py-1 text-9xl tracking-tighter">
+      <div className='flex w-fit items-center justify-center px-4 py-1 text-9xl tracking-tighter'>
         0{index + 1}
       </div>
       <div>
-        <h3 className="mb-4 text-2xl font-semibold tracking-tighter lg:text-3xl">
+        <h3 className='mb-4 text-2xl font-semibold tracking-tighter lg:text-3xl'>
           {step.title}
         </h3>
-        <p className="text-foreground/50">{step.description}</p>
+        <p className='text-foreground/50'>{step.description}</p>
       </div>
     </li>
   );
 };
 
-export { Process2 };
+export { ProcessSection };

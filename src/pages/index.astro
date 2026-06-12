@@ -1,66 +1,215 @@
 ---
-import { About6 } from '@/components/about6';
-import { CaseStudies6 } from '@/components/case-studies6';
-import { Contact6 } from '@/components/contact6';
-import { Cta20 } from '@/components/cta20';
-import { Faq4 } from '@/components/faq4';
-import { Hero4 } from '@/components/hero4';
-import { Process2 } from '@/components/process2';
-import { Stats6 } from '@/components/stats6';
-import { Testimonial18 } from '@/components/testimonial18';
+import type { FAQPage, Physician, WithContext } from 'schema-dts';
+
+import { AboutSection } from '@/components/about6';
+import { ContactSection } from '@/components/contact6';
+import { CtaSection } from '@/components/cta20';
+import { FaqSection } from '@/components/faq4';
+import { HeroSection } from '@/components/hero4';
+import { ProcessSection } from '@/components/process2';
+import { ServicesSection } from '@/components/case-studies6';
+import { StatsSection } from '@/components/stats6';
+import { TestimonialSection } from '@/components/testimonial18';
 import Layout from '@/layouts/layout.astro';
 import { getBasePath } from '@/utils/env';
+import heroImg from '@/assets/je/A7D22EB7-79EB-4643-BDDB-C46046C2C963.jpg';
 import serialize from 'serialize-javascript';
 
-const restaurantSchema = {
+const siteUrl = getBasePath();
+
+const medicoBusiness: WithContext<Physician> = {
   '@context': 'https://schema.org',
+  '@type': 'Physician',
+  name: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+  description:
+    'Psiquiatra humanizado na Av. Paulista, São Paulo. Tratamento para depressão, ansiedade, TDAH, burnout e mais. CRM 127.207.',
+  url: siteUrl,
+  telephone: '+5511913259328',
+  email: 'drjean.psiquiatria@gmail.com',
+  medicalSpecialty: 'Psychiatric',
+  priceRange: 'R$$$',
+  currenciesAccepted: 'BRL',
+  paymentAccepted: 'Cartão de crédito, débito, Pix',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Av. Paulista, 2494 — Conjunto 94',
+    addressLocality: 'São Paulo',
+    addressRegion: 'SP',
+    postalCode: '01310-300',
+    addressCountry: 'BR',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -23.5614,
+    longitude: -46.6565,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '19:00',
+    },
+  ],
+  areaServed: {
+    '@type': 'City',
+    name: 'São Paulo',
+  },
+};
+
+const faqSchema: WithContext<FAQPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Qual a diferença entre psiquiatra e psicólogo?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'O psiquiatra é médico especializado em saúde mental — pode fazer diagnósticos, prescrever medicamentos e indicar exames. O psicólogo realiza psicoterapia, mas não prescreve medicação.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Preciso de encaminhamento médico para consultar?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Não. Você pode agendar sua consulta diretamente, sem necessidade de encaminhamento. Basta entrar em contato pelo WhatsApp ou formulário.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'O Dr. Jean atende pelo convênio?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'As consultas são realizadas de forma particular. Aceitamos cartões de crédito e débito. Muitos planos de saúde oferecem reembolso — consulte o seu.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'É possível fazer consulta online?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sim, oferecemos consultas por telemedicina para pacientes que não podem comparecer presencialmente.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Como sei se preciso de um psiquiatra?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Se você está sofrendo — seja com tristeza, ansiedade, insônia, mudanças de humor ou dificuldades emocionais — já é motivo suficiente para buscar ajuda. Não espere a situação piorar.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'O consultório fica em que bairro de São Paulo?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'O consultório está localizado na Av. Paulista, 2494 — conjunto 94, no bairro Bela Vista, São Paulo. Fácil acesso pelo metrô (estação Consolação ou Trianon-MASP).',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'O atendimento é feito em outro idioma além do português?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sim. O Dr. Jean Almeida atende também em Espanhol.',
+      },
+    },
+  ],
 };
 ---
 
 <Layout
-  title=''
-  description=''
-  canonical={getBasePath()}
+  title='Psiquiatra em São Paulo — Dr. Jean Almeida | CRM 127.207'
+  description='Consulte com o Dr. Jean Almeida, psiquiatra humanizado na Av. Paulista, São Paulo. Tratamento para depressão, ansiedade, TDAH, burnout e mais. Agende agora.'
+  canonical={siteUrl}
   openGraph={{
     basic: {
-      title: '',
+      title: 'Psiquiatra em São Paulo — Dr. Jean Almeida | CRM 127.207',
       type: 'website',
-      image: `${getBasePath()}/og-image.jpg`,
-      url: getBasePath(),
+      image: `${siteUrl}/og-image.jpg`,
+      url: siteUrl,
     },
     optional: {
-      description: '',
-      siteName: '',
+      description:
+        'Consulte com o Dr. Jean Almeida, psiquiatra humanizado na Av. Paulista, São Paulo. Tratamento para depressão, ansiedade, TDAH, burnout e mais. Agende agora.',
+      siteName: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
       locale: 'pt_BR',
     },
     image: {
-      alt: '',
+      alt: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
     },
   }}
   twitter={{
     card: 'summary_large_image',
-    title: '',
-    description: '',
-    image: `${getBasePath()}/og-image.jpg`,
-    imageAlt: '',
+    title: 'Psiquiatra em São Paulo — Dr. Jean Almeida | CRM 127.207',
+    description:
+      'Consulte com o Dr. Jean Almeida, psiquiatra humanizado na Av. Paulista, São Paulo. Tratamento para depressão, ansiedade, TDAH, burnout e mais.',
+    image: `${siteUrl}/og-image.jpg`,
+    imageAlt: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
   }}
 >
-  <!-- JSON-LD Schema -->
+  <!-- JSON-LD Schema: MedicalBusiness -->
   <script
     is:inline
     type='application/ld+json'
-    set:html={serialize(restaurantSchema)}
+    set:html={serialize(medicoBusiness)}
+    slot='head'
+  />
+  <!-- JSON-LD Schema: FAQPage -->
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(faqSchema)}
     slot='head'
   />
   <main>
-    <Hero4 client:load />
-    <About6 />
-    <Stats6 />
-    <CaseStudies6 client:visible />
-    <Process2 client:visible />
-    <Testimonial18 client:visible />
-    <Faq4 client:visible />
-    <Cta20 />
-    <Contact6 />
+    <HeroSection
+      client:load
+      heading='Psiquiatra em São Paulo com Escuta Profunda e Tratamento Individualizado'
+      description='Nem todo sofrimento aparece por fora. Ansiedade, exaustão, vazio emocional, insônia, relações difíceis — às vezes a vida continua funcionando enquanto você já não consegue mais descansar dentro dela. Dr. Jean Almeida · Psiquiatra na Av. Paulista, São Paulo.'
+      buttons={{
+        primary: {
+          text: 'Agendar Minha Consulta',
+          url: 'https://wa.me/5511913259328?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20minha%20consulta.',
+        },
+        secondary: {
+          text: 'Saiba Mais ↓',
+          url: '#sobre',
+        },
+      }}
+      reviews={{
+        count: 5,
+        rating: 5.0,
+        avatars: [
+          {
+            src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/avatars/avatar1.jpg',
+            alt: 'Paciente',
+          },
+          {
+            src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/avatars/avatar2.jpg',
+            alt: 'Paciente',
+          },
+          {
+            src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/avatars/avatar3.jpg',
+            alt: 'Paciente',
+          },
+        ],
+      }}
+      image={{
+        src: heroImg.src,
+        alt: 'Dr. Jean Almeida — Psiquiatra em São Paulo, Av. Paulista',
+      }}
+    />
+    <AboutSection />
+    <StatsSection />
+    <ServicesSection client:visible />
+    <ProcessSection client:visible />
+    <TestimonialSection client:visible />
+    <FaqSection client:visible />
+    <CtaSection />
+    <ContactSection />
   </main>
 </Layout>

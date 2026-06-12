@@ -7,3 +7,7 @@ export const getBasePath = () => {
   }
   return env;
 };
+
+export const getZapNumber = () => {
+  return import.meta.env.PUBLIC_ZAP_NUMBER || '5511913259328';
+};

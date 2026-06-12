@@ -1,38 +1,46 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from 'lucide-react';
 
-import { cn } from "@/lib/utils";
+import paulistaImg from '@/assets/clinica/Paulista 2.jpg';
+import { cn } from '@/lib/utils';
 
-interface Footer12Props {
+interface FooterProps {
   className?: string;
 }
 
-const Footer12 = ({ className }: Footer12Props) => {
+const Footer = ({ className }: FooterProps) => {
   const navigation = [
-    { name: "Product", href: "#" },
-    { name: "About Us", href: "#" },
-    { name: "Pricing", href: "#" },
-    { name: "FAQ", href: "#" },
-    { name: "Contact", href: "#" },
+    { name: 'Sobre o Dr. Jean', href: '#sobre' },
+    { name: 'Áreas de Atuação', href: '#areas' },
+    { name: 'Como Funciona', href: '#como-funciona' },
+    { name: 'Depoimentos', href: '#depoimentos' },
+    { name: 'Perguntas Frequentes', href: '#faq' },
+    {
+      name: 'Agendar Consulta',
+      href: 'https://wa.me/5511913259328?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta.',
+    },
   ];
 
   const social = [
-    { name: "Twitter", href: "#" },
-    { name: "LinkedIn", href: "#" },
+    { name: 'WhatsApp', href: 'https://wa.me/5511913259328' },
+    { name: 'Google', href: 'https://g.page/r/drjeanalmeida' },
   ];
 
-  const legal = [{ name: "Privacy Policy", href: "#" }];
+  const legal = [
+    { name: 'Política de Privacidade', href: '#' },
+    { name: 'Aviso Legal', href: '#' },
+  ];
 
   return (
     <section
-      className={cn("flex flex-col items-center gap-14 py-32", className)}
+      className={cn('flex flex-col items-center gap-14 py-32', className)}
     >
-      <nav className="container flex flex-col items-center gap-4">
-        <ul className="flex flex-wrap items-center justify-center gap-6">
+      <nav className='container flex flex-col items-center gap-4'>
+        <ul className='flex flex-wrap items-center justify-center gap-6'>
           {navigation.map((item) => (
             <li key={item.name}>
               <a
                 href={item.href}
-                className="font-medium transition-opacity hover:opacity-75"
+                className='font-medium transition-opacity hover:opacity-75'
               >
                 {item.name}
               </a>
@@ -42,35 +50,43 @@ const Footer12 = ({ className }: Footer12Props) => {
             <li key={item.name}>
               <a
                 href={item.href}
-                className="flex items-center gap-0.5 font-medium transition-opacity hover:opacity-75"
+                className='flex items-center gap-0.5 font-medium transition-opacity hover:opacity-75'
               >
-                {item.name} <ArrowUpRight className="size-4" />
+                {item.name} <ArrowUpRight className='size-4' />
               </a>
             </li>
           ))}
         </ul>
-        <ul className="flex flex-wrap items-center justify-center gap-6">
+        <ul className='flex flex-wrap items-center justify-center gap-6'>
           {legal.map((item) => (
             <li key={item.name}>
               <a
                 href={item.href}
-                className="text-sm text-muted-foreground transition-opacity hover:opacity-75"
+                className='text-sm text-muted-foreground transition-opacity hover:opacity-75'
               >
                 {item.name}
               </a>
             </li>
           ))}
         </ul>
+        <p className='text-center text-sm text-muted-foreground'>
+          © 2026 Dr. Jean Almeida — Psiquiatra em São Paulo. CRM 127.207. Todos
+          os direitos reservados.
+        </p>
+        <p className='text-center text-xs text-muted-foreground max-w-xl'>
+          ⚠️ As informações deste site são de caráter informativo e não
+          substituem consulta médica.
+        </p>
       </nav>
       <img
-        src="https://deifkwefumgah.cloudfront.net/shadcnblocks/block/shadcnblocks-giant-text.png"
-        alt="Shadcnblocks"
-        width={1570}
-        height={375}
-        className="mt-10 md:mt-14 lg:mt-20"
+        src={paulistaImg.src}
+        alt='Av. Paulista, São Paulo — Consultório Dr. Jean Almeida'
+        width={paulistaImg.width}
+        height={paulistaImg.height}
+        className='mt-10 md:mt-14 lg:mt-20'
       />
     </section>
   );
 };
 
-export { Footer12 };
+export { Footer };

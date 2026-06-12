@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoaderIcon, Mail, MapPin, MessagesSquare, Phone } from "lucide-react";
-import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { LoaderIcon, Mail, MapPin, MessagesSquare, Phone } from 'lucide-react';
+import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { z } from 'zod';
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Field,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
+import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
 
 interface ContactInfo {
   icon: React.ReactNode;
@@ -31,72 +31,72 @@ interface ContactInfo {
 
 const contactInfo: ContactInfo[] = [
   {
-    icon: <Mail className="size-6" />,
-    title: "Email",
-    description: "Get a response within 24 hours",
-    value: "hello@company.com",
-    href: "mailto:hello@company.com",
-    badge: "Recommended",
+    icon: <Mail className='size-6' />,
+    title: 'E-mail',
+    description: 'Resposta em até 24 horas',
+    value: 'drjean.psiquiatria@gmail.com',
+    href: 'mailto:drjean.psiquiatria@gmail.com',
+    badge: 'Recomendado',
   },
   {
-    icon: <MessagesSquare className="size-6" />,
-    title: "Live Chat",
-    description: "Instant support available now",
-    value: "Start chatting",
-    href: "#",
-    badge: "Online",
+    icon: <MessagesSquare className='size-6' />,
+    title: 'WhatsApp',
+    description: 'Atendimento rápido e direto',
+    value: '(11) 91325-9328',
+    href: 'https://wa.me/5511913259328?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta.',
+    badge: 'Disponível',
   },
   {
-    icon: <Phone className="size-6" />,
-    title: "Phone",
-    description: "Mon-Fri, 9AM-6PM EST",
-    value: "+1 (555) 123-4567",
-    href: "tel:+15551234567",
+    icon: <Phone className='size-6' />,
+    title: 'Telefone',
+    description: 'Segunda a Sexta, 9h às 19h',
+    value: '(11) 91325-9328',
+    href: 'tel:+5511913259328',
   },
   {
-    icon: <MapPin className="size-6" />,
-    title: "Office",
-    description: "Schedule an in-person meeting",
-    value: "123 Innovation St, Tech City",
-    href: "#",
+    icon: <MapPin className='size-6' />,
+    title: 'Endereço',
+    description: 'Metrô Consolação / Trianon-MASP',
+    value: 'Av. Paulista, 2494 — cj. 94, Bela Vista, São Paulo — SP',
+    href: 'https://maps.google.com/?q=Av.+Paulista,+2494,+S%C3%A3o+Paulo',
   },
 ];
 
 const contactFormSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
+  firstName: z.string().min(1, 'First name is required'),
+  lastName: z.string().min(1, 'Last name is required'),
   email: z
     .string()
-    .min(1, "Email is required")
-    .email("Please enter a valid email"),
+    .min(1, 'Email is required')
+    .email('Please enter a valid email'),
   company: z.string().optional(),
-  message: z.string().min(1, "Message is required"),
+  message: z.string().min(1, 'Message is required'),
   agreeToTerms: z.literal(true, {
-    errorMap: () => ({ message: "You must agree to the terms" }),
+    message: 'Você deve concordar com os termos',
   }),
 });
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
-interface Contact6Props {
+interface ContactSectionProps {
   className?: string;
   onSubmit?: (data: ContactFormData) => Promise<void>;
 }
 
-const Contact6 = ({ className, onSubmit }: Contact6Props) => {
+const ContactSection = ({ className, onSubmit }: ContactSectionProps) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
-    mode: "onSubmit",
-    reValidateMode: "onSubmit",
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      company: "",
-      message: "",
+      firstName: '',
+      lastName: '',
+      email: '',
+      company: '',
+      message: '',
       agreeToTerms: undefined,
     },
   });
@@ -106,7 +106,7 @@ const Contact6 = ({ className, onSubmit }: Contact6Props) => {
       if (onSubmit) {
         await onSubmit(data);
       } else {
-        console.log("Form submitted:", data);
+        console.log('Form submitted:', data);
         await new Promise((resolve) => setTimeout(resolve, 1000));
       }
       setIsSubmitted(true);
@@ -115,47 +115,46 @@ const Contact6 = ({ className, onSubmit }: Contact6Props) => {
       setTimeout(() => setShowSuccess(false), 4500);
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch {
-      form.setError("root", {
-        message: "Something went wrong. Please try again.",
+      form.setError('root', {
+        message: 'Something went wrong. Please try again.',
       });
     }
   };
 
   return (
-    <section className={cn("bg-background py-24", className)}>
-      <div className="container px-4 md:px-6">
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-16 text-center">
-            <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Contact Us
+    <section className={cn('bg-background py-24', className)}>
+      <div className='container px-4 md:px-6'>
+        <div className='mx-auto max-w-4xl'>
+          <div className='mb-16 text-center'>
+            <h1 className='mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl'>
+              Entre em Contato — Agende Sua Consulta
             </h1>
-            <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              Ready to start your next project? Our team is here to help you
-              succeed. Reach out and let's discuss how we can bring your ideas
-              to life.
+            <p className='mx-auto max-w-2xl text-lg text-muted-foreground'>
+              Estamos prontos para receber você. Escolha a forma mais
+              conveniente de entrar em contato.
             </p>
           </div>
 
-          <div className="grid gap-12 lg:grid-cols-2">
-            <div className="space-y-6">
-              <div className="space-y-4">
+          <div className='grid gap-12 lg:grid-cols-2'>
+            <div className='space-y-6'>
+              <div className='space-y-4'>
                 {contactInfo.map((info, index) => (
-                  <Card key={index} className="border-0 bg-muted shadow-none">
+                  <Card key={index} className='border-0 bg-muted shadow-none'>
                     <CardContent>
-                      <div className="flex items-start gap-4">
-                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-muted">
+                      <div className='flex items-start gap-4'>
+                        <div className='flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-muted'>
                           {info.icon}
                         </div>
-                        <div className="min-w-0 flex-1">
-                          <div className="mb-1 flex items-center gap-2">
-                            <h3 className="font-semibold">{info.title}</h3>
+                        <div className='min-w-0 flex-1'>
+                          <div className='mb-1 flex items-center gap-2'>
+                            <h3 className='font-semibold'>{info.title}</h3>
                           </div>
-                          <p className="mb-2 text-sm text-muted-foreground">
+                          <p className='mb-2 text-sm text-muted-foreground'>
                             {info.description}
                           </p>
                           <a
                             href={info.href}
-                            className="text-sm font-medium transition-colors hover:underline"
+                            className='text-sm font-medium transition-colors hover:underline'
                           >
                             {info.value}
                           </a>
@@ -167,45 +166,43 @@ const Contact6 = ({ className, onSubmit }: Contact6Props) => {
               </div>
             </div>
 
-            <Card className="border-0 shadow-none">
+            <Card className='border-0 shadow-none'>
               <CardHeader>
-                <CardTitle>Send us a message</CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  Fill out the form below and we'll get back to you within 24
-                  hours.
+                <CardTitle>Envie uma mensagem</CardTitle>
+                <p className='text-sm text-muted-foreground'>
+                  Preencha o formulário e retornaremos em até 24 horas.
                 </p>
               </CardHeader>
               <CardContent>
                 {isSubmitted && (
                   <div
                     className={cn(
-                      "mb-6 rounded-lg border border-green-500/20 bg-green-500/10 p-4 text-center transition-opacity duration-500",
-                      showSuccess ? "opacity-100" : "opacity-0",
+                      'mb-6 rounded-lg border border-green-500/20 bg-green-500/10 p-4 text-center transition-opacity duration-500',
+                      showSuccess ? 'opacity-100' : 'opacity-0',
                     )}
                   >
-                    <p className="text-sm font-medium text-green-600 dark:text-green-400">
-                      Message sent successfully!
+                    <p className='text-sm font-medium text-green-600 dark:text-green-400'>
+                      Mensagem enviada com sucesso!
                     </p>
                   </div>
                 )}
 
                 <form onSubmit={form.handleSubmit(handleFormSubmit)}>
                   <FieldGroup>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className='grid grid-cols-2 gap-4'>
                       <Controller
                         control={form.control}
-                        name="firstName"
+                        name='firstName'
                         render={({ field, fieldState }) => (
                           <Field data-invalid={fieldState.invalid}>
                             <FieldLabel htmlFor={field.name}>
-                              First Name{" "}
-                              <span className="text-destructive">*</span>
+                              Nome <span className='text-destructive'>*</span>
                             </FieldLabel>
                             <Input
                               {...field}
                               id={field.name}
                               aria-invalid={fieldState.invalid}
-                              placeholder="John"
+                              placeholder='João'
                             />
                             {fieldState.invalid && (
                               <FieldError errors={[fieldState.error]} />
@@ -216,18 +213,18 @@ const Contact6 = ({ className, onSubmit }: Contact6Props) => {
 
                       <Controller
                         control={form.control}
-                        name="lastName"
+                        name='lastName'
                         render={({ field, fieldState }) => (
                           <Field data-invalid={fieldState.invalid}>
                             <FieldLabel htmlFor={field.name}>
-                              Last Name{" "}
-                              <span className="text-destructive">*</span>
+                              Sobrenome{' '}
+                              <span className='text-destructive'>*</span>
                             </FieldLabel>
                             <Input
                               {...field}
                               id={field.name}
                               aria-invalid={fieldState.invalid}
-                              placeholder="Doe"
+                              placeholder='Silva'
                             />
                             {fieldState.invalid && (
                               <FieldError errors={[fieldState.error]} />
@@ -239,19 +236,18 @@ const Contact6 = ({ className, onSubmit }: Contact6Props) => {
 
                     <Controller
                       control={form.control}
-                      name="email"
+                      name='email'
                       render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>
                           <FieldLabel htmlFor={field.name}>
-                            Email Address{" "}
-                            <span className="text-destructive">*</span>
+                            E-mail <span className='text-destructive'>*</span>
                           </FieldLabel>
                           <Input
                             {...field}
                             id={field.name}
-                            type="email"
+                            type='email'
                             aria-invalid={fieldState.invalid}
-                            placeholder="john@company.com"
+                            placeholder='joao@email.com'
                           />
                           {fieldState.invalid && (
                             <FieldError errors={[fieldState.error]} />
@@ -262,14 +258,14 @@ const Contact6 = ({ className, onSubmit }: Contact6Props) => {
 
                     <Controller
                       control={form.control}
-                      name="company"
+                      name='company'
                       render={({ field }) => (
                         <Field>
-                          <FieldLabel htmlFor={field.name}>Company</FieldLabel>
+                          <FieldLabel htmlFor={field.name}>WhatsApp</FieldLabel>
                           <Input
                             {...field}
                             id={field.name}
-                            placeholder="Your Company"
+                            placeholder='(11) 99999-9999'
                           />
                         </Field>
                       )}
@@ -277,19 +273,19 @@ const Contact6 = ({ className, onSubmit }: Contact6Props) => {
 
                     <Controller
                       control={form.control}
-                      name="message"
+                      name='message'
                       render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>
                           <FieldLabel htmlFor={field.name}>
-                            Message <span className="text-destructive">*</span>
+                            Mensagem <span className='text-destructive'>*</span>
                           </FieldLabel>
                           <Textarea
                             {...field}
                             id={field.name}
                             aria-invalid={fieldState.invalid}
-                            placeholder="Tell us about your project, goals, or how we can help..."
+                            placeholder='Descreva brevemente o motivo da consulta ou sua dúvida...'
                             rows={4}
-                            className="resize-none"
+                            className='resize-none'
                           />
                           {fieldState.invalid && (
                             <FieldError errors={[fieldState.error]} />
@@ -300,33 +296,33 @@ const Contact6 = ({ className, onSubmit }: Contact6Props) => {
 
                     <Controller
                       control={form.control}
-                      name="agreeToTerms"
+                      name='agreeToTerms'
                       render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>
-                          <div className="flex items-start space-x-3">
+                          <div className='flex items-start space-x-3'>
                             <Checkbox
                               id={field.name}
-                              checked={field.value}
+                              checked={field.value === true}
                               onCheckedChange={field.onChange}
                               aria-invalid={fieldState.invalid}
                             />
                             <label
                               htmlFor={field.name}
-                              className="text-sm leading-relaxed text-muted-foreground"
+                              className='text-sm leading-relaxed text-muted-foreground'
                             >
-                              I agree to the{" "}
+                              Concordo com os{' '}
                               <a
-                                href="#"
-                                className="font-medium text-foreground hover:underline"
+                                href='#'
+                                className='font-medium text-foreground hover:underline'
                               >
-                                Terms of Service
-                              </a>{" "}
-                              and{" "}
+                                Termos de Uso
+                              </a>{' '}
+                              e a{' '}
                               <a
-                                href="#"
-                                className="font-medium text-foreground hover:underline"
+                                href='#'
+                                className='font-medium text-foreground hover:underline'
                               >
-                                Privacy Policy
+                                Política de Privacidade
                               </a>
                             </label>
                           </div>
@@ -338,23 +334,23 @@ const Contact6 = ({ className, onSubmit }: Contact6Props) => {
                     />
 
                     {form.formState.errors.root && (
-                      <p className="text-sm text-destructive">
+                      <p className='text-sm text-destructive'>
                         {form.formState.errors.root.message}
                       </p>
                     )}
 
                     <Button
-                      type="submit"
-                      className="w-full"
+                      type='submit'
+                      className='w-full'
                       disabled={form.formState.isSubmitting}
                     >
                       {form.formState.isSubmitting ? (
                         <>
-                          <LoaderIcon className="mr-2 size-4 animate-spin" />
-                          Sending...
+                          <LoaderIcon className='mr-2 size-4 animate-spin' />
+                          Enviando...
                         </>
                       ) : (
-                        "Submit"
+                        'Enviar Mensagem'
                       )}
                     </Button>
                   </FieldGroup>
@@ -363,44 +359,46 @@ const Contact6 = ({ className, onSubmit }: Contact6Props) => {
             </Card>
           </div>
 
-          <div className="mt-12">
-            <Separator className="mb-8" />
-            <Card className="border-0 bg-muted shadow-none">
-              <CardContent className="p-6">
-                <div className="grid gap-8 md:grid-cols-2">
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">Office Hours</h3>
-                    <div className="space-y-2 text-sm text-muted-foreground">
-                      <div className="flex justify-between">
-                        <span>Monday - Friday</span>
-                        <span>9:00 AM - 6:00 PM EST</span>
+          <div className='mt-12'>
+            <Separator className='mb-8' />
+            <Card className='border-0 bg-muted shadow-none'>
+              <CardContent className='p-6'>
+                <div className='grid gap-8 md:grid-cols-2'>
+                  <div className='space-y-4'>
+                    <h3 className='text-lg font-semibold'>
+                      Horário de Atendimento
+                    </h3>
+                    <div className='space-y-2 text-sm text-muted-foreground'>
+                      <div className='flex justify-between'>
+                        <span>Segunda a Sexta</span>
+                        <span>9h às 19h</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span>Saturday</span>
-                        <span>10:00 AM - 4:00 PM EST</span>
+                      <div className='flex justify-between'>
+                        <span>Sábado</span>
+                        <span>Fechado</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span>Sunday</span>
-                        <span>Closed</span>
+                      <div className='flex justify-between'>
+                        <span>Domingo</span>
+                        <span>Fechado</span>
                       </div>
                     </div>
                   </div>
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">
-                      Contact Information
+                  <div className='space-y-4'>
+                    <h3 className='text-lg font-semibold'>
+                      Informações de Contato
                     </h3>
-                    <div className="space-y-2 text-sm text-muted-foreground">
-                      <div className="flex justify-between">
-                        <span>Email</span>
-                        <span>hello@company.com</span>
+                    <div className='space-y-2 text-sm text-muted-foreground'>
+                      <div className='flex justify-between'>
+                        <span>E-mail</span>
+                        <span>drjean.psiquiatria@gmail.com</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span>Phone</span>
-                        <span>+1 (555) 123-4567</span>
+                      <div className='flex justify-between'>
+                        <span>Telefone</span>
+                        <span>(11) 91325-9328</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span>Address</span>
-                        <span>123 Innovation St, Tech City</span>
+                      <div className='flex justify-between'>
+                        <span>Endereço</span>
+                        <span>Av. Paulista, 2494 — cj. 94, São Paulo, SP</span>
                       </div>
                     </div>
                   </div>
@@ -414,4 +412,4 @@ const Contact6 = ({ className, onSubmit }: Contact6Props) => {
   );
 };
 
-export { Contact6 };
+export { ContactSection };

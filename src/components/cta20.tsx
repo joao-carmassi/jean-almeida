@@ -19,20 +19,21 @@ interface CtaDividerProps {
   className?: string;
 }
 
-type Cta20Props = CtaDividerProps;
-type Props = Partial<Cta20Props>;
+type CtaSectionProps = CtaDividerProps;
+type Props = Partial<CtaSectionProps>;
 
-const defaultProps: Cta20Props = {
-  heading: 'Transform your business today.',
+const defaultProps: CtaSectionProps = {
+  heading:
+    'Às vezes, o mais difícil não é pedir ajuda — é encontrar um espaço onde você realmente possa ser escutado.',
   buttons: {
     primary: {
-      text: 'Get Started',
-      url: 'https://shadcnblocks.com',
+      text: 'Quero Agendar Minha Consulta',
+      url: 'https://wa.me/5511913259328?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20minha%20consulta.',
     },
   },
 };
 
-const Cta20 = (props: Props) => {
+const CtaSection = (props: Props) => {
   const { heading, buttons, className } = {
     ...defaultProps,
     ...props,
@@ -56,4 +57,4 @@ const Cta20 = (props: Props) => {
   );
 };
 
-export { Cta20 };
+export { CtaSection };

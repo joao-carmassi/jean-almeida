@@ -1,0 +1,103 @@
+---
+import {
+  BlogPostsSection,
+  type IPost,
+} from '@/components/blog/blog-posts-section';
+import Layout from '@/layouts/layout.astro';
+import { getBasePath } from '@/utils/env';
+import serialize from 'serialize-javascript';
+import type { WithContext, Blog, BreadcrumbList } from 'schema-dts';
+
+const blogSchema: WithContext<Blog> = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Blog — Dr. Jean Almeida | Psiquiatra em São Paulo',
+  description:
+    'Artigos sobre saúde mental, psiquiatria, ansiedade, depressão, TDAH e bem-estar emocional. Conteúdo do Dr. Jean Almeida, psiquiatra na Av. Paulista, São Paulo.',
+  url: `${getBasePath()}/blog`,
+  publisher: {
+    '@type': 'Person',
+    name: 'Dr. Jean Almeida',
+    url: getBasePath(),
+  },
+};
+
+const breadcrumbSchema: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Início', item: getBasePath() },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Blog',
+      item: `${getBasePath()}/blog`,
+    },
+  ],
+};
+
+const posts = await Promise.all(
+  Object.values(
+    import.meta.glob<{ url: string; frontmatter: IPost }>('./*.mdx', {
+      eager: true,
+    }),
+  ),
+);
+---
+
+<Layout
+  title='Blog — Dr. Jean Almeida | Psiquiatra em São Paulo'
+  description='Artigos sobre saúde mental, psiquiatria, ansiedade, depressão, TDAH e bem-estar emocional pelo Dr. Jean Almeida, psiquiatra na Av. Paulista, São Paulo.'
+  canonical={`${getBasePath()}/blog`}
+  openGraph={{
+    basic: {
+      title: 'Blog — Dr. Jean Almeida | Psiquiatra em São Paulo',
+      type: 'website',
+      image: `${getBasePath()}/og-image.jpg`,
+      url: `${getBasePath()}/blog`,
+    },
+    optional: {
+      description:
+        'Artigos sobre saúde mental, psiquiatria, ansiedade, depressão, TDAH e bem-estar emocional pelo Dr. Jean Almeida.',
+      siteName: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+      locale: 'pt_BR',
+    },
+    image: {
+      alt: 'Blog do Dr. Jean Almeida — Psiquiatra em São Paulo',
+    },
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: 'Blog — Dr. Jean Almeida | Psiquiatra em São Paulo',
+    description:
+      'Artigos sobre saúde mental e psiquiatria pelo Dr. Jean Almeida, Av. Paulista, São Paulo.',
+    image: `${getBasePath()}/og-image.jpg`,
+    imageAlt: 'Blog do Dr. Jean Almeida — Psiquiatra em São Paulo',
+  }}
+>
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(blogSchema)}
+    slot='head'
+  />
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(breadcrumbSchema)}
+    slot='head'
+  />
+  <main class='min-h-svh'>
+    <BlogPostsSection
+      posts={posts.map((post) => {
+        const { frontmatter } = post;
+        return {
+          label: frontmatter.label,
+          title: frontmatter.title,
+          description: frontmatter.description,
+          url: post.url,
+        };
+      })}
+    />
+  </main>
+</Layout>

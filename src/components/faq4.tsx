@@ -59,12 +59,16 @@ const FaqSection = () => {
           </p>
         </div>
         <div className='mt-12'>
-          <Accordion type='single' collapsible>
+          <Accordion
+            className='dark text-foreground bg-black'
+            type='single'
+            collapsible
+          >
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className='border-b-0'
+                className='border-b-0 bg-card data-[state=open]:bg-card/85'
               >
                 <AccordionTrigger className='hover:text-foreground/60 hover:no-underline'>
                   {faq.question}

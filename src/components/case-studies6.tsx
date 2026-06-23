@@ -3,13 +3,6 @@
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-import imgAltHumor from '@/assets/clinica/LCM_1642.jpg';
-import imgAnsiedade from '@/assets/clinica/LCM_1637.jpg';
-import imgBurnout from '@/assets/clinica/LCM_1640.jpg';
-import imgDepressao from '@/assets/clinica/LCM_1636.jpg';
-import imgInsonia from '@/assets/clinica/LCM_1643.jpg';
-import imgOutras from '@/assets/clinica/LCM_1644.jpg';
-import imgTDAH from '@/assets/clinica/LCM_1638.jpg';
 import { Button } from '@/components/ui/button';
 import type { CarouselApi } from '@/components/ui/carousel';
 import {
@@ -19,113 +12,68 @@ import {
 } from '@/components/ui/carousel';
 
 import { cn } from '@/lib/utils';
+import type { OptimizedPicture } from '@/utils/get-picture-image';
+import { Picture } from './ui/picture';
 
-const TRANSPARENT_PIXEL =
-  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-
-interface CaseStudiesCarouselItem {
-  id: string;
-  logo: string;
-  logoAlt?: string;
-  title: string;
-  description: string;
-  href: string;
-  image: string;
-}
-
-interface CaseStudiesCarouselProps {
-  title: string;
-  description: string;
-  items: CaseStudiesCarouselItem[];
-  className?: string;
-}
-
-type ServicesSectionProps = CaseStudiesCarouselProps;
-type Props = Partial<ServicesSectionProps>;
-
-const defaultProps: ServicesSectionProps = {
-  title: 'Temas Frequentemente Acompanhados',
-  description:
-    'Atendimento de adultos que buscam acompanhamento para ansiedade, depressão, transtornos do humor, transtorno bipolar, insônia, burnout, sofrimento emocional persistente e dificuldades relacionais.',
-  items: [
+const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
+  const items = [
     {
       id: 'depressao',
-      logo: TRANSPARENT_PIXEL,
-      logoAlt: '',
       title: 'Depressão',
       description:
         'Muitas pessoas continuam trabalhando, cumprindo compromissos e convivendo normalmente enquanto se sentem emocionalmente esgotadas por dentro. A depressão nem sempre paralisa — às vezes, ela só apaga.',
       href: '#contato',
-      image: imgDepressao.src,
+      image: images[0],
     },
     {
       id: 'ansiedade',
-      logo: TRANSPARENT_PIXEL,
-      logoAlt: '',
       title: 'Ansiedade e Ruminação',
       description:
         'Pensamento acelerado, dificuldade de desligar, exigência interna excessiva, sensação de alerta permanente. A ansiedade de alta performance é real — e frequentemente invisível para quem está de fora.',
       href: '#contato',
-      image: imgAnsiedade.src,
+      image: images[1],
     },
     {
       id: 'tdah',
-      logo: TRANSPARENT_PIXEL,
-      logoAlt: '',
       title: 'TDAH em Adultos',
       description:
         'Dificuldade de sustentar foco, procrastinação crônica, impulsividade e sensação de estar sempre um passo atrás — o TDAH em adultos é subdiagnosticado e frequentemente confundido com falta de disciplina.',
       href: '#contato',
-      image: imgTDAH.src,
+      image: images[2],
     },
     {
       id: 'burnout',
-      logo: TRANSPARENT_PIXEL,
-      logoAlt: '',
       title: 'Esgotamento e Burnout',
       description:
         'Exaustão que o descanso não resolve, desconexão do próprio trabalho, irritabilidade crescente, perda de sentido — o esgotamento profissional vai além do cansaço. Não é falta de força de vontade.',
       href: '#contato',
-      image: imgBurnout.src,
+      image: images[3],
     },
     {
       id: 'humor',
-      logo: TRANSPARENT_PIXEL,
-      logoAlt: '',
       title: 'Alterações de Humor',
       description:
         'Oscilações emocionais sem causa aparente, períodos de euforia seguidos de queda, instabilidade que afeta relações e trabalho — quando o humor não segue uma lógica clara, um diagnóstico preciso faz toda a diferença.',
       href: '#contato',
-      image: imgAltHumor.src,
+      image: images[4],
     },
     {
       id: 'insonia',
-      logo: TRANSPARENT_PIXEL,
-      logoAlt: '',
       title: 'Insônia Crônica',
       description:
         'Dificuldade em adormecer, sono fragmentado, acordar sem descanso — a insônia crônica raramente é apenas "estresse". Com avaliação adequada, é possível entender sua causa e tratá-la de forma eficaz.',
       href: '#contato',
-      image: imgInsonia.src,
+      image: images[5],
     },
     {
       id: 'outras',
-      logo: TRANSPARENT_PIXEL,
-      logoAlt: '',
       title: 'Outras Condições Psiquiátricas',
       description:
         'Cada sofrimento tem sua singularidade. Condições que não se encaixam nas categorias acima também são avaliadas com a mesma atenção e profundidade.',
       href: '#contato',
-      image: imgOutras.src,
+      image: images[6],
     },
-  ],
-};
-
-const ServicesSection = (props: Props) => {
-  const { title, description, items, className } = {
-    ...defaultProps,
-    ...props,
-  };
+  ];
 
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
@@ -149,19 +97,24 @@ const ServicesSection = (props: Props) => {
   }, [carouselApi]);
 
   return (
-    <section className={cn('py-32', className)}>
+    <section className='py-12 lg:py-24'>
       <div className='container'>
         <div className='mb-6 flex items-end justify-between md:mb-9 lg:mb-10'>
-          <div className='flex flex-col gap-4'>
-            <h2 className='text-3xl font-medium md:text-4xl lg:text-5xl'>
-              {title}
+          <div className='flex flex-col gap-6 lg:gap-10'>
+            <h2 className='text-3xl font-bold md:text-4xl lg:text-5xl max-w-4xl'>
+              Temas Frequentemente Acompanhados
             </h2>
-            <p className='max-w-xl text-muted-foreground'>{description}</p>
+            <p className='text-balance text-muted-foreground lg:text-xl'>
+              Atendimento de adultos que buscam acompanhamento para ansiedade,
+              depressão, transtornos do humor, transtorno bipolar, insônia,
+              burnout, sofrimento emocional persistente e dificuldades
+              relacionais.
+            </p>
           </div>
           <div className='hidden shrink-0 gap-2 md:flex'>
             <Button
               size='icon'
-              variant='ghost'
+              variant='outline'
               onClick={() => {
                 carouselApi?.scrollPrev();
               }}
@@ -172,7 +125,7 @@ const ServicesSection = (props: Props) => {
             </Button>
             <Button
               size='icon'
-              variant='ghost'
+              variant='outline'
               onClick={() => {
                 carouselApi?.scrollNext();
               }}
@@ -188,6 +141,8 @@ const ServicesSection = (props: Props) => {
         <Carousel
           setApi={setCarouselApi}
           opts={{
+            loop: true,
+            skipSnaps: true,
             breakpoints: {
               '(max-width: 768px)': {
                 dragFree: true,
@@ -213,25 +168,18 @@ const ServicesSection = (props: Props) => {
             {items.map((item) => (
               <CarouselItem
                 key={item.id}
-                className='max-w-[320px] pl-5 lg:max-w-[360px]'
+                className='max-w-[320px] pl-5 lg:max-w-90'
               >
                 <a href={item.href} className='group rounded-xl'>
                   <div className='group relative h-full min-h-108 max-w-full overflow-hidden rounded-xl md:aspect-5/4 lg:aspect-video'>
-                    <img
+                    <Picture
                       src={item.image}
                       alt={item.title}
                       className='absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105'
                     />
                     <div className='absolute inset-0 h-full bg-linear-to-t from-black/80 via-black/28 to-transparent' />
-                    <div className='absolute inset-x-0 bottom-0 flex flex-col items-start p-6 text-white md:p-8'>
-                      <div className='mb-3 flex h-9 items-center pt-4 md:mb-4 md:pt-4 lg:pt-4'>
-                        <img
-                          src={item.logo}
-                          alt={item.logoAlt ?? ''}
-                          className='max-h-8 w-auto max-w-[160px] object-contain object-left'
-                        />
-                      </div>
-                      <div className='text-xl font-semibold'>{item.title}</div>
+                    <div className='text-xl font-semibold absolute inset-x-0 bottom-0 flex flex-col items-start p-6 text-white md:p-8'>
+                      {item.title}
                     </div>
                   </div>
                 </a>

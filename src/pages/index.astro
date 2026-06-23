@@ -21,6 +21,13 @@ import img4 from '@/assets/clinica/LCM_1630.jpg';
 import img5 from '@/assets/clinica/LCM_1631.jpg';
 import img6 from '@/assets/clinica/LCM_1632.jpg';
 import img7 from '@/assets/clinica/LCM_1633.jpg';
+import img8 from '@/assets/clinica/LCM_1642.jpg';
+import img9 from '@/assets/clinica/LCM_1637.jpg';
+import img10 from '@/assets/clinica/LCM_1640.jpg';
+import img11 from '@/assets/clinica/LCM_1636.jpg';
+import img12 from '@/assets/clinica/LCM_1643.jpg';
+import img13 from '@/assets/clinica/LCM_1644.jpg';
+import img14 from '@/assets/clinica/LCM_1638.jpg';
 
 const siteUrl = getBasePath();
 
@@ -139,6 +146,16 @@ const aboutImages = await Promise.all([
   getPictureImage({ src: img6, width: 350, height: 437 }),
   getPictureImage({ src: img7, width: 350, height: 437 }),
 ]);
+
+const servicesImages = await Promise.all([
+  getPictureImage({ src: img8, width: 340, height: 432 }),
+  getPictureImage({ src: img9, width: 340, height: 432 }),
+  getPictureImage({ src: img10, width: 340, height: 432 }),
+  getPictureImage({ src: img11, width: 340, height: 432 }),
+  getPictureImage({ src: img12, width: 340, height: 432 }),
+  getPictureImage({ src: img13, width: 340, height: 432 }),
+  getPictureImage({ src: img14, width: 340, height: 432 }),
+]);
 ---
 
 <Layout
@@ -189,7 +206,7 @@ const aboutImages = await Promise.all([
     <HeroSection images={heroImages} client:load />
     <AboutSection images={aboutImages} />
     <StatsSection />
-    <ServicesSection client:visible />
+    <ServicesSection images={servicesImages} client:visible />
     <ProcessSection client:visible />
     <TestimonialSection client:visible />
     <FaqSection client:visible />

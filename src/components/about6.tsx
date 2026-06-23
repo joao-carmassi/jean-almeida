@@ -8,7 +8,7 @@ const AboutSection = ({ images }: { images: OptimizedPicture[] }) => {
         <div className='flex flex-col items-center justify-start gap-6 lg:flex-row'>
           <div className='flex w-full flex-col items-start justify-start lg:w-1/2'>
             <div className='pr-6'>
-              <h2 className='mb-6 lg:mb-10 text-4xl font-bold md:text-5xl lg:text-6xl'>
+              <h2 className='mb-6 lg:mb-10 text-3xl font-bold md:text-4xl lg:text-5xl'>
                 Acompanhamento Psiquiátrico com Escuta e Profundidade
               </h2>
               <p className='mb-6 lg:mb-10 text-balance text-muted-foreground lg:text-xl'>

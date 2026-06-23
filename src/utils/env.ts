@@ -9,5 +9,5 @@ export const getBasePath = () => {
 };
 
 export const getZapNumber = () => {
-  return import.meta.env.PUBLIC_ZAP_NUMBER || '5511913259328';
+  return import.meta.env.PUBLIC_ZAP_NUMBER as string;
 };

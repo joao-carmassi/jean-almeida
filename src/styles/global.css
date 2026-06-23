@@ -12,68 +12,80 @@ Uncomment to import Google fonts if you want to use them in your project.
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 @import '@fontsource-variable/inter';
+@plugin 'tailwindcss-pattern';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --background: #fffceb;
+  --foreground: #283517;
 
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --card: #fff9df;
+  --card-foreground: #283517;
+
+  --popover: #fff9df;
+  --popover-foreground: #283517;
+
+  --primary: #8c6a3b;
+  --primary-foreground: #fffceb;
+
+  --secondary: #efe8cf;
+  --secondary-foreground: #283517;
+
+  --muted: #f3edda;
+  --muted-foreground: #5a6248;
+
+  --accent: #e6d8b8;
+  --accent-foreground: #283517;
+
+  --destructive: #b84a3a;
+  --destructive-foreground: #fffceb;
+
+  --border: #d8cba9;
+  --input: #d8cba9;
+  --ring: #8c6a3b;
+
+  --chart-1: #8c6a3b;
+  --chart-2: #283517;
+  --chart-3: #b99a63;
+  --chart-4: #5a6248;
+  --chart-5: #e6d8b8;
+
+  --sidebar: #fff9df;
+  --sidebar-foreground: #283517;
+  --sidebar-primary: #8c6a3b;
+  --sidebar-primary-foreground: #fffceb;
+  --sidebar-accent: #efe8cf;
+  --sidebar-accent-foreground: #283517;
+  --sidebar-border: #d8cba9;
+  --sidebar-ring: #8c6a3b;
 
   --radius: 0.625rem;
 
-  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
-  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-2xs: 0 1px 3px 0px hsl(90 20% 10% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(90 20% 10% / 0.05);
   --shadow-sm:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    0 1px 3px 0px hsl(90 20% 10% / 0.1), 0 1px 2px -1px hsl(90 20% 10% / 0.1);
+  --shadow:
+    0 1px 3px 0px hsl(90 20% 10% / 0.1), 0 1px 2px -1px hsl(90 20% 10% / 0.1);
   --shadow-md:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+    0 1px 3px 0px hsl(90 20% 10% / 0.1), 0 2px 4px -1px hsl(90 20% 10% / 0.1);
   --shadow-lg:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+    0 1px 3px 0px hsl(90 20% 10% / 0.1), 0 4px 6px -1px hsl(90 20% 10% / 0.1);
   --shadow-xl:
-    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
-  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+    0 1px 3px 0px hsl(90 20% 10% / 0.1), 0 8px 10px -1px hsl(90 20% 10% / 0.1);
+  --shadow-2xl: 0 1px 3px 0px hsl(90 20% 10% / 0.25);
 
-  /* Shadcnblocks.com Colors */
-  --gradient-1: oklch(0.643 0.4075 269.926);
-  --gradient-2: oklch(0.727 0.4675 144.688);
-  --gradient-3: oklch(0.701 0.3775 339.956);
+  /* Gradients */
+  --gradient-1: #8c6a3b;
+  --gradient-2: #283517;
+  --gradient-3: #b99a63;
 
   /* Alerts */
-  --error: oklch(0.704 0.191 22.216);
-  --success: oklch(0.34 0.69 165.96);
-  --info: oklch(0.36 0.68 241.16);
-  --warning: oklch(0.769 0.288 70.08);
+  --error: #b84a3a;
+  --success: #4f7f45;
+  --info: #3f6f82;
+  --warning: #c28a2e;
 
   /* Fonts */
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
@@ -82,66 +94,77 @@ Uncomment to import Google fonts if you want to use them in your project.
 
   --font-display: var(--font-poppins);
   --font-text: var(--font-montserrat);
-
   --font-handwriting: var(--font-manison);
 
   /* Magicui Colors */
-  --color-1: oklch(66.2% 0.225 25.9);
-  --color-2: oklch(60.4% 0.26 302);
-  --color-3: oklch(69.6% 0.165 251);
-  --color-4: oklch(80.2% 0.134 225);
-  --color-5: oklch(90.7% 0.231 133);
+  --color-1: #8c6a3b;
+  --color-2: #b99a63;
+  --color-3: #283517;
+  --color-4: #5a6248;
+  --color-5: #fffceb;
 }
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
 
-  /* Shadcnblocks.com Colors */
-  --gradient-1: oklch(0.643 0.4075 269.926);
-  --gradient-2: oklch(0.727 0.4675 144.688);
-  --gradient-3: oklch(0.701 0.3775 339.956);
+.dark {
+  --background: #283517;
+  --foreground: #fffceb;
+
+  --card: #32411d;
+  --card-foreground: #fffceb;
+
+  --popover: #32411d;
+  --popover-foreground: #fffceb;
+
+  --primary: #8c6a3b;
+  --primary-foreground: #fffceb;
+
+  --secondary: #3b4b25;
+  --secondary-foreground: #fffceb;
+
+  --muted: #3b4b25;
+  --muted-foreground: #d8cba9;
+
+  --accent: #4a5c2d;
+  --accent-foreground: #fffceb;
+
+  --destructive: #d66a5a;
+  --destructive-foreground: #fffceb;
+
+  --border: #55663a;
+  --input: #55663a;
+  --ring: #b99a63;
+
+  --chart-1: #b99a63;
+  --chart-2: #fffceb;
+  --chart-3: #8c6a3b;
+  --chart-4: #d8cba9;
+  --chart-5: #5a6248;
+
+  --sidebar: #32411d;
+  --sidebar-foreground: #fffceb;
+  --sidebar-primary: #8c6a3b;
+  --sidebar-primary-foreground: #fffceb;
+  --sidebar-accent: #3b4b25;
+  --sidebar-accent-foreground: #fffceb;
+  --sidebar-border: #55663a;
+  --sidebar-ring: #b99a63;
+
+  /* Gradients */
+  --gradient-1: #8c6a3b;
+  --gradient-2: #fffceb;
+  --gradient-3: #b99a63;
 
   /* Alerts */
-  --error: oklch(0.704 0.191 22.216);
-  --success: oklch(0.34 0.69 165.96);
-  --info: oklch(0.36 0.68 241.16);
-  --warning: oklch(0.769 0.288 70.08);
+  --error: #d66a5a;
+  --success: #7fa96d;
+  --info: #6fa4b8;
+  --warning: #d6a848;
 
   /* Magicui Colors */
-  --color-1: oklch(66.2% 0.225 25.9);
-  --color-2: oklch(60.4% 0.26 302);
-  --color-3: oklch(69.6% 0.165 251);
-  --color-4: oklch(80.2% 0.134 225);
-  --color-5: oklch(90.7% 0.231 133);
+  --color-1: #8c6a3b;
+  --color-2: #b99a63;
+  --color-3: #fffceb;
+  --color-4: #d8cba9;
+  --color-5: #283517;
 }
 
 @theme inline {

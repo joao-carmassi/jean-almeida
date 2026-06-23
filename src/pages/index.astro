@@ -12,8 +12,9 @@ import { StatsSection } from '@/components/stats6';
 import { TestimonialSection } from '@/components/testimonial18';
 import Layout from '@/layouts/layout.astro';
 import { getBasePath } from '@/utils/env';
-import heroImg from '@/assets/je/A7D22EB7-79EB-4643-BDDB-C46046C2C963.jpg';
 import serialize from 'serialize-javascript';
+import getPictureImage from '@/utils/get-picture-image';
+import img1 from '@/assets/hero.jpeg';
 
 const siteUrl = getBasePath();
 
@@ -119,6 +120,10 @@ const faqSchema: WithContext<FAQPage> = {
     },
   ],
 };
+
+const heroImages = await Promise.all([
+  getPictureImage({ src: img1, width: 574, height: 574 }),
+]);
 ---
 
 <Layout
@@ -166,43 +171,7 @@ const faqSchema: WithContext<FAQPage> = {
     slot='head'
   />
   <main>
-    <HeroSection
-      client:load
-      heading='Psiquiatra em São Paulo com Escuta Profunda e Tratamento Individualizado'
-      description='Nem todo sofrimento aparece por fora. Ansiedade, exaustão, vazio emocional, insônia, relações difíceis — às vezes a vida continua funcionando enquanto você já não consegue mais descansar dentro dela. Dr. Jean Almeida · Psiquiatra na Av. Paulista, São Paulo.'
-      buttons={{
-        primary: {
-          text: 'Agendar Minha Consulta',
-          url: 'https://wa.me/5511913259328?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20minha%20consulta.',
-        },
-        secondary: {
-          text: 'Saiba Mais ↓',
-          url: '#sobre',
-        },
-      }}
-      reviews={{
-        count: 5,
-        rating: 5.0,
-        avatars: [
-          {
-            src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/avatars/avatar1.jpg',
-            alt: 'Paciente',
-          },
-          {
-            src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/avatars/avatar2.jpg',
-            alt: 'Paciente',
-          },
-          {
-            src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/avatars/avatar3.jpg',
-            alt: 'Paciente',
-          },
-        ],
-      }}
-      image={{
-        src: heroImg.src,
-        alt: 'Dr. Jean Almeida — Psiquiatra em São Paulo, Av. Paulista',
-      }}
-    />
+    <HeroSection images={heroImages} client:load />
     <AboutSection />
     <StatsSection />
     <ServicesSection client:visible />

@@ -1,18 +1,9 @@
-import img1 from '@/assets/clinica/LCM_1611.jpg';
-import img2 from '@/assets/clinica/LCM_1629.jpg';
-import img3 from '@/assets/clinica/LCM_1630.jpg';
-import img4 from '@/assets/clinica/LCM_1631.jpg';
-import img5 from '@/assets/clinica/LCM_1632.jpg';
-import img6 from '@/assets/clinica/LCM_1633.jpg';
-import { cn } from '@/lib/utils';
+import type { OptimizedPicture } from '@/utils/get-picture-image';
+import { Picture } from './ui/picture';
 
-interface AboutSectionProps {
-  className?: string;
-}
-
-const AboutSection = ({ className }: AboutSectionProps) => {
+const AboutSection = ({ images }: { images: OptimizedPicture[] }) => {
   return (
-    <section id='sobre' className={cn('py-32', className)}>
+    <section id='sobre' className='py-12 lg:py-24'>
       <div className='container'>
         <div className='flex flex-col items-center justify-start gap-6 lg:flex-row'>
           <div className='flex w-full flex-col items-start justify-start gap-24 lg:w-1/2'>
@@ -20,7 +11,7 @@ const AboutSection = ({ className }: AboutSectionProps) => {
               <h1 className='mb-6 text-4xl font-bold md:text-5xl lg:mb-10 lg:text-6xl'>
                 Acompanhamento Psiquiátrico com Escuta e Profundidade
               </h1>
-              <p className='mb-9 text-muted-foreground lg:text-xl'>
+              <p className='mb-9 text-balance text-muted-foreground lg:text-xl'>
                 Meu nome é Jean Almeida, sou médico com atuação em psiquiatria,
                 registrado no CRM 127.207. Meu trabalho é construído sobre a
                 escuta cuidadosa e o acompanhamento longitudinal — atenção não
@@ -32,19 +23,19 @@ const AboutSection = ({ className }: AboutSectionProps) => {
               </p>
             </div>
             <div className='flex flex-col items-center justify-center gap-6 md:flex-row'>
-              <img
-                src={img1.src}
+              <Picture
+                src={images[0]}
                 alt='Consultório Dr. Jean Almeida — Av. Paulista, São Paulo'
-                className='aspect-[0.7] w-full rounded-lg object-cover md:w-1/2'
+                className='aspect-[0.7] w-full rounded-lg object-cover'
               />
-              <div className='flex w-full flex-col items-center justify-center gap-6 md:w-1/2'>
-                <img
-                  src={img2.src}
+              <div className='flex w-full flex-col items-center justify-center gap-6'>
+                <Picture
+                  src={images[1]}
                   alt='Sala de atendimento psiquiátrico'
                   className='aspect-[1.1] rounded-lg object-cover'
                 />
-                <img
-                  src={img3.src}
+                <Picture
+                  src={images[2]}
                   alt='Ambiente acolhedor do consultório'
                   className='aspect-[0.7] rounded-lg object-cover'
                 />
@@ -53,19 +44,19 @@ const AboutSection = ({ className }: AboutSectionProps) => {
           </div>
           <div className='flex w-full flex-col items-center justify-center gap-12 pt-12 lg:w-1/2 lg:pt-48'>
             <div className='flex flex-col items-center justify-center gap-6 md:flex-row'>
-              <img
-                src={img4.src}
+              <Picture
+                src={images[3]}
                 alt='Detalhe do espaço de consulta'
-                className='aspect-[0.9] w-full rounded-lg object-cover md:w-1/2'
+                className='aspect-[0.9] w-full rounded-lg object-cover'
               />
-              <div className='flex w-full flex-col items-center justify-center gap-6 md:w-1/2'>
-                <img
-                  src={img5.src}
+              <div className='flex w-full flex-col items-center justify-center gap-6'>
+                <Picture
+                  src={images[4]}
                   alt='Interior do consultório psiquiátrico'
                   className='aspect-[0.8] rounded-lg object-cover'
                 />
-                <img
-                  src={img6.src}
+                <Picture
+                  src={images[5]}
                   alt='Espaço de escuta e cuidado'
                   className='aspect-[0.9] rounded-lg object-cover'
                 />
@@ -75,12 +66,12 @@ const AboutSection = ({ className }: AboutSectionProps) => {
               <h1 className='mb-8 text-2xl font-semibold lg:mb-6'>
                 Nosso Consultório
               </h1>
-              <p className='mb-9 lg:text-xl'>
+              <p className='mb-9 max-w-5xl text-balance text-muted-foreground lg:text-xl'>
                 O consultório está localizado na Av. Paulista, 2494 — conjunto
                 94, no coração de São Paulo, com fácil acesso pelo metrô
                 (estação Consolação ou Trianon-MASP).
               </p>
-              <p className='text-muted-foreground'>
+              <p className='max-w-5xl text-balance text-muted-foreground lg:text-xl'>
                 Muitas pessoas que chegam ao consultório funcionam bem por fora
                 — trabalham, cumprem compromissos, mantêm relações. Mas carregam
                 um sofrimento interno que o desempenho cotidiano não apaga. Se

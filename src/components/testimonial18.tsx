@@ -1,29 +1,24 @@
 import { Star } from 'lucide-react';
 
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { cn } from '@/lib/utils';
 
-interface TestimonialSectionProps {
-  className?: string;
-}
-
-const TestimonialSection = ({ className }: TestimonialSectionProps) => {
+const TestimonialSection = () => {
   return (
-    <section id='depoimentos' className={cn('py-32', className)}>
-      <div className='container'>
-        <div className='flex flex-col items-center gap-4'>
+    <section id='depoimentos' className='py-12 md:py-24'>
+      <div>
+        <div className='container flex flex-col items-center gap-6'>
           <div className='flex items-center gap-1 text-sm font-semibold'>
             <Star className='h-6 w-auto fill-amber-500 stroke-amber-500' />
             Avaliação 5.0 no Google
           </div>
-          <h2 className='text-center text-3xl font-semibold lg:text-4xl'>
+          <h2 className='text-3xl font-bold md:text-4xl lg:text-5xl'>
             O Que os Pacientes Dizem
           </h2>
-          <p className='text-center text-muted-foreground lg:text-lg'>
+          <p className='text-balance text-muted-foreground lg:text-xl'>
             Depoimentos de quem encontrou um espaço de escuta e cuidado genuíno.
           </p>
         </div>
-        <div className='mx-auto mt-20 max-w-5xl rounded-2xl bg-muted p-6 md:p-20'>
+        <div className='container mx-auto mt-12 rounded-2xl bg-muted p-6 md:p-20'>
           <div className='mb-6 flex gap-1'>
             <Star className='size-5 fill-amber-500 text-amber-500' />
             <Star className='size-5 fill-amber-500 text-amber-500' />

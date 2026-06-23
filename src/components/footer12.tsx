@@ -53,7 +53,7 @@ const Footer = () => {
         </p>
       </nav>
       <h2 className='font-handwriting text-[13vw] font-black hidden lg:block'>
-        Gean Almeida
+        Jean Almeida
       </h2>
     </section>
   );

@@ -1,13 +1,6 @@
 import { ArrowUpRight } from 'lucide-react';
 
-import paulistaImg from '@/assets/clinica/Paulista 2.jpg';
-import { cn } from '@/lib/utils';
-
-interface FooterProps {
-  className?: string;
-}
-
-const Footer = ({ className }: FooterProps) => {
+const Footer = () => {
   const navigation = [
     { name: 'Sobre o Dr. Jean', href: '#sobre' },
     { name: 'Áreas de Atuação', href: '#areas' },
@@ -25,15 +18,8 @@ const Footer = ({ className }: FooterProps) => {
     { name: 'Google', href: 'https://g.page/r/drjeanalmeida' },
   ];
 
-  const legal = [
-    { name: 'Política de Privacidade', href: '#' },
-    { name: 'Aviso Legal', href: '#' },
-  ];
-
   return (
-    <section
-      className={cn('flex flex-col items-center gap-14 py-32', className)}
-    >
+    <section className='flex flex-col items-center py-12 lg:pb-0 dark bg-card text-foreground'>
       <nav className='container flex flex-col items-center gap-4'>
         <ul className='flex flex-wrap items-center justify-center gap-6'>
           {navigation.map((item) => (
@@ -57,18 +43,6 @@ const Footer = ({ className }: FooterProps) => {
             </li>
           ))}
         </ul>
-        <ul className='flex flex-wrap items-center justify-center gap-6'>
-          {legal.map((item) => (
-            <li key={item.name}>
-              <a
-                href={item.href}
-                className='text-sm text-muted-foreground transition-opacity hover:opacity-75'
-              >
-                {item.name}
-              </a>
-            </li>
-          ))}
-        </ul>
         <p className='text-center text-sm text-muted-foreground'>
           © 2026 Dr. Jean Almeida — Psiquiatra em São Paulo. CRM 127.207. Todos
           os direitos reservados.
@@ -78,13 +52,9 @@ const Footer = ({ className }: FooterProps) => {
           substituem consulta médica.
         </p>
       </nav>
-      <img
-        src={paulistaImg.src}
-        alt='Av. Paulista, São Paulo — Consultório Dr. Jean Almeida'
-        width={paulistaImg.width}
-        height={paulistaImg.height}
-        className='mt-10 md:mt-14 lg:mt-20'
-      />
+      <h2 className='font-handwriting text-[13vw] font-black hidden lg:block'>
+        Gean Almeida
+      </h2>
     </section>
   );
 };

@@ -28,6 +28,10 @@ import img11 from '@/assets/clinica/LCM_1636.jpg';
 import img12 from '@/assets/clinica/LCM_1643.jpg';
 import img13 from '@/assets/clinica/LCM_1644.jpg';
 import img14 from '@/assets/clinica/LCM_1638.jpg';
+import img15 from '@/assets/clinica/LCM_1565.jpg';
+import img16 from '@/assets/clinica/LCM_1563.jpg';
+import img17 from '@/assets/clinica/LCM_1559.jpg';
+import img18 from '@/assets/clinica/LCM_1567.jpg';
 
 const siteUrl = getBasePath();
 
@@ -156,6 +160,13 @@ const servicesImages = await Promise.all([
   getPictureImage({ src: img13, width: 340, height: 432 }),
   getPictureImage({ src: img14, width: 340, height: 432 }),
 ]);
+
+const processImages = await Promise.all([
+  getPictureImage({ src: img15, width: 694, height: 358 }),
+  getPictureImage({ src: img16, width: 694, height: 358 }),
+  getPictureImage({ src: img17, width: 694, height: 358 }),
+  getPictureImage({ src: img18, width: 694, height: 358 }),
+]);
 ---
 
 <Layout
@@ -207,7 +218,7 @@ const servicesImages = await Promise.all([
     <AboutSection images={aboutImages} />
     <StatsSection />
     <ServicesSection images={servicesImages} client:visible />
-    <ProcessSection client:visible />
+    <ProcessSection images={processImages} client:visible />
     <TestimonialSection client:visible />
     <FaqSection client:visible />
     <CtaSection />

@@ -99,8 +99,8 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
   return (
     <section className='py-12 lg:py-24'>
       <div className='container'>
-        <div className='mb-6 flex items-end justify-between md:mb-9 lg:mb-10'>
-          <div className='flex flex-col gap-6 lg:gap-10'>
+        <div className='flex items-end justify-between mb-12'>
+          <div className='flex flex-col gap-6'>
             <h2 className='text-3xl font-bold md:text-4xl lg:text-5xl max-w-4xl'>
               Temas Frequentemente Acompanhados
             </h2>
@@ -178,7 +178,7 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
                       className='absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105'
                     />
                     <div className='absolute inset-0 h-full bg-linear-to-t from-black/80 via-black/28 to-transparent' />
-                    <div className='text-xl font-semibold absolute inset-x-0 bottom-0 flex flex-col items-start p-6 text-white md:p-8'>
+                    <div className='text-xl font-semibold absolute inset-x-0 bottom-0 flex flex-col items-start p-6 text-white md:p-8 font-handwriting'>
                       {item.title}
                     </div>
                   </div>

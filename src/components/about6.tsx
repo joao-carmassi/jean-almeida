@@ -8,10 +8,10 @@ const AboutSection = ({ images }: { images: OptimizedPicture[] }) => {
         <div className='flex flex-col items-center justify-start gap-6 lg:flex-row'>
           <div className='flex w-full flex-col items-start justify-start lg:w-1/2'>
             <div className='pr-6'>
-              <h2 className='mb-6 lg:mb-10 text-3xl font-bold md:text-4xl lg:text-5xl'>
+              <h2 className='mb-6 text-3xl font-bold md:text-4xl lg:text-5xl'>
                 Acompanhamento Psiquiátrico com Escuta e Profundidade
               </h2>
-              <p className='mb-6 lg:mb-10 text-balance text-muted-foreground lg:text-xl'>
+              <p className='mb-12 text-balance text-muted-foreground lg:text-xl'>
                 Meu nome é Jean Almeida, sou médico com atuação em psiquiatria,
                 registrado no CRM 127.207. Meu trabalho é construído sobre a
                 escuta cuidadosa e o acompanhamento longitudinal — atenção não
@@ -63,10 +63,8 @@ const AboutSection = ({ images }: { images: OptimizedPicture[] }) => {
               </div>
             </div>
             <div>
-              <h3 className='mb-6 lg:mb-10 text-2xl font-semibold'>
-                Nosso Consultório
-              </h3>
-              <p className='mb-6 lg:mb-10 max-w-5xl text-balance text-muted-foreground lg:text-xl'>
+              <h3 className='mb-6 text-2xl font-semibold'>Nosso Consultório</h3>
+              <p className='mb-6 max-w-5xl text-balance text-muted-foreground lg:text-xl'>
                 O consultório está localizado na Av. Paulista, 2494 — conjunto
                 94, no coração de São Paulo, com fácil acesso pelo metrô
                 (estação Consolação ou Trianon-MASP).

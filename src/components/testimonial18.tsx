@@ -26,7 +26,7 @@ const TestimonialSection = () => {
             <Star className='size-5 fill-amber-500 text-amber-500' />
             <Star className='size-5 fill-amber-500 text-amber-500' />
           </div>
-          <q className='text-2xl font-semibold md:text-4xl'>
+          <q className='text-2xl font-semibold md:text-4xl font-handwriting'>
             Dr. Jean é uma pessoa incrível. Já passei com outros médicos antes,
             mas nenhum com o qual me conectasse desta forma.
           </q>

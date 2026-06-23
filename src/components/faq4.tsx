@@ -1,5 +1,3 @@
-import { ChevronRight } from 'lucide-react';
-
 import {
   Accordion,
   AccordionContent,
@@ -7,8 +5,6 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { cn } from '@/lib/utils';
 
 const faqs = [
   {
@@ -48,18 +44,16 @@ const faqs = [
   },
 ];
 
-interface FaqSectionProps {
-  className?: string;
-}
-
-const FaqSection = ({ className }: FaqSectionProps) => {
+const FaqSection = () => {
   return (
-    <section id='faq' className={cn('py-32', className)}>
+    <section id='faq' className='py-12 md:py-24'>
       <div className='container'>
         <div>
           <Badge className='text-xs font-medium'>FAQ</Badge>
-          <h1 className='mt-4 text-4xl font-semibold'>Perguntas Frequentes</h1>
-          <p className='mt-6 font-medium text-muted-foreground'>
+          <h2 className='mt-6 text-3xl font-bold md:text-4xl lg:text-5xl'>
+            Perguntas Frequentes
+          </h2>
+          <p className='mt-6 text-balance text-muted-foreground lg:text-xl'>
             Tem dúvidas sobre psiquiatria ou sobre como funciona o atendimento?
             Veja as respostas mais comuns.
           </p>
@@ -79,24 +73,6 @@ const FaqSection = ({ className }: FaqSectionProps) => {
               </AccordionItem>
             ))}
           </Accordion>
-        </div>
-        <Separator className='my-12' />
-        <div className='flex flex-col justify-between gap-12 md:flex-row md:items-end'>
-          <div className='lg:col-span-2'>
-            <h1 className='mt-4 text-2xl font-semibold'>Ainda tem dúvidas?</h1>
-            <p className='mt-6 font-medium text-muted-foreground'>
-              Entre em contato pelo WhatsApp e responderemos com prazer.
-            </p>
-          </div>
-          <div className='flex md:justify-end'>
-            <a
-              href='https://wa.me/5511913259328?text=Ol%C3%A1%2C%20tenho%20uma%20d%C3%BAvida%20sobre%20o%20atendimento.'
-              className='flex items-center gap-2 hover:underline'
-            >
-              Falar pelo WhatsApp
-              <ChevronRight className='h-auto w-4' />
-            </a>
-          </div>
         </div>
       </div>
     </section>

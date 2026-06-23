@@ -26,11 +26,11 @@ const TestimonialSection = () => {
             <Star className='size-5 fill-amber-500 text-amber-500' />
             <Star className='size-5 fill-amber-500 text-amber-500' />
           </div>
-          <q className='text-2xl font-semibold md:text-4xl font-handwriting'>
+          <q className='text-2xl font-bold md:text-3xl lg:text-4xl font-handwriting'>
             Dr. Jean é uma pessoa incrível. Já passei com outros médicos antes,
             mas nenhum com o qual me conectasse desta forma.
           </q>
-          <p className='mt-6 text-muted-foreground'>
+          <p className='mt-6 text-balance text-muted-foreground lg:text-xl'>
             Ele é muito gentil, compreensivo e dedicado. O atendimento é
             humanizado e a escuta é genuína. Recomendo de coração para quem
             busca um acompanhamento psiquiátrico de qualidade em São Paulo.

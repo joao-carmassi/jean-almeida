@@ -45,7 +45,7 @@ const Navbar = ({
     href: '#hero',
   },
   items = [...navigationLinks],
-  loginHref = getZapLink(
+  loginHref: consultaHref = getZapLink(
     'Olá, gostaria de agendar uma consulta com o Dr. Jean Almeida.',
   ),
 }: Navbar33Props) => {
@@ -53,7 +53,7 @@ const Navbar = ({
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   return (
-    <header className='fixed left-1/2 -translate-x-1/2 z-50 w-full container top-5 lg:top-12'>
+    <header className='fixed left-1/2 -translate-x-1/2 z-50 w-full container top-5 lg:top-8'>
       <div className='w-full rounded-4xl border bg-background/70 backdrop-blur-md transition-all duration-300'>
         <div className='flex items-center justify-between p-3'>
           <div className='flex items-center gap-3'>
@@ -143,7 +143,7 @@ const Navbar = ({
           {/* Auth Buttons */}
           <div className='flex items-center gap-2.5'>
             <Button asChild variant='default'>
-              <a href={loginHref}>
+              <a href={consultaHref} target='_blank' rel='noopener noreferrer'>
                 <span className='relative z-10'>Agendar Consulta</span>
               </a>
             </Button>

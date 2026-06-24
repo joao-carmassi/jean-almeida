@@ -11,15 +11,24 @@ const Footer = () => {
     },
   ];
 
-  const social = [{ name: 'WhatsApp', href: getZapLink() }];
+  const social = [
+    { name: 'WhatsApp', href: getZapLink() },
+    { name: 'Google', href: 'https://share.google/fUEwnewtna9YHcBIa' },
+  ];
 
   return (
-    <section className='flex flex-col items-center py-12 lg:pb-0 dark bg-card text-foreground'>
+    <section className='flex flex-col items-center py-12 lg:pb-0 dark bg-card text-foreground overflow-hidden'>
       <nav className='container flex flex-col items-center gap-4'>
         <ul className='flex flex-wrap items-center justify-center gap-6'>
           {navigation.map((item) => (
             <li key={item.label}>
               <a
+                target={item.href.startsWith('http') ? '_blank' : undefined}
+                rel={
+                  item.href.startsWith('http')
+                    ? 'noopener noreferrer'
+                    : undefined
+                }
                 href={item.href}
                 className='font-medium transition-opacity hover:opacity-75'
               >
@@ -30,6 +39,8 @@ const Footer = () => {
           {social.map((item) => (
             <li key={item.name}>
               <a
+                target='_blank'
+                rel='noopener noreferrer'
                 href={item.href}
                 className='flex items-center gap-0.5 font-medium transition-opacity hover:opacity-75'
               >
@@ -47,7 +58,7 @@ const Footer = () => {
           substituem consulta médica.
         </p>
       </nav>
-      <h2 className='font-handwriting text-[13vw] font-black hidden lg:block'>
+      <h2 className='font-handwriting text-foreground text-[13vw] font-black leading-none -mb-7 hidden lg:block'>
         Jean Almeida
       </h2>
     </section>

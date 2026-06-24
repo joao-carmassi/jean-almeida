@@ -60,7 +60,7 @@ const ProcessSection = ({ images }: { images: OptimizedPicture[] }) => {
     <section id='como-funciona' className='py-12 lg:py-24'>
       <div className='container'>
         <div className='grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-20'>
-          <div className='top-10 h-fit w-fit gap-3 space-y-6 py-8 lg:sticky'>
+          <div className='top-22 h-fit w-fit gap-3 space-y-6 py-8 lg:sticky'>
             <h2 className='relative w-fit text-3xl font-bold md:text-4xl lg:text-5xl max-w-4xl'>
               Como Funciona
             </h2>

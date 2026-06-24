@@ -12,6 +12,7 @@ import { StatsSection } from '@/components/stats6';
 import { TestimonialSection } from '@/components/testimonial18';
 import Layout from '@/layouts/layout.astro';
 import { getBasePath } from '@/utils/env';
+import { getZapNumber, getEmail } from '@/utils/env';
 import serialize from 'serialize-javascript';
 import getPictureImage from '@/utils/get-picture-image';
 import img1 from '@/assets/hero.jpeg';
@@ -45,8 +46,8 @@ const medicoBusiness: WithContext<Physician> = {
   description:
     'Psiquiatra humanizado na Av. Paulista, São Paulo. Tratamento para depressão, ansiedade, TDAH, burnout e mais. CRM 127.207.',
   url: siteUrl,
-  telephone: '+5511913259328',
-  email: 'drjean.psiquiatria@gmail.com',
+  telephone: `+${getZapNumber()}`,
+  email: getEmail(),
   medicalSpecialty: 'Psychiatric',
   priceRange: 'R$$$',
   currenciesAccepted: 'BRL',

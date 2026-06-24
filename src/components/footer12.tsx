@@ -7,7 +7,7 @@ const Footer = () => {
     ...navigationLinks,
     {
       label: 'Agendar Consulta',
-      href: 'https://wa.me/5511913259328?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta.',
+      href: getZapLink('Olá, gostaria de agendar uma consulta.'),
     },
   ];
 

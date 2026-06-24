@@ -1,6 +1,8 @@
 'use client';
 import { Mail, MapPin, MessagesSquare, Phone } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { getEmail, formatPhoneNumber, getPhoneNumber } from '@/utils/env';
+import getZapLink from '@/utils/get-zap-link';
 
 interface ContactInfo {
   icon: React.ReactNode;
@@ -16,24 +18,24 @@ const contactInfo: ContactInfo[] = [
     icon: <Mail className='size-6' />,
     title: 'E-mail',
     description: 'Resposta em até 24 horas',
-    value: 'drjean.psiquiatria@gmail.com',
-    href: 'mailto:drjean.psiquiatria@gmail.com',
+    value: getEmail(),
+    href: `mailto:${getEmail()}`,
     badge: 'Recomendado',
   },
   {
     icon: <MessagesSquare className='size-6' />,
     title: 'WhatsApp',
     description: 'Atendimento rápido e direto',
-    value: '(11) 91325-9328',
-    href: 'https://wa.me/5511913259328?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta.',
+    value: formatPhoneNumber(),
+    href: getZapLink('Olá, gostaria de agendar uma consulta.'),
     badge: 'Disponível',
   },
   {
     icon: <Phone className='size-6' />,
     title: 'Telefone',
     description: 'Segunda a Sexta, 9h às 19h',
-    value: '(11) 91325-9328',
-    href: 'tel:+5511913259328',
+    value: formatPhoneNumber(),
+    href: `tel:+55${getPhoneNumber()}`,
   },
   {
     icon: <MapPin className='size-6' />,

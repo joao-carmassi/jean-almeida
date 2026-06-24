@@ -25,13 +25,6 @@ const StatsSection = () => {
                 Agendar Consulta
               </a>
             </Button>
-            <Button
-              variant='outline'
-              className='w-full sm:w-auto text-foreground'
-              asChild
-            >
-              <a href='#sobre'>Saiba Mais</a>
-            </Button>
           </div>
         </div>
         <div className='grid w-full md:grid-cols-2 gap-12 sm:w-fit lg:grid-cols-4 lg:gap-16'>

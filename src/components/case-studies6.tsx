@@ -97,7 +97,7 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
   }, [carouselApi]);
 
   return (
-    <section className='py-12 lg:py-24'>
+    <section id='areas' className='py-12 lg:py-24'>
       <div className='container'>
         <div className='flex items-end justify-between mb-12'>
           <div className='flex flex-col gap-6'>

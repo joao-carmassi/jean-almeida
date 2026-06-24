@@ -27,7 +27,7 @@ const HeroSection = ({ images }: { images: OptimizedPicture[] }) => {
   };
 
   return (
-    <section className='min-h-svh py-12 grid place-items-center'>
+    <section id='hero' className='min-h-svh py-12 grid place-items-center'>
       <div className='container mx-auto'>
         <div className='flex items-center justify-center flex-col-reverse lg:flex-row gap-10 lg:grid-cols-2 lg:gap-20'>
           <div className='pattern-dots-md text-foreground rounded-4xl'>

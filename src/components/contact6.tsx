@@ -46,7 +46,7 @@ const contactInfo: ContactInfo[] = [
 
 const ContactSection = () => {
   return (
-    <section className='py-12 md:py-24' id='contact'>
+    <section className='py-12 md:py-24' id='contato'>
       <div className='container px-4 md:px-6'>
         <div className='mx-auto'>
           <div className='mb-12 text-center'>

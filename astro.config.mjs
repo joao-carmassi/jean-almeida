@@ -37,8 +37,8 @@ export default defineConfig({
     },
     {
       provider: fontProviders.google(),
-      name: 'Manison',
-      cssVariable: '--font-manison',
+      name: 'Bodoni Moda',
+      cssVariable: '--font-bodoni-moda',
       weights: ['400', '500', '600', '700'],
       optimizedFallbacks: true,
       fallbacks: ['Georgia', 'serif'],

@@ -5,8 +5,8 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar';
 const TestimonialSection = () => {
   return (
     <section id='depoimentos' className='py-12 md:py-24'>
-      <div>
-        <div className='container flex flex-col items-center gap-6'>
+      <div className='container'>
+        <div className='flex flex-col items-center gap-6'>
           <div className='flex items-center gap-1 text-sm font-semibold'>
             <Star className='h-6 w-auto fill-amber-500 stroke-amber-500' />
             Avaliação 5.0 no Google
@@ -18,7 +18,7 @@ const TestimonialSection = () => {
             Depoimentos de quem encontrou um espaço de escuta e cuidado genuíno.
           </p>
         </div>
-        <div className='container mx-auto mt-12 rounded-2xl bg-muted p-6 md:p-20'>
+        <div className='mx-auto mt-12 rounded-2xl bg-muted p-6 md:p-20'>
           <div className='mb-6 flex gap-1'>
             <Star className='size-5 fill-amber-500 text-amber-500' />
             <Star className='size-5 fill-amber-500 text-amber-500' />

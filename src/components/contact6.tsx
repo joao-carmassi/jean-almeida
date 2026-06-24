@@ -59,7 +59,7 @@ const ContactSection = () => {
             </p>
           </div>
 
-          <div className='grid gap-6 lg:grid-cols-2 w-full'>
+          <div className='grid gap-6 w-full'>
             {contactInfo.map((info, index) => (
               <Card
                 key={index}
@@ -92,7 +92,7 @@ const ContactSection = () => {
               src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.350498473113!2d-46.66499162467!3d-23.555852078803603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce582d0e86e945%3A0xc911c4449bf6cde0!2sAv.%20Paulista%2C%202494%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001310-300!5e0!3m2!1spt-BR!2sbr!4v1782254913622!5m2!1spt-BR!2sbr'
               loading='lazy'
               referrerPolicy='strict-origin-when-cross-origin'
-              className='w-full aspect-3/1 col-span-2 rounded-4xl'
+              className='w-full aspect-video md:aspect-3/1 md:col-span-2 rounded-4xl'
             />
           </div>
         </div>

@@ -36,6 +36,7 @@ async function getPictureImage({
         width,
         height,
         format,
+        quality: 100,
       });
 
       return {

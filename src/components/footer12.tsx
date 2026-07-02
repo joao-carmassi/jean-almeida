@@ -12,6 +12,7 @@ const Footer = () => {
   ];
 
   const social = [
+    { name: 'Blog', href: '/blog' },
     { name: 'WhatsApp', href: getZapLink() },
     { name: 'Google', href: 'https://share.google/fUEwnewtna9YHcBIa' },
   ];

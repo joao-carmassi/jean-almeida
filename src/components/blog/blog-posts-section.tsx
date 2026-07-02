@@ -15,16 +15,13 @@ export interface IPost {
 
 const BlogPostsSection = ({ posts = [] }: { posts?: IPost[] }) => {
   return (
-    <section className='py-12 md:py-24 pt-8 md:pt-12'>
-      <div className='container mx-auto'>
+    <section className='py-28 lg:py-12'>
+      <div className='container mx-auto lg:pt-18'>
         <div className='mx-auto flex flex-col items-center gap-6'>
-          <Badge>Gastronomia & Viagem</Badge>
-          <h1 className='font-bold text-4xl xl:text-5xl max-w-5xl'>
-            Dicas e Histórias da Serra da Mantiqueira
-          </h1>
+          <Badge>badge</Badge>
+          <h1 className='font-bold text-4xl xl:text-5xl max-w-5xl'>Titulo</h1>
           <p className='mb-8 md:mb-14 max-w-2xl text-lg font-normal text-muted-foreground md:text-xl text-center'>
-            Receitas de truta, roteiros em São Bento do Sapucaí, curiosidades
-            sobre a Pedra do Baú e novidades do Restaurante Sabor com Arte.
+            Paragrafo
           </p>
         </div>
 
@@ -32,7 +29,7 @@ const BlogPostsSection = ({ posts = [] }: { posts?: IPost[] }) => {
           {posts.map((post, i) => (
             <Card
               key={i}
-              className='overflow-hidden border-0 px-4 bg-card shadow-none'
+              className='overflow-hidden border-0 px-4 bg-white shadow-lg inset-shadow-2xs'
             >
               <div className='flex flex-col gap-6 sm:flex-row'>
                 <div className='flex-1 space-y-3'>

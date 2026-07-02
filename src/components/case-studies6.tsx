@@ -50,8 +50,8 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
       image: images[3],
     },
     {
-      id: 'humor',
-      title: 'Alterações de Humor',
+      id: 'bipolar',
+      title: 'Transtorno Bipolar',
       description:
         'Oscilações emocionais sem causa aparente, períodos de euforia seguidos de queda, instabilidade que afeta relações e trabalho — quando o humor não segue uma lógica clara, um diagnóstico preciso faz toda a diferença.',
       href: '#contato',
@@ -66,10 +66,10 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
       image: images[5],
     },
     {
-      id: 'outras',
-      title: 'Outras Condições Psiquiátricas',
+      id: 'borderline',
+      title: 'Transtorno Borderline',
       description:
-        'Cada sofrimento tem sua singularidade. Condições que não se encaixam nas categorias acima também são avaliadas com a mesma atenção e profundidade.',
+        'Instabilidade emocional, relacionamentos intensos e conflituosos, medo de abandono e comportamento impulsivo — o transtorno borderline requer compreensão e tratamento especializado.',
       href: '#contato',
       image: images[6],
     },
@@ -177,7 +177,7 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
                       alt={item.title}
                       className='absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105'
                     />
-                    <div className='absolute inset-0 h-full bg-linear-to-t from-black/80 via-black/28 to-transparent' />
+                    {/* <div className='absolute inset-0 h-full bg-linear-to-t from-black/80 via-black/28 to-transparent' /> */}
                     <div className='text-xl font-semibold absolute inset-x-0 bottom-0 flex flex-col items-start p-6 text-white md:p-8 font-handwriting'>
                       {item.title}
                     </div>

@@ -42,7 +42,7 @@ const Navbar = ({
   logo = {
     src: '/favicon-96x96.png',
     alt: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
-    href: '#hero',
+    href: '/#hero',
   },
   items = [...navigationLinks],
   loginHref: consultaHref = getZapLink(
@@ -87,7 +87,7 @@ const Navbar = ({
               </div>
             </button>
             <a
-              href={logo.href || '#hero'}
+              href={logo.href || '/#hero'}
               className='flex shrink-0 items-center gap-2'
             >
               <img

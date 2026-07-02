@@ -58,13 +58,19 @@ const HeroSection = ({ images }: { images: OptimizedPicture[] }) => {
     >
       <div className='container mx-auto'>
         <div className='flex items-center justify-center flex-col-reverse lg:flex-row gap-10 lg:grid-cols-2 lg:gap-20'>
-          <div className='pattern-dots-md text-foreground rounded-4xl gsap-hero-media opacity-0'>
+          <div className='relative pattern-dots-md text-foreground rounded-4xl gsap-hero-media opacity-0'>
             <Picture
               loading='eager'
               src={images[0]}
               alt='Dr. Jean Almeida — Psiquiatra em São Paulo, Av. Paulista'
               className='rounded-4xl object-cover md:translate-x-8 md:translate-y-8 shadow-lg aspect-square'
             />
+            <img
+              src='/logos/SVG/Logo alternativa vetorizada.svg'
+              alt='logo'
+              className='absolute z-20 bottom-6 md:bottom-0 right-6 md:right-0 h-fit w-36'
+            />
+            <div className='w-full h-full md:translate-x-8 md:translate-y-8 bg-linear-to-b from-transparent from-60% to-black/50 to-100% absolute z-10 top-0 left-0 rounded-4xl' />
           </div>
           <div className='mx-auto flex max-w-5xl flex-col items-center gap-6 text-center md:mr-auto lg:order-2 lg:items-start lg:text-left'>
             <h1 className='max-w-xl text-4xl font-bold tracking-tight text-pretty lg:max-w-3xl lg:text-6xl font-handwriting gsap-hero opacity-0'>

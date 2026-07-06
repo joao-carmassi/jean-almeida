@@ -8,7 +8,6 @@ import sitemap from '@astrojs/sitemap';
 import robotsTxt from 'astro-robots-txt';
 import { loadEnv } from 'vite';
 import mdx from '@astrojs/mdx';
-import vercel from '@astrojs/vercel';
 
 const { PUBLIC_BASE_PATH } = loadEnv(process.env.NODE_ENV, process.cwd(), '');
 
@@ -48,6 +47,4 @@ export default defineConfig({
   site: PUBLIC_BASE_PATH,
   base: '/jean-almeida',
   integrations: [react(), sitemap(), robotsTxt(), mdx()],
-
-  adapter: vercel(),
 });

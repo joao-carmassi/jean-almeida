@@ -46,6 +46,7 @@ export default defineConfig({
   ],
 
   site: PUBLIC_BASE_PATH,
+  base: '/jean-almeida',
   integrations: [react(), sitemap(), robotsTxt(), mdx()],
 
   adapter: vercel(),

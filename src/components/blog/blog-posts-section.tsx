@@ -16,12 +16,16 @@ export interface IPost {
 const BlogPostsSection = ({ posts = [] }: { posts?: IPost[] }) => {
   return (
     <section className='py-28 lg:py-12'>
-      <div className='container mx-auto lg:pt-18'>
+      <div className='container mx-auto pt-2 lg:pt-22'>
         <div className='mx-auto flex flex-col items-center gap-6'>
-          <Badge>badge</Badge>
-          <h1 className='font-bold text-4xl xl:text-5xl max-w-5xl'>Titulo</h1>
+          <Badge>Blog</Badge>
+          <h1 className='font-bold text-4xl xl:text-5xl max-w-5xl text-center'>
+            Psiquiatria com Escuta, Presença e Cuidado
+          </h1>
           <p className='mb-8 md:mb-14 max-w-2xl text-lg font-normal text-muted-foreground md:text-xl text-center'>
-            Paragrafo
+            Conteúdos sobre saúde mental, ansiedade, depressão, burnout, insônia
+            e temas clínicos frequentes no consultório, com linguagem clara e
+            acolhedora.
           </p>
         </div>
 

@@ -52,7 +52,7 @@ const medicoBusiness: WithContext<Physician> = {
   medicalSpecialty: 'Psychiatric',
   priceRange: 'R$$$',
   currenciesAccepted: 'BRL',
-  paymentAccepted: 'Cartão de crédito, débito, Pix',
+  paymentAccepted: 'Pix',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Av. Paulista, 2494 — Conjunto 94',
@@ -102,10 +102,10 @@ const faqSchema: WithContext<FAQPage> = {
     },
     {
       '@type': 'Question',
-      name: 'O Dr. Jean atende pelo convênio?',
+      name: 'Qual a forma de pagamento das consultas?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'As consultas são realizadas de forma particular. Aceitamos cartões de crédito e débito. Muitos planos de saúde oferecem reembolso — consulte o seu.',
+        text: 'As consultas são realizadas de forma particular. A única forma de pagamento aceita é Pix.',
       },
     },
     {
@@ -129,7 +129,7 @@ const faqSchema: WithContext<FAQPage> = {
       name: 'O consultório fica em que bairro de São Paulo?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'O consultório está localizado na Av. Paulista, 2494 — conjunto 94, no bairro Bela Vista, São Paulo. Fácil acesso pelo metrô (estação Consolação ou Trianon-MASP).',
+        text: 'O consultório está localizado na Av. Paulista, 2494 — conjunto 94, no bairro Bela Vista, São Paulo. Fácil acesso pelo metrô (estação Consolação ou Paulista-Pernambucanas).',
       },
     },
     {

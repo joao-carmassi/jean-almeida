@@ -40,7 +40,7 @@ const contactInfo: ContactInfo[] = [
   {
     icon: <MapPin className='size-6' />,
     title: 'Endereço',
-    description: 'Metrô Consolação / Trianon-MASP',
+    description: 'Metrô Consolação / Paulista-Pernambucanas',
     value: 'Av. Paulista, 2494 — cj. 94, Bela Vista, São Paulo — SP',
     href: 'https://maps.google.com/?q=Av.+Paulista,+2494,+S%C3%A3o+Paulo',
   },

@@ -63,7 +63,7 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
       description:
         'Dificuldade em adormecer, sono fragmentado, acordar sem descanso — a insônia crônica raramente é apenas "estresse". Com avaliação adequada, é possível entender sua causa e tratá-la de forma eficaz.',
       href: '#contato',
-      image: images[5],
+      image: images[6],
     },
     {
       id: 'borderline',
@@ -71,7 +71,7 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
       description:
         'Instabilidade emocional, relacionamentos intensos e conflituosos, medo de abandono e comportamento impulsivo — o transtorno borderline requer compreensão e tratamento especializado.',
       href: '#contato',
-      image: images[6],
+      image: images[5],
     },
   ];
 

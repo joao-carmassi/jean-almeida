@@ -18,9 +18,9 @@ const faqs = [
       'Não. Você pode agendar sua consulta diretamente, sem necessidade de encaminhamento. Basta entrar em contato pelo WhatsApp ou formulário.',
   },
   {
-    question: 'O Dr. Jean atende pelo convênio?',
+    question: 'Qual a forma de pagamento das consultas?',
     answer:
-      'As consultas são realizadas de forma particular. Aceitamos cartões de crédito e débito. Muitos planos de saúde oferecem reembolso — consulte o seu.',
+      'As consultas são realizadas de forma particular. A única forma de pagamento aceita é Pix.',
   },
   {
     question: 'É possível fazer consulta online?',
@@ -35,7 +35,7 @@ const faqs = [
   {
     question: 'O consultório fica em que bairro de São Paulo?',
     answer:
-      'O consultório está localizado na Av. Paulista, 2494 — conjunto 94, no bairro Bela Vista, São Paulo. Fácil acesso pelo metrô (estação Consolação ou Trianon-MASP).',
+      'O consultório está localizado na Av. Paulista, 2494 — conjunto 94, no bairro Bela Vista, São Paulo. Fácil acesso pelo metrô (estação Consolação ou Paulista-Pernambucanas).',
   },
   {
     question: 'O atendimento é feito em outro idioma além do português?',

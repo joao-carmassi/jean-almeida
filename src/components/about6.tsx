@@ -67,7 +67,7 @@ const AboutSection = ({ images }: { images: OptimizedPicture[] }) => {
               <p className='mb-6 max-w-5xl text-balance text-muted-foreground lg:text-xl'>
                 O consultório está localizado na Av. Paulista, 2494 — conjunto
                 94, no coração de São Paulo, com fácil acesso pelo metrô
-                (estação Consolação ou Trianon-MASP).
+                (estação Consolação ou Paulista-Pernambucanas).
               </p>
               <p className='max-w-5xl text-balance text-muted-foreground lg:text-xl'>
                 Muitas pessoas que chegam ao consultório funcionam bem por fora

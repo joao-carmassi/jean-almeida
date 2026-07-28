@@ -43,7 +43,7 @@ const BlogPostsSection = ({ posts = [] }: { posts?: IPost[] }) => {
                     </Badge>
                   </div>
                   <h2 className='text-xl lg:text-2xl font-bold'>
-                    <a href={post.url} className='hover:underline'>
+                    <a href={`${post.url}/`} className='hover:underline'>
                       {post.title}
                     </a>
                   </h2>
@@ -51,7 +51,7 @@ const BlogPostsSection = ({ posts = [] }: { posts?: IPost[] }) => {
                     {post.description}
                   </p>
                   <a
-                    href={post.url}
+                    href={`${post.url}/`}
                     target='_blank'
                     className='inline-flex items-center text-primary hover:underline'
                   >

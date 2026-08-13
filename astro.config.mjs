@@ -45,5 +45,12 @@ export default defineConfig({
   ],
 
   site: PUBLIC_BASE_PATH,
+
+  // GitHub Pages serves every route at `/path/` and 301s `/path`. Keeping the
+  // dev server and the sitemap on the same convention stops canonical tags,
+  // internal links and indexed URLs from drifting apart.
+  trailingSlash: 'always',
+  build: { format: 'directory' },
+
   integrations: [react(), sitemap(), robotsTxt(), mdx()],
 });

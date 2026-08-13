@@ -11,7 +11,7 @@ import { ServicesSection } from '@/components/case-studies6';
 import { StatsSection } from '@/components/stats6';
 import { TestimonialSection } from '@/components/testimonial18';
 import Layout from '@/layouts/layout.astro';
-import { getBasePath } from '@/utils/env';
+import { getBasePath, getCanonicalUrl } from '@/utils/env';
 import { getZapNumber, getEmail } from '@/utils/env';
 import serialize from 'serialize-javascript';
 import getPictureImage from '@/utils/get-picture-image';
@@ -39,6 +39,7 @@ import img18 from '@/assets/clinica/LCM_1559.jpg';
 import img19 from '@/assets/clinica/LCM_1578.jpg';
 
 const siteUrl = getBasePath();
+const homeUrl = getCanonicalUrl('/');
 
 const medicoBusiness: WithContext<Physician> = {
   '@context': 'https://schema.org',
@@ -46,7 +47,7 @@ const medicoBusiness: WithContext<Physician> = {
   name: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
   description:
     'Psiquiatra humanizado na Av. Paulista, São Paulo. Tratamento para depressão, ansiedade, TDAH, burnout e mais. CRM 127.207.',
-  url: siteUrl,
+  url: homeUrl,
   telephone: `+${getZapNumber()}`,
   email: getEmail(),
   medicalSpecialty: 'Psychiatric',
@@ -178,13 +179,13 @@ const processImages = await Promise.all([
 <Layout
   title='Psiquiatra em São Paulo — Dr. Jean Almeida | CRM 127.207'
   description='Consulte com o Dr. Jean Almeida, psiquiatra humanizado na Av. Paulista, São Paulo. Tratamento para depressão, ansiedade, TDAH, burnout e mais. Agende agora.'
-  canonical={siteUrl}
+  canonical={homeUrl}
   openGraph={{
     basic: {
       title: 'Psiquiatra em São Paulo — Dr. Jean Almeida | CRM 127.207',
       type: 'website',
       image: `${siteUrl}/og-image.jpg`,
-      url: siteUrl,
+      url: homeUrl,
     },
     optional: {
       description:

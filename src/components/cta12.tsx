@@ -36,7 +36,7 @@ const Cta12 = () => {
                 className='w-full sm:w-auto'
                 asChild
               >
-                <a href='/blog'>Ver conteúdos sobre saúde mental</a>
+                <a href='/blog/'>Ver conteúdos sobre saúde mental</a>
               </Button>
             </div>
           </div>

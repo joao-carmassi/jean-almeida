@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import { ArrowUpRight } from 'lucide-react';
+import { author } from '@/data/author';
+---
+
+<section
+  class='mt-16 rounded-4xl bg-card p-6 shadow-md ring-1 ring-foreground/5 md:p-8'
+  aria-labelledby='sobre-o-autor'
+>
+  <div class='flex flex-col gap-6 sm:flex-row sm:items-start'>
+    <Image
+      src={author.photo}
+      alt={author.photoAlt}
+      width={192}
+      loading='lazy'
+      decoding='async'
+      class='size-24 shrink-0 rounded-full object-cover object-top'
+    />
+    <div class='space-y-2'>
+      <p class='text-sm font-medium tracking-wide text-muted-foreground'>
+        Sobre o autor
+      </p>
+      <h2 id='sobre-o-autor' class='text-xl font-bold'>
+        <a href={author.url} class='hover:underline'>{author.name}</a>
+      </h2>
+      <p class='text-sm font-medium text-muted-foreground'>
+        {author.jobTitle} · {author.crm}
+      </p>
+      <p class='text-muted-foreground'>{author.bio}</p>
+      {
+        author.profiles.length > 0 && (
+          <ul class='flex flex-wrap gap-x-4 gap-y-2 pt-2'>
+            {author.profiles.map((profile) => (
+              <li>
+                <a
+                  href={profile.url}
+                  target='_blank'
+                  rel='me noopener noreferrer'
+                  class='inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline'
+                >
+                  {profile.name}
+                  <ArrowUpRight className='size-4' />
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </div>
+</section>

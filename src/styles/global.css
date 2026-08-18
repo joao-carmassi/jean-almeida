@@ -9,10 +9,8 @@ Uncomment to import Google fonts if you want to use them in your project.
 
 @plugin "@tailwindcss/typography";
 @import 'tw-animate-css';
-@import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
-@import '@fontsource-variable/inter';
-@plugin 'tailwindcss-pattern';
+@import@plugin 'tailwindcss-pattern';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -92,7 +90,7 @@ html {
   --warning: #c28a2e;
 
   /* Fonts */
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
 
@@ -239,7 +237,7 @@ html {
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
 
-  --font-sans: 'Inter Variable', sans-serif;
+  --font-sans: var(--font-montserrat), sans-serif;
   --font-serif: var(--font-serif);
   --font-mono: var(--font-mono);
 
@@ -777,7 +775,7 @@ html {
       background-position: 200%;
     }
   }
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-display);
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
@@ -877,6 +875,14 @@ html {
   }
   html {
     @apply font-sans;
+  }
+
+  /* Estado inicial da timeline do herói (hero4.tsx). Fica atrás de `.js`, que
+     o script inline do layout adiciona antes do primeiro paint: sem JS, a
+     dobra renderiza visível em vez de ficar presa em opacity 0. */
+  .js .gsap-hero,
+  .js .gsap-hero-media {
+    opacity: 0;
   }
 }
 

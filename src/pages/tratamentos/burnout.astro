@@ -1,0 +1,444 @@
+---
+import type {
+  BreadcrumbList,
+  FAQPage,
+  MedicalWebPage,
+  WithContext,
+} from 'schema-dts';
+
+import MedicalDisclaimer from '@/components/blog/medical-disclaimer.astro';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList as BreadcrumbListUi,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import { buttonVariants } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { authorPersonSchema } from '@/data/author';
+import Layout from '@/layouts/layout.astro';
+import { getBasePath, getCanonicalUrl } from '@/utils/env';
+import getZapLink from '@/utils/get-zap-link';
+import { Home } from 'lucide-react';
+import serialize from 'serialize-javascript';
+
+const siteUrl = getBasePath();
+const homeUrl = getCanonicalUrl('/');
+const pageUrl = getCanonicalUrl('/tratamentos/burnout');
+const ogImageUrl = `${siteUrl}/og-image.jpg`;
+
+const pageTitle = 'Tratamento para Burnout em São Paulo | Dr. Jean Almeida';
+const pageDescription =
+  'Psiquiatra para burnout na Av. Paulista, São Paulo. Avaliação do esgotamento profissional e acompanhamento individualizado com o Dr. Jean Almeida.';
+
+/** Data da última revisão clínica do texto desta página. */
+const lastReviewed = '2026-08-18';
+
+const zapLink = getZapLink(
+  'Olá, gostaria de agendar uma consulta para avaliar esgotamento relacionado ao trabalho.',
+);
+
+const faqs = [
+  {
+    question: 'Burnout é o mesmo que depressão?',
+    answer:
+      'Não são a mesma coisa, embora possam coexistir. O burnout está ancorado no contexto de trabalho e costuma aliviar, ao menos em parte, quando a pessoa se afasta dele. A depressão atravessa todas as áreas da vida e não se dissolve com férias. Na prática clínica, é frequente encontrar os dois quadros sobrepostos, e distinguir o peso de cada um muda a conduta.',
+  },
+  {
+    question: 'Férias resolvem burnout?',
+    answer:
+      'Um afastamento curto pode aliviar temporariamente, mas raramente resolve. Quando as condições que produziram o esgotamento continuam as mesmas, os sintomas tendem a retornar em poucas semanas após o retorno. O tratamento precisa envolver mudanças concretas na relação com o trabalho, não apenas descanso.',
+  },
+  {
+    question: 'Psiquiatra pode dar atestado ou afastamento por burnout?',
+    answer:
+      'A necessidade de afastamento é uma decisão clínica, avaliada individualmente conforme a gravidade do quadro, o risco envolvido e a viabilidade de tratamento sem interrupção das atividades. Não é automática nem se define antes da consulta, mas é uma das possibilidades discutidas quando a avaliação indica.',
+  },
+  {
+    question: 'Burnout precisa de medicação?',
+    answer:
+      'Nem sempre. Quando o quadro é predominantemente de esgotamento ligado ao contexto ocupacional, a intervenção central envolve psicoterapia e reorganização das condições de trabalho. A medicação entra quando há quadros associados — depressão, ansiedade, insônia importante — ou quando a intensidade dos sintomas justifica.',
+  },
+  {
+    question: 'Estou funcionando normalmente, ainda assim pode ser burnout?',
+    answer:
+      'Pode. Muitas pessoas mantêm o desempenho por muito tempo às custas de um esforço crescente e de tudo o que ficou de fora: convívio, lazer, sono, saúde. O fato de continuar entregando não descarta esgotamento — em geral só adia o momento em que ele se torna visível.',
+  },
+];
+
+const spokes = [
+  {
+    href: '/blog/burnout-sinais-de-esgotamento-fisico-e-mental-relacionados-ao-trabalho/',
+    title: 'Burnout: sinais de esgotamento ligado ao trabalho',
+    blurb:
+      'Os sinais físicos, emocionais e de desempenho que costumam preceder o colapso.',
+  },
+  {
+    href: '/blog/burnout-ou-estresse-comum-como-diferenciar/',
+    title: 'Burnout ou estresse comum? Como diferenciar',
+    blurb:
+      'O que distingue um período puxado de um esgotamento que já não se recupera com descanso.',
+  },
+  {
+    href: '/blog/exaustao-emocional-apesar-de-continuar-funcionando/',
+    title: 'Exaustão emocional apesar de continuar funcionando',
+    blurb:
+      'Por que o alto desempenho pode mascarar o sofrimento e atrasar a busca por ajuda.',
+  },
+];
+
+const medicalWebPageSchema: WithContext<MedicalWebPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  '@id': `${pageUrl}#page`,
+  name: 'Tratamento para burnout em São Paulo',
+  description: pageDescription,
+  url: pageUrl,
+  inLanguage: 'pt-BR',
+  specialty: 'Psychiatric',
+  lastReviewed,
+  reviewedBy: authorPersonSchema,
+  about: {
+    '@type': 'MedicalCondition',
+    name: 'Síndrome de burnout',
+    alternateName: [
+      'Burnout',
+      'Esgotamento profissional',
+      'Síndrome do esgotamento ocupacional',
+    ],
+  },
+  audience: {
+    '@type': 'Patient',
+    name: 'Adultos com esgotamento relacionado ao trabalho',
+  },
+  isPartOf: { '@id': homeUrl },
+};
+
+const breadcrumbSchema: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Início', item: homeUrl },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Tratamento para burnout',
+      item: pageUrl,
+    },
+  ],
+};
+
+const faqSchema: WithContext<FAQPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  url: pageUrl,
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question' as const,
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer' as const,
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={pageUrl}
+  openGraph={{
+    basic: {
+      title: pageTitle,
+      type: 'website',
+      image: ogImageUrl,
+      url: pageUrl,
+    },
+    optional: {
+      description: pageDescription,
+      siteName: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+      locale: 'pt_BR',
+    },
+    image: {
+      alt: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+    },
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: pageTitle,
+    description: pageDescription,
+    image: ogImageUrl,
+    imageAlt: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+  }}
+>
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(medicalWebPageSchema, { isJSON: true })}
+    slot='head'
+  />
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(breadcrumbSchema, { isJSON: true })}
+    slot='head'
+  />
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(faqSchema, { isJSON: true })}
+    slot='head'
+  />
+
+  <main class='min-h-svh'>
+    <section class='py-12 pt-8 md:py-24 md:pt-12'>
+      <div class='container mt-18'>
+        <Breadcrumb>
+          <BreadcrumbListUi>
+            <BreadcrumbItem>
+              <BreadcrumbLink aria-label='Início' href='/'>
+                <Home className='h-4 w-4' />
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Tratamento para burnout</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbListUi>
+        </Breadcrumb>
+
+        <h1 class='mt-6 text-4xl font-bold xl:text-5xl'>
+          Tratamento para burnout em São Paulo
+        </h1>
+        <p class='mt-6 max-w-3xl text-lg text-muted-foreground'>
+          Avaliação e acompanhamento psiquiátrico do esgotamento relacionado ao
+          trabalho no consultório do Dr. Jean Almeida, na Av. Paulista, 2494 —
+          conjunto 94. CRM 127.207.
+        </p>
+
+        <div class='mt-8 flex flex-wrap gap-3'>
+          <a
+            href={zapLink}
+            target='_blank'
+            rel='noopener noreferrer'
+            class={buttonVariants({ size: 'lg' })}
+          >
+            Agendar consulta pelo WhatsApp
+          </a>
+          <a
+            href='/#contato'
+            class={buttonVariants({ variant: 'outline', size: 'lg' })}
+          >
+            Ver endereço e contato
+          </a>
+        </div>
+
+        <Separator className='mt-12 mb-12' />
+
+        <div class='prose dark:prose-invert max-w-none'>
+          <p>
+            Quem chega ao consultório com burnout quase nunca chega dizendo
+            isso. Chega dizendo que está cansado de um jeito que dormir não
+            resolve, que perdeu a paciência com pessoas de quem gosta, que
+            precisa de duas horas para fazer o que antes levava vinte minutos,
+            que acorda de domingo já com o peito apertado. E chega, com
+            frequência, ainda entregando tudo — porque parar parecia menos
+            viável do que continuar.
+          </p>
+          <p>
+            O burnout é descrito como uma síndrome resultante de estresse
+            crônico no trabalho que não foi adequadamente manejado. Isso importa
+            clinicamente: ele está ancorado num contexto. Tratar sem olhar para
+            esse contexto costuma produzir alívio curto e recaída previsível.
+          </p>
+
+          <h2>Como o burnout se apresenta na prática clínica</h2>
+          <p>
+            Três eixos costumam aparecer juntos. O primeiro é a exaustão: uma
+            fadiga que não se recupera no fim de semana e que atinge tanto o
+            corpo quanto a capacidade de pensar. O segundo é o distanciamento —
+            cinismo, irritação, indiferença em relação ao trabalho e às pessoas
+            envolvidas nele, muitas vezes em alguém que antes se importava
+            demais. O terceiro é a queda na sensação de eficácia: a impressão
+            constante de estar fazendo tudo pela metade, mesmo quando os
+            resultados objetivos ainda são bons.
+          </p>
+          <p>
+            O corpo acompanha. Dores de cabeça e tensão muscular persistentes,
+            distúrbios digestivos, infecções repetidas, alterações de sono — em
+            geral dificuldade para desligar à noite combinada com sono não
+            reparador. A vida em volta encolhe antes que o desempenho caia:
+            primeiro somem o lazer, o exercício e o convívio; o rendimento é o
+            último a ceder, e por isso o quadro costuma ser reconhecido tarde.
+          </p>
+          <p>
+            Distinguir burnout de estresse ocupacional intenso é uma tarefa
+            clínica concreta. O estresse comum tem picos e vales, responde ao
+            descanso e mantém o envolvimento com o trabalho. O burnout é
+            sustentado, não cede com folga e vem acompanhado de desengajamento.
+            Também é preciso considerar depressão, transtornos de ansiedade,
+            transtornos do sono, uso problemático de álcool, anemia,
+            hipotireoidismo e outras causas clínicas de fadiga persistente —
+            todas produzem apresentações semelhantes e algumas coexistem com o
+            burnout.
+          </p>
+
+          <h2>Como é feita a avaliação no consultório</h2>
+          <p>
+            A avaliação examina o quadro e o terreno em que ele se formou. De um
+            lado, a evolução dos sintomas: quando começaram, como se
+            transformaram, o que acontece nas férias e nos fins de semana, como
+            estão sono, humor, concentração, apetite, uso de álcool e de
+            estimulantes. De outro, as condições ocupacionais: carga real de
+            trabalho, previsibilidade, autonomia, clareza do que se espera de
+            você, qualidade das relações no ambiente e coerência entre o que o
+            trabalho exige e o que você considera aceitável.
+          </p>
+          <p>
+            Também se investiga o que veio junto. Depressão e transtornos de
+            ansiedade acompanham o burnout com frequência alta, e a presença
+            deles muda o plano de tratamento. Condições clínicas que explicam
+            fadiga são consideradas, com exames quando o caso justifica. A
+            avaliação de risco é feita sempre — inclusive porque o esgotamento
+            prolongado costuma vir com uma sensação de desesperança que merece
+            ser nomeada.
+          </p>
+
+          <h2>Abordagens de tratamento</h2>
+          <p>
+            O tratamento do burnout tem um componente que nenhum outro quadro
+            exige com a mesma centralidade: a intervenção sobre as condições que
+            o produziram. Sem isso, as demais medidas tendem a funcionar como
+            manutenção de um sistema que segue sobrecarregado.
+          </p>
+          <h3>Reorganização da relação com o trabalho</h3>
+          <p>
+            Isso raramente significa pedir demissão. Significa examinar, com
+            realismo, o que pode ser negociado, redistribuído, delegado,
+            limitado no horário ou recusado, e a que custo. Em parte dos casos,
+            um afastamento temporário é clinicamente indicado — decisão avaliada
+            individualmente, considerando gravidade, risco e viabilidade de
+            recuperação sem interrupção das atividades. O objetivo é criar
+            condição real de recuperação, não apenas conceder uma pausa.
+          </p>
+          <h3>Psicoterapia</h3>
+          <p>
+            A psicoterapia trabalha os padrões que sustentam o esgotamento:
+            dificuldade de estabelecer limites, perfeccionismo, identidade
+            fundida com desempenho, culpa ao descansar. Também dá espaço para
+            reconstruir o que foi sendo cortado da vida em nome da produtividade
+            — que é, na prática, boa parte do que protege contra a recaída.
+          </p>
+          <h3>Medicação, quando indicada</h3>
+          <p>
+            Não existe medicamento para burnout em si. O que existe é tratamento
+            para as condições associadas — quadros depressivos, transtornos de
+            ansiedade, insônia significativa — quando estão presentes e têm peso
+            suficiente. Nesses casos, a indicação é médica e individual, definida
+            na consulta a partir da avaliação. Por isso esta página não traz nome
+            de medicamento nem dose, e nenhum plano de tratamento pode garantir
+            resultado antes de ser acompanhado na prática.
+          </p>
+          <h3>Sono, corpo e recuperação</h3>
+          <p>
+            Restabelecer o sono é uma das primeiras metas, porque quase todo o
+            restante depende dele. Atividade física possível, alimentação
+            minimamente regular, redução de cafeína no fim do dia e retomada de
+            atividades sem finalidade produtiva compõem o tratamento. A
+            recuperação é gradual e costuma acontecer em degraus, não em linha
+            reta.
+          </p>
+
+          <h2>Quando procurar ajuda</h2>
+          <p>
+            Vale procurar avaliação quando o cansaço não se recupera mais com
+            descanso, quando o domingo já é tomado pela antecipação da segunda,
+            quando o sono deixou de ser reparador, quando erros e esquecimentos
+            aumentaram, quando o convívio e o lazer desapareceram da agenda ou
+            quando você percebe que está usando álcool para desligar. Não é
+            preciso chegar ao colapso para justificar uma consulta — chegar
+            antes dele é, aliás, o cenário de melhor prognóstico.
+          </p>
+          <p>
+            Se houver desesperança intensa ou pensamentos de morte, procure
+            ajuda imediatamente: CVV no 188, SAMU no 192 ou o pronto-socorro
+            mais próximo. Para conhecer o consultório e a forma de atendimento,
+            veja a <a href='/'>página inicial</a> do site.
+          </p>
+        </div>
+
+        <section aria-labelledby='faq-burnout' class='mt-16'>
+          <h2 id='faq-burnout' class='text-3xl font-bold md:text-4xl'>
+            Perguntas frequentes sobre burnout
+          </h2>
+          <div class='mt-8 space-y-3'>
+            {
+              faqs.map((faq) => (
+                <details class='group rounded-2xl border border-border bg-card p-6'>
+                  <summary class='cursor-pointer list-none font-semibold marker:content-none'>
+                    {faq.question}
+                  </summary>
+                  <p class='mt-3 text-muted-foreground'>{faq.answer}</p>
+                </details>
+              ))
+            }
+          </div>
+        </section>
+
+        <section aria-labelledby='cta-burnout' class='mt-16'>
+          <div class='rounded-4xl bg-accent p-8 lg:p-12'>
+            <h2
+              id='cta-burnout'
+              class='text-2xl font-semibold tracking-tight md:text-3xl'
+            >
+              Marcar uma avaliação para burnout
+            </h2>
+            <p class='mt-4 max-w-2xl text-muted-foreground'>
+              O agendamento é feito diretamente pelo WhatsApp, sem necessidade
+              de encaminhamento. O consultório fica na Av. Paulista, 2494 —
+              conjunto 94, São Paulo, com acesso pelo metrô.
+            </p>
+            <div class='mt-6'>
+              <a
+                href={zapLink}
+                target='_blank'
+                rel='noopener noreferrer'
+                class={buttonVariants({ size: 'lg' })}
+              >
+                Falar pelo WhatsApp
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby='leia-tambem-burnout' class='mt-16'>
+          <h2 id='leia-tambem-burnout' class='text-3xl font-bold md:text-4xl'>
+            Leia também sobre burnout
+          </h2>
+          <ul class='mt-8 grid gap-4 sm:grid-cols-2'>
+            {
+              spokes.map((spoke) => (
+                <li>
+                  <a
+                    href={spoke.href}
+                    class='flex h-full flex-col rounded-4xl border border-border bg-background p-6 transition-colors hover:bg-muted'
+                  >
+                    <span class='font-semibold'>{spoke.title}</span>
+                    <span class='mt-2 text-sm text-muted-foreground'>
+                      {spoke.blurb}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <MedicalDisclaimer />
+      </div>
+    </section>
+  </main>
+</Layout>

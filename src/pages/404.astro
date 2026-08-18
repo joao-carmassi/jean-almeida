@@ -1,0 +1,99 @@
+---
+import { buttonVariants } from '@/components/ui/button';
+import Layout from '@/layouts/layout.astro';
+import { getBasePath } from '@/utils/env';
+import getZapLink from '@/utils/get-zap-link';
+
+const siteUrl = getBasePath();
+
+const zapLink = getZapLink('Olá, gostaria de agendar uma consulta.');
+
+const atalhos = [
+  {
+    label: 'Página inicial',
+    description: 'Conheça o Dr. Jean Almeida e o consultório na Av. Paulista.',
+    href: '/',
+  },
+  {
+    label: 'Áreas de atuação',
+    description:
+      'Depressão, ansiedade, TDAH, burnout, insônia e outros quadros atendidos.',
+    href: '/#areas',
+  },
+  {
+    label: 'Blog',
+    description: 'Artigos sobre saúde mental escritos em linguagem acessível.',
+    href: '/blog/',
+  },
+  {
+    label: 'Contato',
+    description: 'Endereço, telefone, e-mail e formas de agendar sua consulta.',
+    href: '/#contato',
+  },
+];
+---
+
+<Layout
+  title='Página não encontrada — Dr. Jean Almeida'
+  description='A página que você procurava não está mais disponível. Veja os atalhos para o site do Dr. Jean Almeida, psiquiatra na Av. Paulista, São Paulo.'
+  canonical={`${siteUrl}/404.html`}
+  noindex={true}
+>
+  <main class='flex min-h-svh flex-col justify-center py-16 md:py-24'>
+    <div class='container px-4 md:px-6'>
+      <div class='mx-auto max-w-2xl text-center'>
+        <p class='text-sm font-medium tracking-widest text-muted-foreground'>
+          ERRO 404
+        </p>
+        <h1 class='mt-4 text-3xl font-bold md:text-4xl lg:text-5xl'>
+          Não encontramos esta página
+        </h1>
+        <p class='mx-auto mt-6 text-balance text-muted-foreground lg:text-xl'>
+          O endereço pode ter mudado ou o conteúdo não está mais disponível —
+          mas seguimos por aqui para ajudar você a encontrar o que precisa.
+        </p>
+        <div class='mt-8 flex flex-wrap items-center justify-center gap-3'>
+          <a
+            href={zapLink}
+            target='_blank'
+            rel='noopener noreferrer'
+            class={buttonVariants({ size: 'lg' })}
+          >
+            Falar pelo WhatsApp
+          </a>
+          <a href='/' class={buttonVariants({ variant: 'outline', size: 'lg' })}>
+            Voltar para o início
+          </a>
+        </div>
+      </div>
+
+      <ul class='mx-auto mt-12 grid max-w-3xl gap-4 sm:grid-cols-2'>
+        {
+          atalhos.map((atalho) => (
+            <li>
+              <a
+                href={atalho.href}
+                class='flex h-full flex-col rounded-4xl border border-border bg-background p-6 transition-colors hover:bg-muted'
+              >
+                <span class='font-semibold'>{atalho.label}</span>
+                <span class='mt-2 text-sm text-muted-foreground'>
+                  {atalho.description}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p
+        class='mx-auto mt-12 max-w-2xl text-center text-sm text-muted-foreground'
+      >
+        Se você está passando por um momento difícil e precisa de ajuda
+        imediata, ligue para o CVV no <a
+          href='tel:188'
+          class='font-medium underline underline-offset-4'>188</a
+        > — atendimento gratuito, 24 horas por dia.
+      </p>
+    </div>
+  </main>
+</Layout>

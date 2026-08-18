@@ -1,0 +1,453 @@
+---
+import type {
+  BreadcrumbList,
+  FAQPage,
+  MedicalWebPage,
+  WithContext,
+} from 'schema-dts';
+
+import MedicalDisclaimer from '@/components/blog/medical-disclaimer.astro';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList as BreadcrumbListUi,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import { buttonVariants } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { authorPersonSchema } from '@/data/author';
+import Layout from '@/layouts/layout.astro';
+import { getBasePath, getCanonicalUrl } from '@/utils/env';
+import getZapLink from '@/utils/get-zap-link';
+import { Home } from 'lucide-react';
+import serialize from 'serialize-javascript';
+
+const siteUrl = getBasePath();
+const homeUrl = getCanonicalUrl('/');
+const pageUrl = getCanonicalUrl('/tratamentos/tdah');
+const ogImageUrl = `${siteUrl}/og-image.jpg`;
+
+const pageTitle = 'TDAH em Adultos: Tratamento em São Paulo | Dr. Jean Almeida';
+const pageDescription =
+  'Avaliação e tratamento de TDAH em adultos na Av. Paulista, São Paulo. Diagnóstico criterioso e acompanhamento com o psiquiatra Dr. Jean Almeida.';
+
+/** Data da última revisão clínica do texto desta página. */
+const lastReviewed = '2026-08-18';
+
+const zapLink = getZapLink(
+  'Olá, gostaria de agendar uma avaliação para TDAH em adulto.',
+);
+
+const faqs = [
+  {
+    question: 'É possível descobrir TDAH só na vida adulta?',
+    answer:
+      'Sim, é comum. O que não acontece é o TDAH começar na vida adulta: os sinais precisam estar presentes desde a infância, ainda que só tenham gerado prejuízo evidente mais tarde, quando as demandas de autonomia aumentaram. Muitos adultos compensaram os sintomas por anos com esforço, inteligência ou estrutura externa.',
+  },
+  {
+    question: 'Existe exame de sangue ou de imagem que diagnostique TDAH?',
+    answer:
+      'Não. O diagnóstico é clínico, baseado em história de vida, critérios diagnósticos e avaliação do prejuízo funcional. Exames podem ser solicitados para investigar outras causas dos sintomas, não para confirmar o TDAH. Testes online também não fecham diagnóstico — no máximo indicam que vale procurar avaliação.',
+  },
+  {
+    question: 'Todo adulto com TDAH precisa usar medicação?',
+    answer:
+      'Não. A indicação depende da intensidade dos sintomas, do prejuízo que eles causam e das condições associadas. Há pacientes que se organizam bem com psicoterapia, psicoeducação e mudanças de rotina. Em outros casos a medicação faz diferença importante, e essa decisão é tomada em conjunto na consulta.',
+  },
+  {
+    question: 'TDAH pode ser confundido com ansiedade ou depressão?',
+    answer:
+      'Sim, e a confusão vai nos dois sentidos. Desatenção e inquietação aparecem em quadros ansiosos e depressivos, e adultos com TDAH não diagnosticado frequentemente desenvolvem ansiedade e sintomas depressivos como consequência de anos de frustração. Separar o que é causa e o que é consequência é parte central da avaliação.',
+  },
+  {
+    question: 'O que devo levar para a consulta de avaliação?',
+    answer:
+      'Ajuda muito trazer boletins ou lembranças concretas da vida escolar, relatos de familiares que conviveram com você na infância, avaliações anteriores, exames recentes e a lista de medicações em uso. Exemplos práticos de situações em que os sintomas atrapalham valem mais do que descrições genéricas.',
+  },
+];
+
+const spokes = [
+  {
+    href: '/blog/tdah-em-adultos-sintomas/',
+    title: 'TDAH em adultos: sintomas e como identificar',
+    blurb:
+      'Como a desatenção, a impulsividade e a desorganização aparecem no trabalho e nas relações.',
+  },
+  {
+    href: '/blog/como-e-feito-o-diagnostico-de-tdah-em-adultos/',
+    title: 'Como é feito o diagnóstico de TDAH em adultos',
+    blurb:
+      'As etapas da avaliação, o papel dos testes e o que realmente confirma o diagnóstico.',
+  },
+  {
+    href: '/blog/tratamento-para-tdah-em-adultos/',
+    title: 'Tratamento para TDAH em adultos',
+    blurb:
+      'O que compõe o tratamento além da medicação, e como avaliar se ele está funcionando.',
+  },
+];
+
+const medicalWebPageSchema: WithContext<MedicalWebPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  '@id': `${pageUrl}#page`,
+  name: 'Tratamento para TDAH em adultos em São Paulo',
+  description: pageDescription,
+  url: pageUrl,
+  inLanguage: 'pt-BR',
+  specialty: 'Psychiatric',
+  lastReviewed,
+  reviewedBy: authorPersonSchema,
+  about: {
+    '@type': 'MedicalCondition',
+    name: 'Transtorno de déficit de atenção e hiperatividade',
+    alternateName: [
+      'TDAH',
+      'TDAH em adultos',
+      'Transtorno do déficit de atenção',
+    ],
+  },
+  audience: {
+    '@type': 'Patient',
+    name: 'Adultos com suspeita ou diagnóstico de TDAH',
+  },
+  isPartOf: { '@id': homeUrl },
+};
+
+const breadcrumbSchema: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Início', item: homeUrl },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Tratamento para TDAH em adultos',
+      item: pageUrl,
+    },
+  ],
+};
+
+const faqSchema: WithContext<FAQPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  url: pageUrl,
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question' as const,
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer' as const,
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={pageUrl}
+  openGraph={{
+    basic: {
+      title: pageTitle,
+      type: 'website',
+      image: ogImageUrl,
+      url: pageUrl,
+    },
+    optional: {
+      description: pageDescription,
+      siteName: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+      locale: 'pt_BR',
+    },
+    image: {
+      alt: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+    },
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: pageTitle,
+    description: pageDescription,
+    image: ogImageUrl,
+    imageAlt: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+  }}
+>
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(medicalWebPageSchema, { isJSON: true })}
+    slot='head'
+  />
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(breadcrumbSchema, { isJSON: true })}
+    slot='head'
+  />
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(faqSchema, { isJSON: true })}
+    slot='head'
+  />
+
+  <main class='min-h-svh'>
+    <section class='py-12 pt-8 md:py-24 md:pt-12'>
+      <div class='container mt-18'>
+        <Breadcrumb>
+          <BreadcrumbListUi>
+            <BreadcrumbItem>
+              <BreadcrumbLink aria-label='Início' href='/'>
+                <Home className='h-4 w-4' />
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Tratamento para TDAH em adultos</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbListUi>
+        </Breadcrumb>
+
+        <h1 class='mt-6 text-4xl font-bold xl:text-5xl'>
+          Tratamento para TDAH em adultos em São Paulo
+        </h1>
+        <p class='mt-6 max-w-3xl text-lg text-muted-foreground'>
+          Avaliação diagnóstica e acompanhamento de TDAH em adultos no
+          consultório do Dr. Jean Almeida, na Av. Paulista, 2494 — conjunto 94.
+          CRM 127.207.
+        </p>
+
+        <div class='mt-8 flex flex-wrap gap-3'>
+          <a
+            href={zapLink}
+            target='_blank'
+            rel='noopener noreferrer'
+            class={buttonVariants({ size: 'lg' })}
+          >
+            Agendar avaliação pelo WhatsApp
+          </a>
+          <a
+            href='/#contato'
+            class={buttonVariants({ variant: 'outline', size: 'lg' })}
+          >
+            Ver endereço e contato
+          </a>
+        </div>
+
+        <Separator className='mt-12 mb-12' />
+
+        <div class='prose dark:prose-invert max-w-none'>
+          <p>
+            A queixa que mais aparece na avaliação de TDAH em adultos não é
+            desatenção — é a distância entre o esforço investido e o resultado
+            obtido. Pessoas que trabalham dobrado para entregar o mesmo que os
+            colegas, que adiam tarefas simples por dias, que perdem prazos
+            apesar de se importarem com eles, que começam projetos com
+            entusiasmo e não conseguem sustentá-los. Depois de anos assim, o
+            diagnóstico que a própria pessoa costuma se dar é moral: preguiça,
+            falta de força de vontade, imaturidade.
+          </p>
+          <p>
+            TDAH é um transtorno do neurodesenvolvimento que afeta funções
+            executivas — atenção sustentada, controle de impulso, organização,
+            noção de tempo, regulação do esforço. Não desaparece na vida adulta;
+            muda de forma. E o diagnóstico só faz sentido quando reconstruído
+            desde a infância, com prejuízo demonstrável em mais de um contexto
+            de vida.
+          </p>
+
+          <h2>Como o TDAH se apresenta na prática clínica</h2>
+          <p>
+            No adulto, a hiperatividade motora costuma dar lugar a uma
+            inquietação interna: dificuldade de permanecer parado, necessidade
+            de estar sempre fazendo algo, mente que salta entre assuntos. A
+            desatenção aparece como leitura que precisa ser refeita, conversas
+            perdidas no meio, objetos esquecidos, distração ao alternar entre
+            demandas. A impulsividade se traduz em respostas precipitadas,
+            compras não planejadas, decisões tomadas antes de avaliar
+            consequências.
+          </p>
+          <p>
+            A desorganização e a relação difícil com o tempo talvez sejam o que
+            mais custa. Subestimar quanto tempo uma tarefa leva, adiar aquilo
+            que não é urgente até virar emergência, funcionar bem apenas sob
+            pressão de prazo. Ao lado disso, o hiperfoco: períodos longos de
+            imersão em algo interessante, que confundem quem imagina que TDAH
+            seria incapacidade de se concentrar em qualquer coisa.
+          </p>
+          <p>
+            O TDAH também não tem uma forma única. Em algumas pessoas
+            predominam os sintomas de desatenção, e o quadro passa despercebido
+            por décadas porque não há agitação visível — é o perfil que
+            costumava ser descrito na escola como distraído ou sonhador. Em
+            outras, predominam a inquietação e a impulsividade. E há a
+            apresentação combinada, com os dois conjuntos presentes. Essa
+            variação explica por que tanta gente descarta a hipótese sozinha:
+            quem imagina TDAH como criança que não para quieta não se reconhece
+            no adulto que passa o dia disperso e paralisado diante da própria
+            lista de tarefas.
+          </p>
+          <p>
+            Muita coisa se parece com TDAH sem ser. Privação crônica de sono e
+            apneia comprometem atenção. Ansiedade ocupa a memória de trabalho.
+            Depressão reduz concentração e iniciativa. Alterações de tireoide,
+            uso de álcool e de outras substâncias, e quadros de esgotamento
+            profissional produzem apresentações parecidas. E existe o caminho
+            inverso: adultos com TDAH não identificado que desenvolvem ansiedade
+            e sintomas depressivos como consequência de anos de fracasso
+            repetido em tarefas que, em tese, deveriam ser simples.
+          </p>
+
+          <h2>Como é feita a avaliação no consultório</h2>
+          <p>
+            A avaliação de TDAH em adultos é mais longa que uma consulta comum
+            porque depende de reconstrução histórica. Ela percorre o desempenho
+            escolar, os comentários que você ouvia de professores, a forma como
+            estudava, o modo como lidava com prazos, e como tudo isso evoluiu na
+            vida universitária e profissional. Relatos de familiares que
+            conviveram com você na infância acrescentam informação que a memória
+            própria costuma não alcançar.
+          </p>
+          <p>
+            Além dos sintomas, avalia-se o prejuízo funcional: onde exatamente
+            isso atrapalha hoje — carreira, finanças, estudos, relacionamentos,
+            organização doméstica. Escalas e questionários podem ser usados como
+            apoio, mas não substituem a entrevista clínica nem fecham
+            diagnóstico sozinhos. A investigação também precisa afastar outras
+            causas e identificar condições associadas, que são a regra e não a
+            exceção.
+          </p>
+
+          <h2>Abordagens de tratamento</h2>
+          <p>
+            O tratamento do TDAH em adultos é multimodal. Nenhum componente
+            isolado costuma resolver, e a combinação é ajustada conforme o
+            impacto dos sintomas na vida de cada paciente.
+          </p>
+          <h3>Medicação</h3>
+          <p>
+            Há medicamentos com eficácia bem documentada para os sintomas
+            nucleares do TDAH, incluindo opções estimulantes e não
+            estimulantes. A escolha entre elas envolve o perfil de sintomas,
+            condições cardiovasculares e psiquiátricas associadas, histórico de
+            uso de substâncias e interações medicamentosas. Por isso não há
+            indicação de medicamento nem de dose nesta página: é decisão médica,
+            individual, tomada depois da avaliação e reavaliada nos retornos.
+          </p>
+          <p>
+            Vale um esclarecimento comum: medicação para TDAH não produz
+            concentração artificial nem substitui organização. Ela tende a
+            reduzir o custo de sustentar atenção e de conter impulso, o que
+            torna as estratégias comportamentais viáveis. Sem essas estratégias,
+            o ganho costuma ser menor do que poderia ser.
+          </p>
+          <h3>Psicoterapia e psicoeducação</h3>
+          <p>
+            A psicoterapia trabalha os sistemas práticos de organização, a
+            postergação, a regulação emocional e — parte frequentemente
+            subestimada — a autoimagem construída ao longo de anos de cobrança.
+            A psicoeducação, entender o funcionamento do próprio transtorno,
+            muda a leitura que a pessoa faz das próprias dificuldades e costuma
+            ser o primeiro alívio real do processo.
+          </p>
+          <h3>Rotina, ambiente e comorbidades</h3>
+          <p>
+            Sono regular, atividade física, redução de fontes de interrupção e
+            uso consistente de lembretes e listas externas fazem diferença
+            mensurável. Quando há ansiedade, depressão ou transtorno do sono
+            associados, o plano precisa contemplá-los — tratar só o TDAH,
+            nesses casos, costuma render resultado parcial.
+          </p>
+
+          <h2>Quando procurar avaliação</h2>
+          <p>
+            Procure avaliação quando a desatenção, a desorganização ou a
+            impulsividade estão custando caro de forma repetida: prazos
+            perdidos, trocas frequentes de emprego, dívidas por descontrole
+            financeiro, conflitos recorrentes, sensação persistente de estar
+            aquém do próprio potencial. Se essas dificuldades acompanham você
+            desde cedo e não se explicam por um momento específico da vida, vale
+            investigar.
+          </p>
+          <p>
+            Diagnóstico não é rótulo: é a informação que permite escolher o
+            tratamento certo e parar de tratar como falha de caráter algo que
+            tem explicação clínica. Para conhecer o consultório e a forma de
+            atendimento, veja a <a href='/'>página inicial</a> do site.
+          </p>
+        </div>
+
+        <section aria-labelledby='faq-tdah' class='mt-16'>
+          <h2 id='faq-tdah' class='text-3xl font-bold md:text-4xl'>
+            Perguntas frequentes sobre TDAH em adultos
+          </h2>
+          <div class='mt-8 space-y-3'>
+            {
+              faqs.map((faq) => (
+                <details class='group rounded-2xl border border-border bg-card p-6'>
+                  <summary class='cursor-pointer list-none font-semibold marker:content-none'>
+                    {faq.question}
+                  </summary>
+                  <p class='mt-3 text-muted-foreground'>{faq.answer}</p>
+                </details>
+              ))
+            }
+          </div>
+        </section>
+
+        <section aria-labelledby='cta-tdah' class='mt-16'>
+          <div class='rounded-4xl bg-accent p-8 lg:p-12'>
+            <h2
+              id='cta-tdah'
+              class='text-2xl font-semibold tracking-tight md:text-3xl'
+            >
+              Marcar uma avaliação para TDAH
+            </h2>
+            <p class='mt-4 max-w-2xl text-muted-foreground'>
+              O agendamento é feito diretamente pelo WhatsApp, sem necessidade
+              de encaminhamento. O consultório fica na Av. Paulista, 2494 —
+              conjunto 94, São Paulo, com acesso pelo metrô.
+            </p>
+            <div class='mt-6'>
+              <a
+                href={zapLink}
+                target='_blank'
+                rel='noopener noreferrer'
+                class={buttonVariants({ size: 'lg' })}
+              >
+                Falar pelo WhatsApp
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby='leia-tambem-tdah' class='mt-16'>
+          <h2 id='leia-tambem-tdah' class='text-3xl font-bold md:text-4xl'>
+            Leia também sobre TDAH
+          </h2>
+          <ul class='mt-8 grid gap-4 sm:grid-cols-2'>
+            {
+              spokes.map((spoke) => (
+                <li>
+                  <a
+                    href={spoke.href}
+                    class='flex h-full flex-col rounded-4xl border border-border bg-background p-6 transition-colors hover:bg-muted'
+                  >
+                    <span class='font-semibold'>{spoke.title}</span>
+                    <span class='mt-2 text-sm text-muted-foreground'>
+                      {spoke.blurb}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <MedicalDisclaimer />
+      </div>
+    </section>
+  </main>
+</Layout>

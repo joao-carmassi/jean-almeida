@@ -5,6 +5,7 @@ type Props = {
   alt: string;
   className?: string;
   loading?: 'lazy' | 'eager';
+  fetchPriority?: 'high' | 'low' | 'auto';
 };
 
 export function Picture({
@@ -12,6 +13,7 @@ export function Picture({
   alt,
   className,
   loading = 'lazy',
+  fetchPriority,
 }: Props) {
   return (
     <picture className={className}>
@@ -26,6 +28,7 @@ export function Picture({
         width={image.fallback.width}
         height={image.fallback.height}
         loading={loading}
+        fetchPriority={fetchPriority}
         decoding='async'
       />
     </picture>

@@ -14,6 +14,7 @@ import Layout from '@/layouts/layout.astro';
 import { getBasePath, getCanonicalUrl } from '@/utils/env';
 import { getZapNumber, getEmail } from '@/utils/env';
 import serialize from 'serialize-javascript';
+import { sameAs } from '@/data/author';
 import getPictureImage from '@/utils/get-picture-image';
 import img1 from '@/assets/hero.jpeg';
 
@@ -40,17 +41,29 @@ import img19 from '@/assets/clinica/LCM_1578.jpg';
 
 const siteUrl = getBasePath();
 const homeUrl = getCanonicalUrl('/');
+const physicianId = `${homeUrl}#physician`;
+const ogImageUrl = `${siteUrl}/og-image.jpg`;
+
+const enderecoCompleto =
+  'Av. Paulista, 2494 — Conjunto 94, São Paulo, SP, 01310-300';
+const mapaUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(enderecoCompleto)}`;
 
 const medicoBusiness: WithContext<Physician> = {
   '@context': 'https://schema.org',
   '@type': 'Physician',
+  '@id': physicianId,
   name: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
   description:
     'Psiquiatra humanizado na Av. Paulista, São Paulo. Tratamento para depressão, ansiedade, TDAH, burnout e mais. CRM 127.207.',
   url: homeUrl,
+  mainEntityOfPage: homeUrl,
+  image: ogImageUrl,
+  logo: ogImageUrl,
   telephone: `+${getZapNumber()}`,
   email: getEmail(),
   medicalSpecialty: 'Psychiatric',
+  knowsLanguage: ['pt-BR', 'es'],
+  sameAs,
   priceRange: 'R$$$',
   currenciesAccepted: 'BRL',
   paymentAccepted: 'Pix',
@@ -67,6 +80,7 @@ const medicoBusiness: WithContext<Physician> = {
     latitude: -23.5614,
     longitude: -46.6565,
   },
+  hasMap: mapaUrl,
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
@@ -79,11 +93,48 @@ const medicoBusiness: WithContext<Physician> = {
     '@type': 'City',
     name: 'São Paulo',
   },
+  availableService: [
+    {
+      '@type': 'MedicalTherapy',
+      name: 'Tratamento para depressão',
+    },
+    {
+      '@type': 'MedicalTherapy',
+      name: 'Tratamento para ansiedade',
+    },
+    {
+      '@type': 'MedicalTherapy',
+      name: 'Tratamento para TDAH em adultos',
+    },
+    {
+      '@type': 'MedicalTherapy',
+      name: 'Tratamento para burnout (esgotamento profissional)',
+    },
+    {
+      '@type': 'MedicalTherapy',
+      name: 'Tratamento para transtorno bipolar',
+    },
+    {
+      '@type': 'MedicalTherapy',
+      name: 'Tratamento para transtorno de personalidade borderline',
+    },
+    {
+      '@type': 'MedicalTherapy',
+      name: 'Tratamento para insônia',
+    },
+    {
+      '@type': 'MedicalTherapy',
+      name: 'Tratamento para TOC (transtorno obsessivo-compulsivo)',
+    },
+  ],
 };
 
 const faqSchema: WithContext<FAQPage> = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
+  '@id': `${homeUrl}#faq`,
+  url: homeUrl,
+  about: { '@id': physicianId },
   mainEntity: [
     {
       '@type': 'Question',

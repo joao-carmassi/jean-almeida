@@ -22,7 +22,8 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
       title: 'Depressão',
       description:
         'Muitas pessoas continuam trabalhando, cumprindo compromissos e convivendo normalmente enquanto se sentem emocionalmente esgotadas por dentro. A depressão nem sempre paralisa — às vezes, ela só apaga.',
-      href: '#contato',
+      href: '/tratamentos/depressao/',
+      cta: 'Saiba mais sobre o tratamento',
       image: images[0],
     },
     {
@@ -30,7 +31,8 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
       title: 'Ansiedade e Ruminação',
       description:
         'Pensamento acelerado, dificuldade de desligar, exigência interna excessiva, sensação de alerta permanente. A ansiedade de alta performance é real — e frequentemente invisível para quem está de fora.',
-      href: '#contato',
+      href: '/tratamentos/ansiedade/',
+      cta: 'Saiba mais sobre o tratamento',
       image: images[1],
     },
     {
@@ -38,7 +40,8 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
       title: 'TDAH em Adultos',
       description:
         'Dificuldade de sustentar foco, procrastinação crônica, impulsividade e sensação de estar sempre um passo atrás — o TDAH em adultos é subdiagnosticado e frequentemente confundido com falta de disciplina.',
-      href: '#contato',
+      href: '/tratamentos/tdah/',
+      cta: 'Saiba mais sobre o tratamento',
       image: images[2],
     },
     {
@@ -46,7 +49,8 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
       title: 'Esgotamento e Burnout',
       description:
         'Exaustão que o descanso não resolve, desconexão do próprio trabalho, irritabilidade crescente, perda de sentido — o esgotamento profissional vai além do cansaço. Não é falta de força de vontade.',
-      href: '#contato',
+      href: '/tratamentos/burnout/',
+      cta: 'Saiba mais sobre o tratamento',
       image: images[3],
     },
     {
@@ -55,6 +59,7 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
       description:
         'Oscilações emocionais sem causa aparente, períodos de euforia seguidos de queda, instabilidade que afeta relações e trabalho — quando o humor não segue uma lógica clara, um diagnóstico preciso faz toda a diferença.',
       href: '#contato',
+      cta: 'Fale com o consultório',
       image: images[4],
     },
     {
@@ -63,6 +68,7 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
       description:
         'Dificuldade em adormecer, sono fragmentado, acordar sem descanso — a insônia crônica raramente é apenas "estresse". Com avaliação adequada, é possível entender sua causa e tratá-la de forma eficaz.',
       href: '#contato',
+      cta: 'Fale com o consultório',
       image: images[6],
     },
     {
@@ -71,6 +77,7 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
       description:
         'Instabilidade emocional, relacionamentos intensos e conflituosos, medo de abandono e comportamento impulsivo — o transtorno borderline requer compreensão e tratamento especializado.',
       href: '#contato',
+      cta: 'Fale com o consultório',
       image: images[5],
     },
   ];
@@ -180,6 +187,9 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
                     {/* <div className='absolute inset-0 h-full bg-linear-to-t from-black/80 via-black/28 to-transparent' /> */}
                     <div className='text-xl font-semibold absolute inset-x-0 bottom-0 flex flex-col items-start p-6 text-white md:p-8 font-handwriting'>
                       {item.title}
+                      <span className='mt-1 font-text text-sm font-medium text-white/85 underline-offset-4 transition-colors group-hover:text-white group-hover:underline'>
+                        {item.cta}
+                      </span>
                     </div>
                   </div>
                 </a>

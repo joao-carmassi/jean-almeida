@@ -1,0 +1,453 @@
+---
+import type {
+  BreadcrumbList,
+  FAQPage,
+  MedicalWebPage,
+  WithContext,
+} from 'schema-dts';
+
+import MedicalDisclaimer from '@/components/blog/medical-disclaimer.astro';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList as BreadcrumbListUi,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import { buttonVariants } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { authorPersonSchema } from '@/data/author';
+import Layout from '@/layouts/layout.astro';
+import { getBasePath, getCanonicalUrl } from '@/utils/env';
+import getZapLink from '@/utils/get-zap-link';
+import { Home } from 'lucide-react';
+import serialize from 'serialize-javascript';
+
+const siteUrl = getBasePath();
+const homeUrl = getCanonicalUrl('/');
+const pageUrl = getCanonicalUrl('/tratamentos/depressao');
+const ogImageUrl = `${siteUrl}/og-image.jpg`;
+
+const pageTitle = 'Tratamento para Depressão em São Paulo | Dr. Jean Almeida';
+const pageDescription =
+  'Psiquiatra para depressão na Av. Paulista, São Paulo. Avaliação diagnóstica detalhada, medicação quando indicada e acompanhamento individualizado.';
+
+/** Data da última revisão clínica do texto desta página. */
+const lastReviewed = '2026-08-18';
+
+const zapLink = getZapLink(
+  'Olá, gostaria de agendar uma consulta para avaliar um quadro de depressão.',
+);
+
+const faqs = [
+  {
+    question: 'Depressão pode passar sozinha, sem tratamento?',
+    answer:
+      'Alguns episódios leves melhoram com mudanças de contexto e apoio, mas isso não é regra e não é previsível. Depressão sem tratamento tende a durar mais, a causar mais prejuízo acumulado em trabalho e relações e a aumentar o risco de novos episódios no futuro. Esperar para ver costuma sair caro.',
+  },
+  {
+    question: 'Como diferenciar depressão de tristeza?',
+    answer:
+      'A tristeza é uma emoção com contorno: tem motivo identificável, oscila ao longo do dia e convive com momentos de alívio. A depressão é um estado persistente, quase diário, que costuma vir acompanhado de perda de interesse, alteração de sono e apetite, queda de energia e de concentração, e que se mantém mesmo quando as circunstâncias melhoram.',
+  },
+  {
+    question: 'Antidepressivo causa dependência?',
+    answer:
+      'Antidepressivos não produzem dependência no sentido de compulsão ou necessidade crescente de dose. O que existe é a possibilidade de sintomas de descontinuação quando a medicação é interrompida de forma abrupta — motivo pelo qual qualquer suspensão deve ser planejada com o médico, e nunca feita por conta própria.',
+  },
+  {
+    question: 'Quanto tempo dura o tratamento da depressão?',
+    answer:
+      'Além do tempo necessário para a melhora dos sintomas, costuma-se manter o tratamento por um período adicional para reduzir o risco de recaída. A duração total varia conforme o número de episódios anteriores, a gravidade do quadro e a resposta obtida, e é definida caso a caso ao longo do acompanhamento.',
+  },
+  {
+    question: 'Preciso fazer psicoterapia junto com o tratamento médico?',
+    answer:
+      'Na maior parte dos casos a combinação é a melhor escolha, porque medicação e psicoterapia atuam em frentes diferentes. Em quadros leves, a psicoterapia isolada pode bastar. A recomendação é individual e discutida na consulta.',
+  },
+];
+
+const spokes = [
+  {
+    href: '/blog/sintomas-de-depressao/',
+    title: 'Sintomas de depressão: como identificar os sinais',
+    blurb:
+      'O mapa completo dos sintomas, incluindo os que aparecem no corpo e passam despercebidos.',
+  },
+  {
+    href: '/blog/depressao-ou-tristeza-como-diferenciar/',
+    title: 'Depressão ou tristeza? Como diferenciar',
+    blurb:
+      'A dúvida mais comum de quem está mal há semanas e não sabe se já é caso de procurar ajuda.',
+  },
+  {
+    href: '/blog/quanto-tempo-dura-uma-depressao/',
+    title: 'Quanto tempo dura uma depressão?',
+    blurb:
+      'O que influencia a duração de um episódio e como reconhecer que a melhora começou.',
+  },
+];
+
+const medicalWebPageSchema: WithContext<MedicalWebPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  '@id': `${pageUrl}#page`,
+  name: 'Tratamento para depressão em São Paulo',
+  description: pageDescription,
+  url: pageUrl,
+  inLanguage: 'pt-BR',
+  specialty: 'Psychiatric',
+  lastReviewed,
+  reviewedBy: authorPersonSchema,
+  about: {
+    '@type': 'MedicalCondition',
+    name: 'Depressão',
+    alternateName: [
+      'Transtorno depressivo maior',
+      'Episódio depressivo',
+      'Depressão unipolar',
+    ],
+  },
+  audience: {
+    '@type': 'Patient',
+    name: 'Adultos com sintomas depressivos',
+  },
+  isPartOf: { '@id': homeUrl },
+};
+
+const breadcrumbSchema: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Início', item: homeUrl },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Tratamento para depressão',
+      item: pageUrl,
+    },
+  ],
+};
+
+const faqSchema: WithContext<FAQPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  url: pageUrl,
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question' as const,
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer' as const,
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={pageUrl}
+  openGraph={{
+    basic: {
+      title: pageTitle,
+      type: 'website',
+      image: ogImageUrl,
+      url: pageUrl,
+    },
+    optional: {
+      description: pageDescription,
+      siteName: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+      locale: 'pt_BR',
+    },
+    image: {
+      alt: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+    },
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: pageTitle,
+    description: pageDescription,
+    image: ogImageUrl,
+    imageAlt: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+  }}
+>
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(medicalWebPageSchema, { isJSON: true })}
+    slot='head'
+  />
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(breadcrumbSchema, { isJSON: true })}
+    slot='head'
+  />
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(faqSchema, { isJSON: true })}
+    slot='head'
+  />
+
+  <main class='min-h-svh'>
+    <section class='py-12 pt-8 md:py-24 md:pt-12'>
+      <div class='container mt-18'>
+        <Breadcrumb>
+          <BreadcrumbListUi>
+            <BreadcrumbItem>
+              <BreadcrumbLink aria-label='Início' href='/'>
+                <Home className='h-4 w-4' />
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Tratamento para depressão</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbListUi>
+        </Breadcrumb>
+
+        <h1 class='mt-6 text-4xl font-bold xl:text-5xl'>
+          Tratamento para depressão em São Paulo
+        </h1>
+        <p class='mt-6 max-w-3xl text-lg text-muted-foreground'>
+          Acompanhamento psiquiátrico para adultos com depressão no consultório
+          do Dr. Jean Almeida, na Av. Paulista, 2494 — conjunto 94. CRM 127.207.
+        </p>
+
+        <div class='mt-8 flex flex-wrap gap-3'>
+          <a
+            href={zapLink}
+            target='_blank'
+            rel='noopener noreferrer'
+            class={buttonVariants({ size: 'lg' })}
+          >
+            Agendar consulta pelo WhatsApp
+          </a>
+          <a
+            href='/#contato'
+            class={buttonVariants({ variant: 'outline', size: 'lg' })}
+          >
+            Ver endereço e contato
+          </a>
+        </div>
+
+        <Separator className='mt-12 mb-12' />
+
+        <div class='prose dark:prose-invert max-w-none'>
+          <p>
+            A depressão costuma ser descrita por quem a vive como um
+            desligamento. Não é exatamente dor: é a sensação de que as coisas
+            perderam cor e peso, de que levantar da cama exige um esforço
+            desproporcional, de que aquilo que antes dava prazer virou mais uma
+            tarefa. Muita gente demora a procurar ajuda porque acha que precisa
+            ter um motivo suficientemente grave para se sentir assim — e a
+            depressão nem sempre tem motivo.
+          </p>
+          <p>
+            Ela também não é falta de disciplina, fraqueza de caráter ou
+            preguiça. É uma condição médica com repercussões no sono, no
+            apetite, na cognição, na energia e na forma como a pessoa avalia a
+            própria vida. E é tratável, com abordagens que têm base de evidência
+            consolidada.
+          </p>
+
+          <h2>Como a depressão se apresenta na prática clínica</h2>
+          <p>
+            O quadro clássico combina humor deprimido na maior parte do dia com
+            perda de interesse ou prazer em atividades que antes importavam,
+            mantidos por semanas. Ao redor desse núcleo aparecem alterações de
+            sono — tanto insônia quanto excesso de sono —, mudança de apetite e
+            peso, lentificação ou agitação, cansaço persistente, dificuldade de
+            concentrar e decidir, e um julgamento sobre si mesmo marcado por
+            culpa e sensação de inutilidade.
+          </p>
+          <p>
+            Na prática, poucas depressões chegam nesse formato de livro. Em
+            adultos que continuam trabalhando, o sintoma mais visível costuma
+            ser a queda de rendimento e o esforço crescente para fazer o mesmo
+            de sempre. Em outros, o que salta é a irritabilidade — reação curta,
+            impaciência, conflitos que não existiam. Há também as depressões que
+            se expressam sobretudo pelo corpo, com dores difusas, alterações
+            digestivas e fadiga, e que passam meses sendo investigadas em outras
+            especialidades.
+          </p>
+          <p>
+            Algumas confusões são frequentes e mudam a conduta. Luto e reação a
+            perdas seguem uma trajetória diferente da depressão. Hipotireoidismo,
+            anemia, deficiências nutricionais, apneia do sono e efeitos de
+            certos medicamentos produzem quadros semelhantes. E é essencial
+            investigar a existência de episódios anteriores de humor elevado,
+            energia aumentada e redução da necessidade de sono: quando eles
+            existem, o quadro pode ser bipolar, e o tratamento é diferente do
+            tratamento da depressão unipolar.
+          </p>
+
+          <h2>Como é feita a avaliação no consultório</h2>
+          <p>
+            A avaliação reconstrói a história do episódio atual e da vida
+            afetiva anterior. Interessa quando os sintomas começaram, se houve
+            episódios prévios, como foram tratados e como terminaram, o que
+            estava acontecendo por volta do início, e como está hoje o
+            funcionamento em trabalho, estudo e relações. Sono, apetite, uso de
+            álcool e outras substâncias entram na conversa porque interferem
+            diretamente no curso do quadro.
+          </p>
+          <p>
+            A investigação clínica complementa a psiquiátrica: condições de
+            saúde, medicações em uso e, quando o caso justifica, exames
+            laboratoriais para afastar causas orgânicas. História familiar de
+            transtornos de humor tem peso. E a avaliação de risco de suicídio é
+            feita de forma direta e cuidadosa em toda consulta — perguntar sobre
+            isso não induz nada, apenas permite proteger.
+          </p>
+
+          <h2>Abordagens de tratamento</h2>
+          <p>
+            O tratamento da depressão combina, em graus variáveis, medicação e
+            psicoterapia. A escolha depende da gravidade, do grau de
+            comprometimento funcional, do histórico de episódios anteriores, de
+            outras condições de saúde e da preferência informada do paciente,
+            discutida na consulta.
+          </p>
+          <h3>Medicação</h3>
+          <p>
+            Existem diferentes classes de antidepressivos com eficácia
+            demonstrada, e elas não são intercambiáveis: diferem em perfil de
+            efeitos adversos, em interações e na adequação a cada quadro. Por
+            isso não há nome de remédio nem dose nesta página — essa é uma
+            decisão médica, tomada individualmente depois da avaliação.
+          </p>
+          <p>
+            Dois pontos evitam desistências precoces. O efeito costuma se
+            construir ao longo de semanas, e não nos primeiros dias; e a
+            interrupção por conta própria assim que os sintomas melhoram é uma
+            das causas mais comuns de recaída. Se algo incomodar durante o uso,
+            o caminho é comunicar no retorno, não abandonar. Nenhum tratamento
+            garante resultado, mas o ajuste orientado aumenta muito a chance de
+            encontrar uma resposta adequada.
+          </p>
+          <h3>Psicoterapia</h3>
+          <p>
+            A psicoterapia atua sobre aquilo que a medicação não alcança: os
+            padrões de pensamento que sustentam a autocrítica, o isolamento
+            progressivo, a paralisia diante de tarefas simples, as questões
+            relacionais e de história de vida envolvidas no quadro. Abordagens
+            estruturadas, como a terapia cognitivo-comportamental, contam com
+            evidência consistente na depressão. Quando o paciente já tem
+            psicólogo, o trabalho é feito em conjunto.
+          </p>
+          <h3>Acompanhamento e prevenção de recaída</h3>
+          <p>
+            Melhorar não é o fim do tratamento. Depois que os sintomas cedem,
+            costuma-se manter a conduta por um período adicional, justamente
+            porque a fase seguinte à melhora é a de maior risco de recaída. O
+            acompanhamento nesse período serve para reconhecer cedo os sinais de
+            retorno — mudança no sono, perda de interesse, isolamento crescente
+            — e para planejar, quando for o caso, a redução gradual e orientada
+            da medicação. Quem já teve mais de um episódio costuma precisar de
+            um horizonte de acompanhamento mais longo.
+          </p>
+          <h3>Rotina e retomada gradual</h3>
+          <p>
+            Regularizar o sono, retomar atividade física em doses possíveis e
+            reintroduzir aos poucos atividades abandonadas fazem parte do
+            tratamento, não são um complemento opcional. Na depressão, a vontade
+            costuma vir depois da ação — o que torna mais realista começar
+            pequeno do que esperar sentir disposição.
+          </p>
+
+          <h2>Quando procurar ajuda</h2>
+          <p>
+            Vale procurar avaliação quando os sintomas persistem por mais de
+            duas semanas, quando há prejuízo no trabalho, nos estudos ou nas
+            relações, quando o sono e o apetite mudaram, quando o isolamento
+            aumentou ou quando o próprio esforço de manter a rotina se tornou
+            exaustivo. Não é preciso estar no limite para justificar uma
+            consulta.
+          </p>
+          <p>
+            Se existirem pensamentos de morte, de se machucar ou de não querer
+            mais estar vivo, a ajuda é imediata: CVV no 188, SAMU no 192 ou o
+            pronto-socorro mais próximo. Para entender melhor como funciona o
+            atendimento e conhecer o consultório, veja a <a href='/'
+              >página inicial</a
+            > do site.
+          </p>
+        </div>
+
+        <section aria-labelledby='faq-depressao' class='mt-16'>
+          <h2 id='faq-depressao' class='text-3xl font-bold md:text-4xl'>
+            Perguntas frequentes sobre depressão
+          </h2>
+          <div class='mt-8 space-y-3'>
+            {
+              faqs.map((faq) => (
+                <details class='group rounded-2xl border border-border bg-card p-6'>
+                  <summary class='cursor-pointer list-none font-semibold marker:content-none'>
+                    {faq.question}
+                  </summary>
+                  <p class='mt-3 text-muted-foreground'>{faq.answer}</p>
+                </details>
+              ))
+            }
+          </div>
+        </section>
+
+        <section aria-labelledby='cta-depressao' class='mt-16'>
+          <div class='rounded-4xl bg-accent p-8 lg:p-12'>
+            <h2
+              id='cta-depressao'
+              class='text-2xl font-semibold tracking-tight md:text-3xl'
+            >
+              Marcar uma avaliação para depressão
+            </h2>
+            <p class='mt-4 max-w-2xl text-muted-foreground'>
+              O agendamento é feito diretamente pelo WhatsApp, sem necessidade
+              de encaminhamento. O consultório fica na Av. Paulista, 2494 —
+              conjunto 94, São Paulo, com acesso pelo metrô.
+            </p>
+            <div class='mt-6'>
+              <a
+                href={zapLink}
+                target='_blank'
+                rel='noopener noreferrer'
+                class={buttonVariants({ size: 'lg' })}
+              >
+                Falar pelo WhatsApp
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby='leia-tambem-depressao' class='mt-16'>
+          <h2 id='leia-tambem-depressao' class='text-3xl font-bold md:text-4xl'>
+            Leia também sobre depressão
+          </h2>
+          <ul class='mt-8 grid gap-4 sm:grid-cols-2'>
+            {
+              spokes.map((spoke) => (
+                <li>
+                  <a
+                    href={spoke.href}
+                    class='flex h-full flex-col rounded-4xl border border-border bg-background p-6 transition-colors hover:bg-muted'
+                  >
+                    <span class='font-semibold'>{spoke.title}</span>
+                    <span class='mt-2 text-sm text-muted-foreground'>
+                      {spoke.blurb}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <MedicalDisclaimer />
+      </div>
+    </section>
+  </main>
+</Layout>

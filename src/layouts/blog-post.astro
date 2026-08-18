@@ -9,12 +9,15 @@ import type {
   FAQPage,
 } from 'schema-dts';
 import BlogpostLayout from '@/components/blog/blogpost-layout.astro';
+import { author, authorPersonSchema } from '@/data/author';
 
 export interface BlogPostFrontmatter {
   title: string;
   description: string;
   label: string;
   publishDate: string;
+  /** Data da última revisão de conteúdo, no formato `YYYY-MM-DD`. */
+  updatedDate?: string;
   /** Slug-based canonical path, e.g. "/blog/onde-comer-em-sao-bento" */
   slug: string;
   keywords?: string[];
@@ -27,7 +30,7 @@ export interface BlogPostFrontmatter {
 const { frontmatter } = Astro.props as { frontmatter: BlogPostFrontmatter };
 
 const basePath = getBasePath();
-const homeUrl = getCanonicalUrl('/');
+const authorId = author.id;
 const canonicalUrl = getCanonicalUrl(frontmatter.slug);
 const ogImage = frontmatter.ogImage ?? `${basePath}/og-image.jpg`;
 
@@ -38,22 +41,15 @@ const blogPostingSchema: WithContext<BlogPosting> = {
   description: frontmatter.description,
   url: canonicalUrl,
   datePublished: frontmatter.publishDate,
-  dateModified: frontmatter.publishDate,
+  dateModified: frontmatter.updatedDate ?? frontmatter.publishDate,
   inLanguage: 'pt-BR',
   image: {
     '@type': 'ImageObject',
     url: ogImage,
   },
-  author: {
-    '@type': 'Person',
-    name: 'Dr. Jean Almeida',
-    url: homeUrl,
-  },
-  publisher: {
-    '@type': 'Person',
-    name: 'Dr. Jean Almeida',
-    url: homeUrl,
-  },
+  author: authorPersonSchema,
+  // Só o `author` traz o nó completo; aqui basta a referência ao mesmo `@id`.
+  publisher: { '@id': authorId },
   mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': canonicalUrl,
@@ -132,9 +128,9 @@ const faqSchema: WithContext<FAQPage> | null =
   }}
   extend={{
     meta: [
-      ...(frontmatter.keywords
-        ? [{ name: 'keywords', content: frontmatter.keywords.join(', ') }]
-        : []),
+      // `meta keywords` não é emitida: o Google a ignora desde 2009. O campo
+      // `keywords` do frontmatter continua sendo lido — ele alimenta o ranking
+      // de posts relacionados em `src/utils/posts.ts`.
       ...(frontmatter.robots
         ? [{ name: 'robots', content: frontmatter.robots }]
         : []),
@@ -164,7 +160,12 @@ const faqSchema: WithContext<FAQPage> | null =
     )
   }
   <main class='min-h-svh'>
-    <BlogpostLayout title={frontmatter.title}>
+    <BlogpostLayout
+      title={frontmatter.title}
+      slug={frontmatter.slug}
+      publishDate={frontmatter.publishDate}
+      updatedDate={frontmatter.updatedDate}
+    >
       <slot />
     </BlogpostLayout>
   </main>

@@ -27,6 +27,8 @@ const ProcessSection = ({ images }: { images: OptimizedPicture[] }) => {
       step: '01',
       title: 'Primeiro Contato',
       image: images[0],
+      imageAlt:
+        'Escultura de mão apoiada em um livro vermelho na janela do consultório do Dr. Jean Almeida, na Av. Paulista',
       description:
         'Entre em contato pelo WhatsApp ou formulário. Retornaremos para agendar sua consulta na Av. Paulista.',
     },
@@ -34,6 +36,8 @@ const ProcessSection = ({ images }: { images: OptimizedPicture[] }) => {
       step: '02',
       title: 'Consulta Inicial',
       image: images[1],
+      imageAlt:
+        'Ampulheta de metal dourado sobre a estante do consultório, símbolo do tempo dedicado a cada consulta',
       description:
         'Uma conversa sem pressa. O Dr. Jean ouvirá sua história, sintomas e contexto de vida antes de qualquer avaliação.',
     },
@@ -41,6 +45,8 @@ const ProcessSection = ({ images }: { images: OptimizedPicture[] }) => {
       step: '03',
       title: 'Avaliação Clínica',
       image: images[2],
+      imageAlt:
+        'Peça de cerâmica artesanal sobre livros de arte na estante do consultório psiquiátrico',
       description:
         'Com base na sua história completa, será construída uma compreensão individualizada — clínica e psicodinâmica — para orientar o acompanhamento.',
     },
@@ -48,6 +54,8 @@ const ProcessSection = ({ images }: { images: OptimizedPicture[] }) => {
       step: '04',
       title: 'Acompanhamento Longitudinal',
       image: images[3],
+      imageAlt:
+        'Estante do consultório com livros de psicanálise de Lacan e uma miniatura identificada como psiquiatra',
       description:
         'O cuidado se constrói ao longo do tempo. O Dr. Jean acompanhará sua evolução com atenção contínua, ajustando a conduta conforme necessário.',
     },
@@ -73,6 +81,8 @@ const ProcessSection = ({ images }: { images: OptimizedPicture[] }) => {
             <div className='relative h-90 overflow-hidden border'>
               {previousActive !== undefined && (
                 <div className='absolute top-0 h-full w-full'>
+                  {/* Camada de saída da transição: o alt fica vazio para não
+                      duplicar a descrição da imagem ativa para leitores de tela. */}
                   <Picture
                     src={process[previousActive].image}
                     className='h-full w-full object-cover'
@@ -94,7 +104,7 @@ const ProcessSection = ({ images }: { images: OptimizedPicture[] }) => {
                 <Picture
                   src={process[active].image}
                   className='h-full w-full object-cover'
-                  alt=''
+                  alt={process[active].imageAlt}
                 />
               </motion.div>
             </div>
@@ -138,6 +148,7 @@ const ProcessCard = ({
     step: string;
     title: string;
     image: OptimizedPicture;
+    imageAlt: string;
     description: string;
   };
   index: number;

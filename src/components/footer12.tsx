@@ -12,9 +12,11 @@ const Footer = () => {
   ];
 
   const social = [
-    { name: 'Blog', href: '/blog/' },
     { name: 'WhatsApp', href: getZapLink() },
-    { name: 'Google', href: 'https://share.google/fUEwnewtna9YHcBIa' },
+    {
+      name: 'Google',
+      href: 'https://www.google.com/maps/search/?api=1&query=Av.%20Paulista%2C%202494%20-%20Conjunto%2094%2C%20S%C3%A3o%20Paulo%2C%20SP%2C%2001310-300',
+    },
   ];
 
   return (

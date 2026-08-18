@@ -1,0 +1,466 @@
+---
+import type {
+  BreadcrumbList,
+  FAQPage,
+  MedicalWebPage,
+  WithContext,
+} from 'schema-dts';
+
+import MedicalDisclaimer from '@/components/blog/medical-disclaimer.astro';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList as BreadcrumbListUi,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import { buttonVariants } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { authorPersonSchema } from '@/data/author';
+import Layout from '@/layouts/layout.astro';
+import { getBasePath, getCanonicalUrl } from '@/utils/env';
+import getZapLink from '@/utils/get-zap-link';
+import { Home } from 'lucide-react';
+import serialize from 'serialize-javascript';
+
+const siteUrl = getBasePath();
+const homeUrl = getCanonicalUrl('/');
+const pageUrl = getCanonicalUrl('/tratamentos/ansiedade');
+const ogImageUrl = `${siteUrl}/og-image.jpg`;
+
+const pageTitle = 'Tratamento para Ansiedade em São Paulo | Dr. Jean Almeida';
+const pageDescription =
+  'Psiquiatra para ansiedade na Av. Paulista, São Paulo. Avaliação diagnóstica cuidadosa, medicação quando indicada e acompanhamento individualizado.';
+
+/** Data da última revisão clínica do texto desta página. */
+const lastReviewed = '2026-08-18';
+
+const zapLink = getZapLink(
+  'Olá, gostaria de agendar uma consulta para avaliar um quadro de ansiedade.',
+);
+
+const faqs = [
+  {
+    question: 'Ansiedade tem cura ou é para o resto da vida?',
+    answer:
+      'Depende do quadro. Alguns episódios de ansiedade estão ligados a um período específico da vida e não voltam depois de tratados. Outros são recorrentes e exigem acompanhamento mais longo, com períodos de melhora e momentos de reativação. O objetivo do tratamento é reduzir a intensidade dos sintomas e devolver funcionalidade, não prometer que a ansiedade nunca mais apareça.',
+  },
+  {
+    question: 'Preciso tomar remédio para tratar ansiedade?',
+    answer:
+      'Não necessariamente. Quadros leves costumam responder bem a psicoterapia e mudanças de rotina. A medicação entra quando os sintomas são intensos, persistentes, causam prejuízo importante ou não cedem com as outras abordagens. Essa decisão é feita em conjunto na consulta, depois da avaliação.',
+  },
+  {
+    question: 'Quanto tempo leva para a ansiedade melhorar com tratamento?',
+    answer:
+      'A resposta varia bastante entre pessoas. Quando há medicação envolvida, é comum que as primeiras mudanças apareçam ao longo de algumas semanas, e não nos primeiros dias. A psicoterapia costuma mostrar efeito de forma gradual. O acompanhamento existe justamente para avaliar essa resposta e ajustar a conduta.',
+  },
+  {
+    question: 'Como sei se é ansiedade ou um problema físico?',
+    answer:
+      'Palpitação, falta de ar, tontura e desconforto no peito também aparecem em condições clínicas como alterações de tireoide, arritmias e anemia. Por isso a avaliação psiquiátrica inclui investigar a história médica e, quando necessário, solicitar exames antes de atribuir tudo à ansiedade.',
+  },
+  {
+    question: 'O atendimento para ansiedade pode ser online?',
+    answer:
+      'Sim. Consultas por telemedicina são possíveis para pacientes que não conseguem comparecer presencialmente ao consultório na Av. Paulista. A escolha entre presencial e online é conversada caso a caso, considerando a gravidade do quadro e a necessidade de exame clínico.',
+  },
+  {
+    question: 'Preciso de encaminhamento para consultar com psiquiatra?',
+    answer:
+      'Não. O agendamento é direto, sem necessidade de encaminhamento de outro profissional. Se você já faz psicoterapia, é útil trazer essa informação para que o trabalho seja articulado.',
+  },
+];
+
+const spokes = [
+  {
+    href: '/blog/quando-a-ansiedade-deixa-de-ser-normal/',
+    title: 'Quando a ansiedade deixa de ser normal?',
+    blurb:
+      'Os critérios práticos que separam a ansiedade esperada do quadro que já merece avaliação.',
+  },
+  {
+    href: '/blog/crise-de-ansiedade-sintomas-e-o-que-fazer/',
+    title: 'Crise de ansiedade: sintomas e o que fazer',
+    blurb:
+      'O que acontece no corpo durante o episódio, o que ajuda no momento e o que costuma piorar.',
+  },
+  {
+    href: '/blog/quando-o-corpo-fala-sintomas-fisicos-da-ansiedade/',
+    title: 'Quando o corpo fala: sintomas físicos da ansiedade',
+    blurb:
+      'Por que a ansiedade se manifesta em palpitação, aperto no peito e desconforto digestivo.',
+  },
+  {
+    href: '/blog/ansiedade-e-insonia-por-que-o-cerebro-nao-consegue-descansar/',
+    title: 'Ansiedade e insônia: por que o cérebro não descansa',
+    blurb:
+      'O ciclo entre noite mal dormida e alerta no dia seguinte, e como ele se sustenta sozinho.',
+  },
+  {
+    href: '/blog/nao-consigo-desligar-a-mente-quando-a-preocupacao-se-torna-sofrimento/',
+    title: 'Não consigo desligar a mente',
+    blurb:
+      'Quando a preocupação deixa de organizar e passa a ocupar o dia inteiro.',
+  },
+];
+
+const medicalWebPageSchema: WithContext<MedicalWebPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  '@id': `${pageUrl}#page`,
+  name: 'Tratamento para ansiedade em São Paulo',
+  description: pageDescription,
+  url: pageUrl,
+  inLanguage: 'pt-BR',
+  specialty: 'Psychiatric',
+  lastReviewed,
+  reviewedBy: authorPersonSchema,
+  about: {
+    '@type': 'MedicalCondition',
+    name: 'Transtorno de ansiedade',
+    alternateName: [
+      'Ansiedade',
+      'Transtorno de ansiedade generalizada',
+      'Transtorno de pânico',
+    ],
+  },
+  audience: {
+    '@type': 'Patient',
+    name: 'Adultos com sintomas de ansiedade',
+  },
+  isPartOf: { '@id': homeUrl },
+};
+
+const breadcrumbSchema: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Início', item: homeUrl },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Tratamento para ansiedade',
+      item: pageUrl,
+    },
+  ],
+};
+
+const faqSchema: WithContext<FAQPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  url: pageUrl,
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question' as const,
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer' as const,
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={pageUrl}
+  openGraph={{
+    basic: {
+      title: pageTitle,
+      type: 'website',
+      image: ogImageUrl,
+      url: pageUrl,
+    },
+    optional: {
+      description: pageDescription,
+      siteName: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+      locale: 'pt_BR',
+    },
+    image: {
+      alt: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+    },
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: pageTitle,
+    description: pageDescription,
+    image: ogImageUrl,
+    imageAlt: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+  }}
+>
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(medicalWebPageSchema, { isJSON: true })}
+    slot='head'
+  />
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(breadcrumbSchema, { isJSON: true })}
+    slot='head'
+  />
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(faqSchema, { isJSON: true })}
+    slot='head'
+  />
+
+  <main class='min-h-svh'>
+    <section class='py-12 pt-8 md:py-24 md:pt-12'>
+      <div class='container mt-18'>
+        <Breadcrumb>
+          <BreadcrumbListUi>
+            <BreadcrumbItem>
+              <BreadcrumbLink aria-label='Início' href='/'>
+                <Home className='h-4 w-4' />
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Tratamento para ansiedade</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbListUi>
+        </Breadcrumb>
+
+        <h1 class='mt-6 text-4xl font-bold xl:text-5xl'>
+          Tratamento para ansiedade em São Paulo
+        </h1>
+        <p class='mt-6 max-w-3xl text-lg text-muted-foreground'>
+          Atendimento psiquiátrico para adultos com ansiedade no consultório do
+          Dr. Jean Almeida, na Av. Paulista, 2494 — conjunto 94. CRM 127.207.
+        </p>
+
+        <div class='mt-8 flex flex-wrap gap-3'>
+          <a
+            href={zapLink}
+            target='_blank'
+            rel='noopener noreferrer'
+            class={buttonVariants({ size: 'lg' })}
+          >
+            Agendar consulta pelo WhatsApp
+          </a>
+          <a
+            href='/#contato'
+            class={buttonVariants({ variant: 'outline', size: 'lg' })}
+          >
+            Ver endereço e contato
+          </a>
+        </div>
+
+        <Separator className='mt-12 mb-12' />
+
+        <div class='prose dark:prose-invert max-w-none'>
+          <p>
+            Quase ninguém procura um psiquiatra no primeiro dia de ansiedade. As
+            pessoas chegam depois de meses tentando administrar sozinhas um
+            estado de alerta que não desliga: a mente que antecipa problemas
+            antes de eles existirem, o corpo tenso mesmo em repouso, o sono que
+            não repõe, a irritação com quem está por perto. Muitas já ouviram
+            que é só estresse, que vai passar, que é excesso de trabalho. Às
+            vezes é. Às vezes não é.
+          </p>
+          <p>
+            Ansiedade não é um diagnóstico único. É um conjunto de quadros com
+            apresentações, causas e respostas ao tratamento bastante diferentes
+            entre si. A consulta psiquiátrica serve, antes de tudo, para
+            entender qual deles está em jogo na sua história específica — e o
+            que está sustentando esse alerta.
+          </p>
+
+          <h2>Como a ansiedade se apresenta na prática clínica</h2>
+          <p>
+            No consultório, a ansiedade raramente chega com esse nome. Chega
+            como insônia que não cede, como cansaço sem explicação, como um
+            aperto no peito que já levou o paciente ao pronto-socorro mais de
+            uma vez. Chega como dificuldade de concentração no trabalho, como
+            irritabilidade em casa, como uma agenda que foi encolhendo porque
+            certas situações passaram a ser evitadas.
+          </p>
+          <p>
+            Algumas apresentações se repetem com frequência. Há a preocupação
+            contínua e difusa, que muda de assunto mas não some, típica do
+            transtorno de ansiedade generalizada. Há os episódios agudos, com
+            taquicardia, falta de ar e sensação de perda de controle, que
+            costumam durar minutos e deixam um medo persistente de que voltem.
+            Há a ansiedade ligada a situações sociais, em que o desconforto se
+            concentra na exposição e no julgamento alheio. E há quadros em que o
+            sintoma dominante é físico, e o paciente passa meses circulando por
+            especialidades clínicas antes de chegar à psiquiatria.
+          </p>
+          <p>
+            O que costuma se confundir com ansiedade também importa. Alterações
+            de tireoide, arritmias, anemia, apneia do sono, uso de estimulantes
+            e efeitos de abstinência produzem sintomas praticamente idênticos.
+            No sentido oposto, quadros de depressão, TDAH e esgotamento
+            profissional frequentemente aparecem revestidos de ansiedade — e
+            tratar apenas a camada de fora costuma render melhora parcial e
+            recaída.
+          </p>
+
+          <h2>Como é feita a avaliação no consultório</h2>
+          <p>
+            A primeira consulta é longa porque precisa ser. Ela reconstrói a
+            linha do tempo dos sintomas: quando começaram, o que estava
+            acontecendo na sua vida naquele momento, o que melhora, o que piora,
+            o que já foi tentado. Interessa saber como está o sono, o apetite, a
+            concentração, o uso de álcool, cafeína e outras substâncias, e como
+            a ansiedade tem afetado trabalho, estudos e relações.
+          </p>
+          <p>
+            A avaliação também investiga o que não é psiquiátrico. História
+            clínica, medicações em uso e, quando o quadro justifica, exames
+            laboratoriais ajudam a excluir causas orgânicas antes de fechar
+            qualquer conclusão. Somam-se a isso a história familiar, a
+            verificação de comorbidades comuns — depressão, uso de substâncias,
+            transtornos do sono — e a avaliação de risco, que é feita sempre,
+            com franqueza e sem rodeios.
+          </p>
+          <p>
+            Só depois disso faz sentido falar em conduta. Um diagnóstico
+            psiquiátrico não é um rótulo definitivo: é uma hipótese de trabalho,
+            revista a cada retorno conforme a resposta ao tratamento mostra o
+            que estava certo e o que precisa mudar.
+          </p>
+
+          <h2>Abordagens de tratamento</h2>
+          <p>
+            O tratamento da ansiedade se apoia em duas frentes principais, que
+            funcionam melhor combinadas do que isoladas: a psicoterapia e, em
+            parte dos casos, a medicação. A proporção entre elas depende da
+            gravidade do quadro, do grau de prejuízo na vida diária, da presença
+            de outras condições e da preferência informada do paciente.
+          </p>
+          <h3>Psicoterapia</h3>
+          <p>
+            Abordagens psicoterápicas estruturadas, como a terapia
+            cognitivo-comportamental, têm boa base de evidência no tratamento
+            dos transtornos de ansiedade. O trabalho envolve reconhecer os
+            padrões de pensamento que alimentam o alerta, reduzir
+            progressivamente as esquivas que mantêm o medo e desenvolver formas
+            mais sustentáveis de lidar com incerteza. Não é conversa solta: tem
+            método, tarefas e metas revisadas ao longo do processo. Quando o
+            paciente já faz terapia, o acompanhamento psiquiátrico é articulado
+            com o psicólogo.
+          </p>
+          <h3>Medicação</h3>
+          <p>
+            Existem classes de medicamentos com eficácia estabelecida para
+            ansiedade, e a escolha entre elas envolve o tipo de quadro, o perfil
+            de efeitos adversos, outras condições de saúde e interações com o
+            que já está em uso. Essa decisão é médica e individual, feita na
+            consulta — não cabe em uma página de internet, e é por isso que aqui
+            não há nome de remédio nem dose.
+          </p>
+          <p>
+            Duas informações costumam evitar frustração. A primeira: as
+            medicações usadas no tratamento contínuo da ansiedade não agem no
+            mesmo dia; é comum que a resposta se construa ao longo de semanas. A
+            segunda: ajustes fazem parte do processo, e a necessidade de mudar
+            algo no meio do caminho não significa que o tratamento falhou.
+            Nenhuma conduta pode garantir resultado, e o acompanhamento existe
+            exatamente para acompanhar a resposta real, e não a esperada.
+          </p>
+          <h3>Rotina, sono e hábitos</h3>
+          <p>
+            Sono irregular, consumo alto de cafeína, uso de álcool como
+            calmante e ausência de atividade física sustentam a ansiedade em
+            silêncio. Esses fatores não substituem tratamento, mas mexer neles
+            costuma mudar de forma concreta a intensidade dos sintomas — e
+            costuma ser a parte que o paciente controla desde a primeira semana.
+          </p>
+
+          <h2>Quando procurar ajuda</h2>
+          <p>
+            Não é preciso esperar uma crise. Vale procurar avaliação quando a
+            ansiedade se tornou frequente, quando você já não consegue
+            controlá-la com o que costumava funcionar, quando ela atrapalha o
+            sono, o trabalho ou os relacionamentos, quando começou a haver
+            evitação de lugares e situações, ou quando sintomas físicos
+            recorrentes já foram investigados e nada foi encontrado.
+          </p>
+          <p>
+            Se houver pensamentos de morte ou risco à própria vida, a busca por
+            ajuda é imediata: CVV no 188, SAMU no 192 ou o pronto-socorro mais
+            próximo. Para os demais casos, você pode conhecer melhor o
+            consultório e a forma de trabalho na <a href='/'>página inicial</a>
+            do site.
+          </p>
+        </div>
+
+        <section aria-labelledby='faq-ansiedade' class='mt-16'>
+          <h2 id='faq-ansiedade' class='text-3xl font-bold md:text-4xl'>
+            Perguntas frequentes sobre ansiedade
+          </h2>
+          <div class='mt-8 space-y-3'>
+            {
+              faqs.map((faq) => (
+                <details class='group rounded-2xl border border-border bg-card p-6'>
+                  <summary class='cursor-pointer list-none font-semibold marker:content-none'>
+                    {faq.question}
+                  </summary>
+                  <p class='mt-3 text-muted-foreground'>{faq.answer}</p>
+                </details>
+              ))
+            }
+          </div>
+        </section>
+
+        <section aria-labelledby='cta-ansiedade' class='mt-16'>
+          <div class='rounded-4xl bg-accent p-8 lg:p-12'>
+            <h2
+              id='cta-ansiedade'
+              class='text-2xl font-semibold tracking-tight md:text-3xl'
+            >
+              Marcar uma avaliação para ansiedade
+            </h2>
+            <p class='mt-4 max-w-2xl text-muted-foreground'>
+              O agendamento é feito diretamente pelo WhatsApp, sem necessidade
+              de encaminhamento. O consultório fica na Av. Paulista, 2494 —
+              conjunto 94, São Paulo, com acesso pelo metrô.
+            </p>
+            <div class='mt-6'>
+              <a
+                href={zapLink}
+                target='_blank'
+                rel='noopener noreferrer'
+                class={buttonVariants({ size: 'lg' })}
+              >
+                Falar pelo WhatsApp
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby='leia-tambem-ansiedade' class='mt-16'>
+          <h2 id='leia-tambem-ansiedade' class='text-3xl font-bold md:text-4xl'>
+            Leia também sobre ansiedade
+          </h2>
+          <ul class='mt-8 grid gap-4 sm:grid-cols-2'>
+            {
+              spokes.map((spoke) => (
+                <li>
+                  <a
+                    href={spoke.href}
+                    class='flex h-full flex-col rounded-4xl border border-border bg-background p-6 transition-colors hover:bg-muted'
+                  >
+                    <span class='font-semibold'>{spoke.title}</span>
+                    <span class='mt-2 text-sm text-muted-foreground'>
+                      {spoke.blurb}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <MedicalDisclaimer />
+      </div>
+    </section>
+  </main>
+</Layout>

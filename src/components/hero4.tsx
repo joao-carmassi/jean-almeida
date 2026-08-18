@@ -58,9 +58,10 @@ const HeroSection = ({ images }: { images: OptimizedPicture[] }) => {
     >
       <div className='container mx-auto'>
         <div className='flex items-center justify-center flex-col-reverse lg:flex-row gap-10 lg:grid-cols-2 lg:gap-20'>
-          <div className='pattern-dots-md text-foreground rounded-4xl gsap-hero-media opacity-0'>
+          <div className='pattern-dots-md text-foreground rounded-4xl gsap-hero-media'>
             <Picture
               loading='eager'
+              fetchPriority='high'
               src={images[0]}
               alt='Dr. Jean Almeida — Psiquiatra em São Paulo, Av. Paulista'
               className='rounded-4xl object-cover md:translate-x-8 md:translate-y-8 shadow-lg aspect-square'
@@ -68,11 +69,11 @@ const HeroSection = ({ images }: { images: OptimizedPicture[] }) => {
             <div className='w-full h-full md:translate-x-8 md:translate-y-8 bg-linear-to-b from-transparent from-60% to-black/50 to-100% absolute z-10 top-0 left-0 rounded-4xl' />
           </div>
           <div className='mx-auto flex max-w-5xl flex-col items-center gap-6 text-center md:mr-auto lg:order-2 lg:items-start lg:text-left'>
-            <h1 className='max-w-xl text-4xl font-bold tracking-tight text-pretty lg:max-w-3xl lg:text-6xl font-handwriting gsap-hero opacity-0'>
+            <h1 className='max-w-xl text-4xl font-bold tracking-tight text-pretty lg:max-w-3xl lg:text-6xl font-handwriting gsap-hero'>
               Psiquiatra em São Paulo com Escuta Profunda e Tratamento
               Individualizado
             </h1>
-            <p className='max-w-5xl text-balance text-muted-foreground lg:text-xl gsap-hero opacity-0'>
+            <p className='max-w-5xl text-balance text-muted-foreground lg:text-xl gsap-hero'>
               Nem todo sofrimento aparece por fora. Ansiedade, exaustão, vazio
               emocional, insônia, relações difíceis — às vezes a vida continua
               funcionando enquanto você já não consegue mais descansar dentro
@@ -84,13 +85,13 @@ const HeroSection = ({ images }: { images: OptimizedPicture[] }) => {
                   {reviews.avatars.map((avatar, index) => (
                     <Avatar
                       key={index}
-                      className='size-10 bg-background ring-2 ring-background after:hidden gsap-hero opacity-0'
+                      className='size-10 bg-background ring-2 ring-background after:hidden gsap-hero'
                     >
                       <AvatarImage src={avatar.src} alt={avatar.alt} />
                     </Avatar>
                   ))}
                 </span>
-                <div className='gsap-hero opacity-0'>
+                <div className='gsap-hero'>
                   <div className='flex items-center gap-1'>
                     {[...Array(5)].map((_, index) => (
                       <Star
@@ -112,7 +113,7 @@ const HeroSection = ({ images }: { images: OptimizedPicture[] }) => {
               <Button
                 asChild
                 size='lg'
-                className='w-full sm:w-auto gsap-hero opacity-0 transition-colors'
+                className='w-full sm:w-auto gsap-hero transition-colors'
               >
                 <a
                   href={getZapLink('Olá, gostaria de agendar uma consulta.')}
@@ -127,7 +128,7 @@ const HeroSection = ({ images }: { images: OptimizedPicture[] }) => {
                 asChild
                 variant='outline'
                 size='lg'
-                className='w-full bg-background sm:w-auto dark:bg-background gsap-hero opacity-0 transition-colors'
+                className='w-full bg-background sm:w-auto dark:bg-background gsap-hero transition-colors'
               >
                 <a href='#sobre'>Saiba Mais ↓</a>
               </Button>

@@ -16,17 +16,26 @@ const { ...props } = Astro.props as Props;
 <html lang='pt-BR'>
   <head>
     <meta charset='utf-8' />
-    <meta name='viewport' content='width=device-width' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
     <link rel='sitemap' href='/sitemap-index.xml' />
+
+    {/* O herói entra via GSAP a partir de `opacity: 0`. Esse estado inicial
+    vive no CSS sob `.js` em vez de no markup, para que uma falha de
+    carregamento do JS não deixe a dobra inteira invisível. Precisa ser inline e
+    antes do CSS: rodar depois causaria flash do herói já visível. */}
+    <script is:inline>document.documentElement.classList.add('js');</script>
 
     <link rel='icon' type='image/png' href='/favicon-96x96.png' sizes='96x96' />
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
     <link rel='shortcut icon' href='/favicon.ico' />
     <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
-    <meta name='apple-mobile-web-app-title' content='MyWebSite' />
+    <meta name='apple-mobile-web-app-title' content='Dr. Jean Almeida' />
     <link rel='manifest' href='/site.webmanifest' />
 
-    <Font cssVariable='--font-poppins' preload />
+    {/* Só as fontes acima da dobra têm preload: Bodoni Moda (h1 do herói) e
+    Montserrat (textos/links do herói e da navbar). Poppins só aparece em
+    títulos abaixo da dobra, então não compete com a imagem de LCP. */}
+    <Font cssVariable='--font-poppins' />
     <Font cssVariable='--font-montserrat' preload />
     <Font cssVariable='--font-bodoni-moda' preload />
     <meta name='generator' content={Astro.generator} />
@@ -34,7 +43,7 @@ const { ...props } = Astro.props as Props;
     <slot name='head' />
   </head>
   <body>
-    <Navbar client:load />
+    <Navbar client:idle />
     <slot />
     <Footer />
   </body>

@@ -29,7 +29,7 @@ const homeUrl = getCanonicalUrl('/');
 const pageUrl = getCanonicalUrl('/tratamentos/depressao');
 const ogImageUrl = `${siteUrl}/og-image.jpg`;
 
-const pageTitle = 'Tratamento para Depressão em São Paulo | Dr. Jean Almeida';
+const pageTitle = 'Psiquiatra para Depressão em SP: Tratamento | Dr. Jean Almeida';
 const pageDescription =
   'Psiquiatra para depressão na Av. Paulista, São Paulo. Avaliação diagnóstica detalhada, medicação quando indicada e acompanhamento individualizado.';
 
@@ -199,8 +199,9 @@ const faqSchema: WithContext<FAQPage> = {
         <Breadcrumb>
           <BreadcrumbListUi>
             <BreadcrumbItem>
-              <BreadcrumbLink aria-label='Início' href='/'>
-                <Home className='h-4 w-4' />
+              <BreadcrumbLink href='/'>
+                <Home className='h-4 w-4' aria-hidden='true' />
+                <span class='sr-only'>Início</span>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />

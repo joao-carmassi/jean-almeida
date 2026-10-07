@@ -35,8 +35,9 @@ const formattedUpdatedDate =
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink aria-label='Início' href='/'>
-            <Home className='h-4 w-4' />
+          <BreadcrumbLink href='/'>
+            <Home className='h-4 w-4' aria-hidden='true' />
+            <span class='sr-only'>Início</span>
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />

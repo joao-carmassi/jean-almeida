@@ -28,7 +28,7 @@ const ProcessSection = ({ images }: { images: OptimizedPicture[] }) => {
       title: 'Primeiro Contato',
       image: images[0],
       imageAlt:
-        'Escultura de mão apoiada em um livro vermelho na janela do consultório do Dr. Jean Almeida, na Av. Paulista',
+        'Escultura de mão sobre livro vermelho no consultório do Dr. Jean Almeida, Av. Paulista',
       description:
         'Entre em contato pelo WhatsApp ou formulário. Retornaremos para agendar sua consulta na Av. Paulista.',
     },

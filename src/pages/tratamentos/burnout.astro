@@ -29,7 +29,7 @@ const homeUrl = getCanonicalUrl('/');
 const pageUrl = getCanonicalUrl('/tratamentos/burnout');
 const ogImageUrl = `${siteUrl}/og-image.jpg`;
 
-const pageTitle = 'Tratamento para Burnout em São Paulo | Dr. Jean Almeida';
+const pageTitle = 'Psiquiatra para Burnout em SP: Tratamento | Dr. Jean Almeida';
 const pageDescription =
   'Psiquiatra para burnout na Av. Paulista, São Paulo. Avaliação do esgotamento profissional e acompanhamento individualizado com o Dr. Jean Almeida.';
 
@@ -71,7 +71,7 @@ const faqs = [
 const spokes = [
   {
     href: '/blog/burnout-sinais-de-esgotamento-fisico-e-mental-relacionados-ao-trabalho/',
-    title: 'Burnout: sinais de esgotamento ligado ao trabalho',
+    title: 'Sintomas de burnout: sinais de esgotamento',
     blurb:
       'Os sinais físicos, emocionais e de desempenho que costumam preceder o colapso.',
   },
@@ -86,6 +86,18 @@ const spokes = [
     title: 'Exaustão emocional apesar de continuar funcionando',
     blurb:
       'Por que o alto desempenho pode mascarar o sofrimento e atrasar a busca por ajuda.',
+  },
+  {
+    href: '/blog/burnout-tem-cura/',
+    title: 'Burnout tem cura?',
+    blurb:
+      'Como é a recuperação, quanto tempo pode levar e por que só descansar costuma não bastar.',
+  },
+  {
+    href: '/blog/burnout-cid-doenca-do-trabalho/',
+    title: 'Burnout é doença do trabalho? CID e afastamento',
+    blurb:
+      'Como o burnout aparece na CID, como funciona o afastamento e o papel do laudo psiquiátrico.',
   },
 ];
 
@@ -199,8 +211,9 @@ const faqSchema: WithContext<FAQPage> = {
         <Breadcrumb>
           <BreadcrumbListUi>
             <BreadcrumbItem>
-              <BreadcrumbLink aria-label='Início' href='/'>
-                <Home className='h-4 w-4' />
+              <BreadcrumbLink href='/'>
+                <Home className='h-4 w-4' aria-hidden='true' />
+                <span class='sr-only'>Início</span>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />

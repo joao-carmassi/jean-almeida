@@ -1,8 +1,10 @@
 import { Star } from 'lucide-react';
 
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar } from '@/components/ui/avatar';
+import type { OptimizedPicture } from '@/utils/get-picture-image';
+import { Picture } from './ui/picture';
 
-const TestimonialSection = () => {
+const TestimonialSection = ({ avatar }: { avatar: OptimizedPicture }) => {
   return (
     <section id='depoimentos' className='py-12 md:py-24'>
       <div className='container'>
@@ -35,11 +37,12 @@ const TestimonialSection = () => {
             humanizado e a escuta é genuína. Recomendo de coração para quem
             busca um acompanhamento psiquiátrico de qualidade em São Paulo.
           </p>
-          <div className='mt-6 flex gap-4'>
+          <div className='mt-6 flex items-center gap-4'>
             <Avatar className='size-14 rounded-full ring-1 ring-input'>
-              <AvatarImage
-                src='https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-1.webp'
-                alt='Barbara da Luz'
+              <Picture
+                src={avatar}
+                alt=''
+                className='size-full rounded-full object-cover'
               />
             </Avatar>
             <div>

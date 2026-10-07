@@ -1,0 +1,383 @@
+---
+import type {
+  BreadcrumbList,
+  FAQPage,
+  MedicalWebPage,
+  WithContext,
+} from 'schema-dts';
+
+import MedicalDisclaimer from '@/components/blog/medical-disclaimer.astro';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList as BreadcrumbListUi,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import { buttonVariants } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { authorPersonSchema } from '@/data/author';
+import Layout from '@/layouts/layout.astro';
+import { getBasePath, getCanonicalUrl } from '@/utils/env';
+import getZapLink from '@/utils/get-zap-link';
+import { Home } from 'lucide-react';
+import serialize from 'serialize-javascript';
+
+const siteUrl = getBasePath();
+const homeUrl = getCanonicalUrl('/');
+const pageUrl = getCanonicalUrl('/tratamentos/consulta-online');
+const ogImageUrl = `${siteUrl}/og-image.jpg`;
+
+const pageTitle = 'Psiquiatra Online: Consulta por Vídeo | Dr. Jean Almeida';
+const pageDescription =
+  'Consulta com psiquiatra online por videochamada, com receita digital quando indicada. Dr. Jean Almeida, psiquiatra em São Paulo, CRM 127.207.';
+
+/** Data da última revisão clínica do texto desta página. */
+const lastReviewed = '2026-10-07';
+
+const zapLink = getZapLink(
+  'Olá, gostaria de agendar uma consulta online com o Dr. Jean Almeida.',
+);
+
+const faqs = [
+  {
+    question: 'A consulta online tem a mesma qualidade da presencial?',
+    answer:
+      'Na maior parte dos casos, sim. A consulta psiquiátrica se apoia principalmente na conversa clínica — história, sintomas, rotina, uso de medicações —, e isso funciona bem por vídeo. A duração e o cuidado da avaliação são os mesmos do consultório.',
+  },
+  {
+    question: 'O psiquiatra online pode receitar remédio?',
+    answer:
+      'Sim, quando há indicação clínica. A receita é emitida em formato digital, com assinatura eletrônica válida. Algumas medicações controladas seguem regras específicas de receituário, e isso é explicado na consulta quando for o caso.',
+  },
+  {
+    question: 'Posso começar online e depois passar para o presencial?',
+    answer:
+      'Pode. Muitos pacientes alternam os dois formatos conforme a rotina. O consultório fica na Av. Paulista, 2494 — conjunto 94, em São Paulo, e o acompanhamento segue o mesmo independentemente do formato de cada consulta.',
+  },
+  {
+    question: 'Quem mora fora de São Paulo pode fazer consulta online?',
+    answer:
+      'Sim. O atendimento por telemedicina permite acompanhar pacientes de outras cidades. Na primeira conversa pelo WhatsApp é possível confirmar horários e tirar dúvidas sobre o formato.',
+  },
+  {
+    question: 'Quando a consulta online não é indicada?',
+    answer:
+      'Em situações de crise grave, risco de suicídio, confusão mental intensa ou sintomas psicóticos agudos, o atendimento precisa ser presencial e imediato. Nesses casos, procure um pronto-socorro, ligue 192 (SAMU) ou 188 (CVV).',
+  },
+];
+
+const spokes = [
+  {
+    href: '/blog/psiquiatra-online-funciona/',
+    title: 'Psiquiatra online funciona?',
+    blurb:
+      'Quando a teleconsulta é indicada, que cuidados ela exige e em quais casos o presencial é melhor.',
+  },
+  {
+    href: '/blog/primeira-consulta-psiquiatrica-como-funciona/',
+    title: 'Primeira consulta psiquiátrica: como funciona',
+    blurb:
+      'O que é avaliado no primeiro encontro e como se preparar para ele.',
+  },
+  {
+    href: '/blog/quanto-custa-uma-consulta-com-psiquiatra/',
+    title: 'Quanto custa uma consulta com psiquiatra',
+    blurb:
+      'O que influencia o valor da consulta, e as diferenças entre particular, convênio e online.',
+  },
+];
+
+const medicalWebPageSchema: WithContext<MedicalWebPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  '@id': `${pageUrl}#page`,
+  name: 'Consulta com psiquiatra online',
+  description: pageDescription,
+  url: pageUrl,
+  inLanguage: 'pt-BR',
+  specialty: 'Psychiatric',
+  lastReviewed,
+  reviewedBy: authorPersonSchema,
+  about: {
+    '@type': 'MedicalProcedure',
+    name: 'Consulta psiquiátrica por telemedicina',
+    alternateName: ['Psiquiatra online', 'Teleconsulta psiquiátrica'],
+  },
+  isPartOf: { '@id': homeUrl },
+};
+
+const breadcrumbSchema: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Início', item: homeUrl },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Consulta com psiquiatra online',
+      item: pageUrl,
+    },
+  ],
+};
+
+const faqSchema: WithContext<FAQPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  url: pageUrl,
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question' as const,
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer' as const,
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={pageUrl}
+  openGraph={{
+    basic: {
+      title: pageTitle,
+      type: 'website',
+      image: ogImageUrl,
+      url: pageUrl,
+    },
+    optional: {
+      description: pageDescription,
+      siteName: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+      locale: 'pt_BR',
+    },
+    image: {
+      alt: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+    },
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: pageTitle,
+    description: pageDescription,
+    image: ogImageUrl,
+    imageAlt: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
+  }}
+>
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(medicalWebPageSchema, { isJSON: true })}
+    slot='head'
+  />
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(breadcrumbSchema, { isJSON: true })}
+    slot='head'
+  />
+  <script
+    is:inline
+    type='application/ld+json'
+    set:html={serialize(faqSchema, { isJSON: true })}
+    slot='head'
+  />
+
+  <main class='min-h-svh'>
+    <section class='py-12 pt-8 md:py-24 md:pt-12'>
+      <div class='container mt-18'>
+        <Breadcrumb>
+          <BreadcrumbListUi>
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/'>
+                <Home className='h-4 w-4' aria-hidden='true' />
+                <span class='sr-only'>Início</span>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Consulta com psiquiatra online</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbListUi>
+        </Breadcrumb>
+
+        <h1 class='mt-6 text-4xl font-bold xl:text-5xl'>
+          Consulta com psiquiatra online
+        </h1>
+        <p class='mt-6 max-w-3xl text-lg text-muted-foreground'>
+          Atendimento psiquiátrico por videochamada com o Dr. Jean Almeida,
+          psiquiatra em São Paulo — CRM 127.207. De segunda a sexta, das 9h às
+          19h, em português ou espanhol.
+        </p>
+
+        <div class='mt-8 flex flex-wrap gap-3'>
+          <a
+            href={zapLink}
+            target='_blank'
+            rel='noopener noreferrer'
+            class={buttonVariants({ size: 'lg' })}
+          >
+            Agendar consulta online pelo WhatsApp
+          </a>
+          <a
+            href='/#contato'
+            class={buttonVariants({ variant: 'outline', size: 'lg' })}
+          >
+            Prefiro presencial
+          </a>
+        </div>
+
+        <Separator className='mt-12 mb-12' />
+
+        <div class='prose dark:prose-invert max-w-none'>
+          <p>
+            A consulta online existe para que distância, trânsito ou agenda
+            apertada não sejam o motivo de adiar um cuidado que já faz falta.
+            É o mesmo atendimento do consultório — a mesma escuta, o mesmo tempo
+            de avaliação, o mesmo acompanhamento ao longo do tratamento — feito
+            por vídeo, de onde você estiver.
+          </p>
+
+          <h2>Como funciona a consulta psiquiátrica online</h2>
+          <p>
+            O agendamento é feito pelo WhatsApp, sem necessidade de
+            encaminhamento. No horário marcado, a consulta acontece por
+            videochamada em plataforma segura. Basta um celular ou computador
+            com câmera, conexão estável e um lugar reservado, onde você possa
+            falar à vontade sem ser ouvido.
+          </p>
+          <p>
+            Na primeira consulta, a avaliação percorre os sintomas atuais, a
+            história de vida, tratamentos anteriores, medicações em uso, sono,
+            rotina e trabalho. Ao final, você sai com uma hipótese clínica
+            explicada em linguagem clara e um plano de tratamento construído em
+            conjunto. Se for útil, exames e documentos podem ser enviados antes
+            da consulta.
+          </p>
+
+          <h2>Receita digital e documentos</h2>
+          <p>
+            Quando há indicação de medicação, a receita é emitida em formato
+            digital, com assinatura eletrônica válida em farmácias. Atestados,
+            relatórios e pedidos de exame também são enviados digitalmente.
+            Algumas medicações controladas seguem regras específicas de
+            receituário; quando isso se aplica, o caminho é explicado na
+            própria consulta.
+          </p>
+
+          <h2>Para quem a consulta online funciona bem</h2>
+          <ul>
+            <li>
+              Quem tem rotina de trabalho intensa e não consegue se deslocar
+              até o consultório em horário comercial.
+            </li>
+            <li>
+              Quem mora fora de São Paulo ou está temporariamente em outra
+              cidade ou país.
+            </li>
+            <li>
+              Retornos e ajustes de tratamento, em quadros como{' '}
+              <a href='/tratamentos/ansiedade/'>ansiedade</a>,{' '}
+              <a href='/tratamentos/depressao/'>depressão</a>,{' '}
+              <a href='/tratamentos/tdah/'>TDAH em adultos</a> e{' '}
+              <a href='/tratamentos/burnout/'>burnout</a>.
+            </li>
+            <li>
+              Quem se sente mais à vontade para falar de dentro de casa,
+              especialmente nas primeiras consultas.
+            </li>
+          </ul>
+
+          <h2>Quando o presencial é melhor</h2>
+          <p>
+            Algumas situações pedem avaliação presencial: quando é preciso
+            examinar fisicamente, quando a conexão ou a falta de privacidade em
+            casa atrapalham a conversa, ou quando o próprio paciente sente que
+            o encontro no consultório faz diferença. Os formatos podem ser
+            alternados ao longo do tratamento. Para entender em mais detalhe os
+            limites da telemedicina, veja o artigo{' '}
+            <a href='/blog/psiquiatra-online-funciona/'>
+              psiquiatra online funciona?
+            </a>
+          </p>
+          <p>
+            Em crises graves, com risco de suicídio ou sintomas psicóticos
+            agudos, o atendimento precisa ser presencial e imediato: procure um
+            pronto-socorro, ligue 192 (SAMU) ou 188 (CVV).
+          </p>
+        </div>
+
+        <section aria-labelledby='faq-online' class='mt-16'>
+          <h2 id='faq-online' class='text-3xl font-bold md:text-4xl'>
+            Perguntas frequentes sobre a consulta online
+          </h2>
+          <div class='mt-8 space-y-3'>
+            {
+              faqs.map((faq) => (
+                <details class='group rounded-2xl border border-border bg-card p-6'>
+                  <summary class='cursor-pointer list-none font-semibold marker:content-none'>
+                    {faq.question}
+                  </summary>
+                  <p class='mt-3 text-muted-foreground'>{faq.answer}</p>
+                </details>
+              ))
+            }
+          </div>
+        </section>
+
+        <section aria-labelledby='cta-online' class='mt-16'>
+          <div class='rounded-4xl bg-accent p-8 lg:p-12'>
+            <h2
+              id='cta-online'
+              class='text-2xl font-semibold tracking-tight md:text-3xl'
+            >
+              Marcar uma consulta online
+            </h2>
+            <p class='mt-4 max-w-2xl text-muted-foreground'>
+              O agendamento é feito diretamente pelo WhatsApp. Se preferir o
+              presencial, o consultório fica na Av. Paulista, 2494 — conjunto
+              94, São Paulo, com acesso pelo metrô.
+            </p>
+            <div class='mt-6'>
+              <a
+                href={zapLink}
+                target='_blank'
+                rel='noopener noreferrer'
+                class={buttonVariants({ size: 'lg' })}
+              >
+                Falar pelo WhatsApp
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby='leia-tambem-online' class='mt-16'>
+          <h2 id='leia-tambem-online' class='text-3xl font-bold md:text-4xl'>
+            Leia também
+          </h2>
+          <ul class='mt-8 grid gap-4 sm:grid-cols-2'>
+            {
+              spokes.map((spoke) => (
+                <li>
+                  <a
+                    href={spoke.href}
+                    class='flex h-full flex-col rounded-4xl border border-border bg-background p-6 transition-colors hover:bg-muted'
+                  >
+                    <span class='font-semibold'>{spoke.title}</span>
+                    <span class='mt-2 text-sm text-muted-foreground'>
+                      {spoke.blurb}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <MedicalDisclaimer />
+      </div>
+    </section>
+  </main>
+</Layout>

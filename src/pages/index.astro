@@ -39,6 +39,11 @@ import img17 from '@/assets/clinica/LCM_1563.jpg';
 import img18 from '@/assets/clinica/LCM_1559.jpg';
 import img19 from '@/assets/clinica/LCM_1578.jpg';
 
+import avatar1 from '@/assets/avatars/avatar1.jpg';
+import avatar2 from '@/assets/avatars/avatar2.jpg';
+import avatar3 from '@/assets/avatars/avatar3.jpg';
+import testimonialAvatar from '@/assets/avatars/testimonial.webp';
+
 const siteUrl = getBasePath();
 const homeUrl = getCanonicalUrl('/');
 const physicianId = `${homeUrl}#physician`;
@@ -199,6 +204,19 @@ const heroImages = await Promise.all([
   getPictureImage({ src: img1, width: 574, height: 574 }),
 ]);
 
+// Avatares exibidos a 40px (hero) e 56px (depoimento); 2x para telas retina.
+const heroAvatars = await Promise.all(
+  [avatar1, avatar2, avatar3].map((src) =>
+    getPictureImage({ src, width: 80, height: 80 }),
+  ),
+);
+
+const testimonialImage = await getPictureImage({
+  src: testimonialAvatar,
+  width: 112,
+  height: 112,
+});
+
 const aboutImages = await Promise.all([
   getPictureImage({ src: img2, width: 350, height: 500 }),
   getPictureImage({ src: img3, width: 350, height: 318 }),
@@ -228,19 +246,19 @@ const processImages = await Promise.all([
 ---
 
 <Layout
-  title='Psiquiatra em São Paulo — Dr. Jean Almeida | CRM 127.207'
-  description='Consulte com o Dr. Jean Almeida, psiquiatra humanizado na Av. Paulista, São Paulo. Tratamento para depressão, ansiedade, TDAH, burnout e mais. Agende agora.'
+  title='Psiquiatra em SP na Av. Paulista e Online | Dr. Jean Almeida'
+  description='Dr. Jean Almeida, psiquiatra em São Paulo (CRM 127.207): consultório na Av. Paulista e consulta online. Depressão, ansiedade, TDAH, burnout e mais. Agende.'
   canonical={homeUrl}
   openGraph={{
     basic: {
-      title: 'Psiquiatra em São Paulo — Dr. Jean Almeida | CRM 127.207',
+      title: 'Psiquiatra em SP na Av. Paulista e Online | Dr. Jean Almeida',
       type: 'website',
       image: `${siteUrl}/og-image.jpg`,
       url: homeUrl,
     },
     optional: {
       description:
-        'Consulte com o Dr. Jean Almeida, psiquiatra humanizado na Av. Paulista, São Paulo. Tratamento para depressão, ansiedade, TDAH, burnout e mais. Agende agora.',
+        'Dr. Jean Almeida, psiquiatra em São Paulo (CRM 127.207): consultório na Av. Paulista e consulta online. Depressão, ansiedade, TDAH, burnout e mais. Agende.',
       siteName: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
       locale: 'pt_BR',
     },
@@ -250,9 +268,9 @@ const processImages = await Promise.all([
   }}
   twitter={{
     card: 'summary_large_image',
-    title: 'Psiquiatra em São Paulo — Dr. Jean Almeida | CRM 127.207',
+    title: 'Psiquiatra em SP na Av. Paulista e Online | Dr. Jean Almeida',
     description:
-      'Consulte com o Dr. Jean Almeida, psiquiatra humanizado na Av. Paulista, São Paulo. Tratamento para depressão, ansiedade, TDAH, burnout e mais.',
+      'Dr. Jean Almeida, psiquiatra em São Paulo (CRM 127.207): consultório na Av. Paulista e consulta online. Depressão, ansiedade, TDAH, burnout e mais. Agende.',
     image: `${siteUrl}/og-image.jpg`,
     imageAlt: 'Dr. Jean Almeida — Psiquiatra em São Paulo',
   }}
@@ -272,12 +290,12 @@ const processImages = await Promise.all([
     slot='head'
   />
   <main>
-    <HeroSection images={heroImages} client:load />
+    <HeroSection images={heroImages} avatars={heroAvatars} client:load />
     <AboutSection images={aboutImages} />
     <StatsSection />
     <ServicesSection images={servicesImages} client:visible />
     <ProcessSection images={processImages} client:visible />
-    <TestimonialSection client:visible />
+    <TestimonialSection avatar={testimonialImage} client:visible />
     <FaqSection client:visible />
     <CtaSection />
     <ContactSection />

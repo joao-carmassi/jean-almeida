@@ -10,6 +10,7 @@ const treatments = [
   ['depressao', 'Tratamento para Depressão', 'diagnóstico e acompanhamento da depressão'],
   ['tdah', 'TDAH em Adultos', 'avaliação diagnóstica e tratamento do TDAH na vida adulta'],
   ['burnout', 'Tratamento para Burnout', 'esgotamento físico e mental relacionado ao trabalho'],
+  ['consulta-online', 'Psiquiatra Online', 'consulta psiquiátrica por telemedicina, com receita digital'],
 ];
 
 /** Gerado no build a partir dos posts, para nunca ficar desatualizado. */

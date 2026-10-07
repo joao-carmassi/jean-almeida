@@ -29,7 +29,7 @@ const homeUrl = getCanonicalUrl('/');
 const pageUrl = getCanonicalUrl('/tratamentos/ansiedade');
 const ogImageUrl = `${siteUrl}/og-image.jpg`;
 
-const pageTitle = 'Tratamento para Ansiedade em São Paulo | Dr. Jean Almeida';
+const pageTitle = 'Psiquiatra para Ansiedade em SP: Tratamento | Dr. Jean Almeida';
 const pageDescription =
   'Psiquiatra para ansiedade na Av. Paulista, São Paulo. Avaliação diagnóstica cuidadosa, medicação quando indicada e acompanhamento individualizado.';
 
@@ -216,8 +216,9 @@ const faqSchema: WithContext<FAQPage> = {
         <Breadcrumb>
           <BreadcrumbListUi>
             <BreadcrumbItem>
-              <BreadcrumbLink aria-label='Início' href='/'>
-                <Home className='h-4 w-4' />
+              <BreadcrumbLink href='/'>
+                <Home className='h-4 w-4' aria-hidden='true' />
+                <span class='sr-only'>Início</span>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />

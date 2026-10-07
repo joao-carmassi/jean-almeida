@@ -1,5 +1,5 @@
 import { ArrowRight, Star } from 'lucide-react';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import type { OptimizedPicture } from '@/utils/get-picture-image';
 import { Picture } from './ui/picture';
@@ -9,24 +9,16 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(useGSAP);
 
-const HeroSection = ({ images }: { images: OptimizedPicture[] }) => {
+const HeroSection = ({
+  images,
+  avatars,
+}: {
+  images: OptimizedPicture[];
+  avatars: OptimizedPicture[];
+}) => {
   const reviews = {
     count: 55,
     rating: 5.0,
-    avatars: [
-      {
-        src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/avatars/avatar1.jpg',
-        alt: 'Paciente',
-      },
-      {
-        src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/avatars/avatar2.jpg',
-        alt: 'Paciente',
-      },
-      {
-        src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/image-set/modern/avatars/avatar3.jpg',
-        alt: 'Paciente',
-      },
-    ],
   };
 
   useGSAP(() => {
@@ -77,17 +69,22 @@ const HeroSection = ({ images }: { images: OptimizedPicture[] }) => {
               Nem todo sofrimento aparece por fora. Ansiedade, exaustão, vazio
               emocional, insônia, relações difíceis — às vezes a vida continua
               funcionando enquanto você já não consegue mais descansar dentro
-              dela. Dr. Jean Almeida · Psiquiatra na Av. Paulista, São Paulo.
+              dela. Dr. Jean Almeida · Psiquiatra na Av. Paulista, São Paulo,
+              com consulta presencial ou online.
             </p>
             {reviews && (
               <div className='flex w-fit flex-col items-center gap-4 sm:flex-row'>
                 <span className='inline-flex items-center -space-x-3'>
-                  {reviews.avatars.map((avatar, index) => (
+                  {avatars.map((avatar, index) => (
                     <Avatar
                       key={index}
                       className='size-10 bg-background ring-2 ring-background after:hidden gsap-hero'
                     >
-                      <AvatarImage src={avatar.src} alt={avatar.alt} />
+                      <Picture
+                        src={avatar}
+                        alt=''
+                        className='size-full rounded-full object-cover'
+                      />
                     </Avatar>
                   ))}
                 </span>

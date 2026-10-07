@@ -29,7 +29,7 @@ const homeUrl = getCanonicalUrl('/');
 const pageUrl = getCanonicalUrl('/tratamentos/tdah');
 const ogImageUrl = `${siteUrl}/og-image.jpg`;
 
-const pageTitle = 'TDAH em Adultos: Tratamento em São Paulo | Dr. Jean Almeida';
+const pageTitle = 'Psiquiatra para TDAH em Adultos em SP | Dr. Jean Almeida';
 const pageDescription =
   'Avaliação e tratamento de TDAH em adultos na Av. Paulista, São Paulo. Diagnóstico criterioso e acompanhamento com o psiquiatra Dr. Jean Almeida.';
 
@@ -86,6 +86,12 @@ const spokes = [
     title: 'Tratamento para TDAH em adultos',
     blurb:
       'O que compõe o tratamento além da medicação, e como avaliar se ele está funcionando.',
+  },
+  {
+    href: '/blog/escala-asrs-tdah-adulto/',
+    title: 'Escala ASRS: o teste de TDAH em adultos',
+    blurb:
+      'O que o questionário mede, como interpretar o resultado e por que ele não fecha diagnóstico.',
   },
 ];
 
@@ -199,8 +205,9 @@ const faqSchema: WithContext<FAQPage> = {
         <Breadcrumb>
           <BreadcrumbListUi>
             <BreadcrumbItem>
-              <BreadcrumbLink aria-label='Início' href='/'>
-                <Home className='h-4 w-4' />
+              <BreadcrumbLink href='/'>
+                <Home className='h-4 w-4' aria-hidden='true' />
+                <span class='sr-only'>Início</span>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
@@ -313,9 +320,10 @@ const faqSchema: WithContext<FAQPage> = {
           <p>
             Além dos sintomas, avalia-se o prejuízo funcional: onde exatamente
             isso atrapalha hoje — carreira, finanças, estudos, relacionamentos,
-            organização doméstica. Escalas e questionários podem ser usados como
-            apoio, mas não substituem a entrevista clínica nem fecham
-            diagnóstico sozinhos. A investigação também precisa afastar outras
+            organização doméstica. Escalas e questionários — como a ASRS, escala
+            de autorrelato de TDAH em adultos da Organização Mundial da Saúde —
+            podem ser usados como apoio, mas não substituem a entrevista clínica
+            nem fecham diagnóstico sozinhos. A investigação também precisa afastar outras
             causas e identificar condições associadas, que são a regra e não a
             exceção.
           </p>

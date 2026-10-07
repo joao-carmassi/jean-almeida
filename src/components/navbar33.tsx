@@ -133,7 +133,7 @@ const Navbar = ({
                     </NavigationMenuContent>
                   </NavigationMenuItem>
                 ) : (
-                  <NavigationMenuItem asChild key={link.label}>
+                  <NavigationMenuItem key={link.label}>
                     <Button variant={'outline'} asChild>
                       <a href={link.href}>{link.label}</a>
                     </Button>

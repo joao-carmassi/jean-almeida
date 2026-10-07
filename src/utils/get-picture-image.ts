@@ -2,6 +2,16 @@ import { getImage } from 'astro:assets';
 
 export type Format = 'avif' | 'webp' | 'png' | 'jpg' | 'jpeg';
 
+// Qualidade 100 inflava os arquivos sem ganho visível; avif e webp comprimem
+// melhor e aguentam qualidade nominal menor.
+const QUALITY: Record<Format, number> = {
+  avif: 60,
+  webp: 75,
+  png: 80,
+  jpg: 80,
+  jpeg: 80,
+};
+
 type GetPictureImageProps = {
   src: ImageMetadata;
   width?: number;
@@ -36,7 +46,7 @@ async function getPictureImage({
         width,
         height,
         format,
-        quality: 100,
+        quality: QUALITY[format],
       });
 
       return {

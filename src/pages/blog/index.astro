@@ -1,10 +1,8 @@
 ---
-import {
-  BlogPostsSection,
-  type IPost,
-} from '@/components/blog/blog-posts-section';
+import { BlogPostsSection } from '@/components/blog/blog-posts-section';
 import Layout from '@/layouts/layout.astro';
 import { getBasePath, getCanonicalUrl } from '@/utils/env';
+import { getPosts } from '@/utils/posts';
 import serialize from 'serialize-javascript';
 import type { WithContext, Blog, BreadcrumbList } from 'schema-dts';
 
@@ -39,13 +37,14 @@ const breadcrumbSchema: WithContext<BreadcrumbList> = {
   ],
 };
 
-const posts = await Promise.all(
-  Object.values(
-    import.meta.glob<{ url: string; frontmatter: IPost }>('./*.mdx', {
-      eager: true,
-    }),
-  ),
-);
+// `href` já vem normalizado como `/blog/slug/`; o `url` cru do módulo mdx
+// também termina em barra e virava `/blog/slug//` no componente.
+const posts = getPosts().map((post) => ({
+  label: post.label,
+  title: post.title,
+  description: post.description,
+  url: post.href,
+}));
 ---
 
 <Layout
@@ -91,16 +90,6 @@ const posts = await Promise.all(
     slot='head'
   />
   <main class='min-h-svh'>
-    <BlogPostsSection
-      posts={posts.map((post) => {
-        const { frontmatter } = post;
-        return {
-          label: frontmatter.label,
-          title: frontmatter.title,
-          description: frontmatter.description,
-          url: post.url,
-        };
-      })}
-    />
+    <BlogPostsSection posts={posts} />
   </main>
 </Layout>

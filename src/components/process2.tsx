@@ -180,7 +180,7 @@ const ProcessCard = ({
         <h3 className='mb-4 text-2xl font-semibold tracking-tighter lg:text-3xl font-handwriting'>
           {step.title}
         </h3>
-        <p className='text-foreground/50'>{step.description}</p>
+        <p className='text-muted-foreground'>{step.description}</p>
       </div>
     </li>
   );

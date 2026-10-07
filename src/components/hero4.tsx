@@ -58,7 +58,7 @@ const HeroSection = ({ images }: { images: OptimizedPicture[] }) => {
     >
       <div className='container mx-auto'>
         <div className='flex items-center justify-center flex-col-reverse lg:flex-row gap-10 lg:grid-cols-2 lg:gap-20'>
-          <div className='pattern-dots-md text-foreground rounded-4xl gsap-hero-media'>
+          <div className='relative pattern-dots-md text-foreground rounded-4xl gsap-hero-media'>
             <Picture
               loading='eager'
               fetchPriority='high'

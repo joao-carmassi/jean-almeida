@@ -126,6 +126,7 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
                 carouselApi?.scrollPrev();
               }}
               disabled={!canScrollPrev}
+              aria-label='Slide anterior'
               className='disabled:pointer-events-auto'
             >
               <ArrowLeft className='size-5' />
@@ -137,6 +138,7 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
                 carouselApi?.scrollNext();
               }}
               disabled={!canScrollNext}
+              aria-label='Próximo slide'
               className='disabled:pointer-events-auto'
             >
               <ArrowRight className='size-5' />
@@ -197,17 +199,21 @@ const ServicesSection = ({ images }: { images: OptimizedPicture[] }) => {
             ))}
           </CarouselContent>
         </Carousel>
-        <div className='mt-8 flex justify-center gap-2'>
+        <div className='mt-8 flex justify-center'>
           {items.map((_, index) => (
             <button
               key={index}
               type='button'
-              className={`h-2 w-2 rounded-full transition-colors ${
-                currentSlide === index ? 'bg-primary' : 'bg-primary/20'
-              }`}
+              className='flex size-6 items-center justify-center'
               onClick={() => carouselApi?.scrollTo(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
+              aria-label={`Ir para o slide ${index + 1}`}
+            >
+              <span
+                className={`size-2 rounded-full transition-colors ${
+                  currentSlide === index ? 'bg-primary' : 'bg-primary/20'
+                }`}
+              />
+            </button>
           ))}
         </div>
       </div>

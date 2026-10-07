@@ -93,6 +93,8 @@ const Navbar = ({
               <img
                 src={logo.src}
                 alt={logo.alt}
+                width={96}
+                height={96}
                 className='h-8 w-auto dark:invert'
               />
             </a>

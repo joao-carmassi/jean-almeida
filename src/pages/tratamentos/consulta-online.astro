@@ -31,7 +31,7 @@ const ogImageUrl = `${siteUrl}/og-image.jpg`;
 
 const pageTitle = 'Psiquiatra Online: Consulta por Vídeo | Dr. Jean Almeida';
 const pageDescription =
-  'Consulta com psiquiatra online por videochamada, com receita digital quando indicada. Dr. Jean Almeida, psiquiatra em São Paulo, CRM 127.207.';
+  'Consulta com psiquiatra online por videochamada, com prescrição digital quando indicada. Dr. Jean Almeida, psiquiatra em São Paulo, CRM 127.207.';
 
 /** Data da última revisão clínica do texto desta página. */
 const lastReviewed = '2026-10-07';
@@ -42,14 +42,14 @@ const zapLink = getZapLink(
 
 const faqs = [
   {
-    question: 'A consulta online tem a mesma qualidade da presencial?',
+    question: 'A consulta online permite uma avaliação psiquiátrica completa?',
     answer:
-      'Na maior parte dos casos, sim. A consulta psiquiátrica se apoia principalmente na conversa clínica — história, sintomas, rotina, uso de medicações —, e isso funciona bem por vídeo. A duração e o cuidado da avaliação são os mesmos do consultório.',
+      'Em muitas situações, sim. A consulta psiquiátrica se apoia principalmente na conversa clínica — história, sintomas, rotina, uso de medicações. A indicação do formato depende do quadro clínico e das necessidades de cada paciente. Quando houver indicação de avaliação presencial, ela será recomendada.',
   },
   {
     question: 'O psiquiatra online pode receitar remédio?',
     answer:
-      'Sim, quando há indicação clínica. A receita é emitida em formato digital, com assinatura eletrônica válida. Algumas medicações controladas seguem regras específicas de receituário, e isso é explicado na consulta quando for o caso.',
+      'Quando houver indicação de medicação, a prescrição poderá ser emitida digitalmente, conforme o tipo de medicamento e as normas sanitárias vigentes. Alguns medicamentos sujeitos a controle especial seguem regras específicas de prescrição e dispensação.',
   },
   {
     question: 'Posso começar online e depois passar para o presencial?',
@@ -59,7 +59,7 @@ const faqs = [
   {
     question: 'Quem mora fora de São Paulo pode fazer consulta online?',
     answer:
-      'Sim. O atendimento por telemedicina permite acompanhar pacientes de outras cidades. Na primeira conversa pelo WhatsApp é possível confirmar horários e tirar dúvidas sobre o formato.',
+      'Sim. O atendimento por telemedicina permite acompanhar pacientes de outras cidades e estados do Brasil. Na primeira conversa pelo WhatsApp é possível confirmar horários e tirar dúvidas sobre o formato.',
   },
   {
     question: 'Quando a consulta online não é indicada?',
@@ -235,9 +235,14 @@ const faqSchema: WithContext<FAQPage> = {
           <p>
             A consulta online existe para que distância, trânsito ou agenda
             apertada não sejam o motivo de adiar um cuidado que já faz falta.
-            É o mesmo atendimento do consultório — a mesma escuta, o mesmo tempo
-            de avaliação, o mesmo acompanhamento ao longo do tratamento — feito
-            por vídeo, de onde você estiver.
+            É o atendimento psiquiátrico feito por vídeo, de forma segura e
+            conveniente, quando essa modalidade for adequada ao seu caso.
+          </p>
+          <p>
+            A consulta online permite uma avaliação psiquiátrica completa em
+            muitas situações. A indicação do formato depende do quadro clínico
+            e das necessidades de cada paciente. Quando houver indicação de
+            avaliação presencial, ela será recomendada.
           </p>
 
           <h2>Como funciona a consulta psiquiátrica online</h2>
@@ -257,14 +262,12 @@ const faqSchema: WithContext<FAQPage> = {
             da consulta.
           </p>
 
-          <h2>Receita digital e documentos</h2>
+          <h2>Prescrição digital</h2>
           <p>
-            Quando há indicação de medicação, a receita é emitida em formato
-            digital, com assinatura eletrônica válida em farmácias. Atestados,
-            relatórios e pedidos de exame também são enviados digitalmente.
-            Algumas medicações controladas seguem regras específicas de
-            receituário; quando isso se aplica, o caminho é explicado na
-            própria consulta.
+            Quando houver indicação de medicação, a prescrição poderá ser
+            emitida digitalmente, conforme o tipo de medicamento e as normas
+            sanitárias vigentes. Alguns medicamentos sujeitos a controle
+            especial seguem regras específicas de prescrição e dispensação.
           </p>
 
           <h2>Para quem a consulta online funciona bem</h2>
@@ -275,7 +278,7 @@ const faqSchema: WithContext<FAQPage> = {
             </li>
             <li>
               Quem mora fora de São Paulo ou está temporariamente em outra
-              cidade ou país.
+              cidade ou estado do Brasil.
             </li>
             <li>
               Retornos e ajustes de tratamento, em quadros como{' '}
